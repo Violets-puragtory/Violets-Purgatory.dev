@@ -1,6 +1,5 @@
 const express = require('express'),
-path = require('path'),
-fs = require('fs')
+path = require('path')
 
 var app = express()
 
