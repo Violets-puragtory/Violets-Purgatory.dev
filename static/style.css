@@ -122,3 +122,9 @@ img:hover {
     /* border-color: rgb(255, 200, 255); */
     object-fit: cover;
 }
+
+hr {
+    color: white;
+    opacity: 0.5;
+    border-width: 2px;
+}
