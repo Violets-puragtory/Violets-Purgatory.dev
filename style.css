@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+
+:root {
+    font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    color: rgb(225, 215, 255);
+    font-size: 2.5rem;
+    margin-top: 30px;
+}
+
+h2 {
+    color: white;
+    font-size: 2rem;
+}
+
+body {
+    padding: 0;
+    margin: auto;
+    background-color: black;
+    max-width: 1100px;
+}
+
+a {
+    color: rgb(230, 175, 255);
+    text-decoration: none;
+    display: inline-block;
+    transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip {
+    font-size: 1.3rem;
+    border: 2px white solid;
+    border-radius: 25px;
+    background-color: black;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transform: scale(1)
+}
+
+.chip:hover {
+    background-color: rgb(20, 10, 30);
+    transform: scale(1.05);
+}
+
+a:hover {
+    color: white;
+    transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+p {
+    color: white;
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 10px;
+}
+
+img {
+    width: 30%;
+    max-width: 150px;
+    min-width: 100px;
+    border: rgb(175, 75, 200) 4px solid;
+    border-radius: 50%;
+    transform: scale(0.9);
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+img:hover {
+    transform: scale(1);
+    /* border-color: rgb(255, 200, 255); */
+    object-fit: cover;
+}
+
+hr {
+    color: white;
+    opacity: 0.25;
+    border-width: 2px;
+    margin: 20px 10%;
+}
