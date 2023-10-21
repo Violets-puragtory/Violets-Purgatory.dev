@@ -1,0 +1,23 @@
+{
+  "name": "violets-purgatory",
+  "version": "1.0.0",
+  "description": "Violets Purgatory is a personal webapp for",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Bingus_Violet/Violets-Purgatory.git"
+  },
+  "keywords": [
+    "web",
+    "site"
+  ],
+  "author": "Violet <Violetbutagain@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.14.2"
+  }
+}
