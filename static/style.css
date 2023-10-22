@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap'); */
 
 :root {
-    font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
     text-align: center;
 }
@@ -22,6 +22,10 @@ body {
     margin: auto;
     background-color: black;
     max-width: 1100px;
+
+    animation-name: "fade-in";
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 a {
@@ -81,4 +85,61 @@ hr {
     opacity: 0.25;
     border-width: 2px;
     margin: 20px 10%;
+}
+
+.love::before {
+    content: "<3 ";
+    color: rgb(255, 100, 150);
+}
+
+.like::before {
+    content: ":) ";
+    color: limegreen;
+}
+
+.silly::before {
+    content: ":P ";
+    color: aqua;
+}
+
+.fine::before {
+    content: ":/ ";
+    color: yellow;
+}
+
+.hate::before {
+    content: ">:( ";
+    color: red;
+}
+
+.love {
+    border-color: rgb(255, 100, 150);
+}
+
+.like {
+    border-color: limegreen;
+}
+
+.silly {
+    border-color: aqua;
+}
+
+.fine {
+    border-color: yellow;
+}
+
+.hate {
+    border-color: red;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20%)
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }
