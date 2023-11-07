@@ -98,6 +98,8 @@ hr {
     max-width: 90%;
 }
 
+/* I am so sorry about this code,,, */
+
 .love::before {
     content: "<3 ";
     color: rgb(255, 100, 150);
@@ -153,6 +155,6 @@ hr {
     100% {
         opacity: 1;
         transform: none;
-        background-color: rgb(10, 5, 20);
+        background-color: rgb(15, 5, 30);
     }
 }
