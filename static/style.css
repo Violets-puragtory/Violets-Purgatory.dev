@@ -17,11 +17,14 @@ h2 {
     font-size: 2rem;
 }
 
-body {
+body, html {
     margin: auto;
     background-color: rgb(30, 5, 60);
     width: 100vw;
     height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden
 }
 
 .fadediv {
@@ -97,7 +100,8 @@ hr {
     border: 2px white solid;
     margin: auto;
     max-width: 1000px;
-    width: 90%;
+    width: 98%;
+    
 }
 
 /* I am so sorry about this code,,, */
