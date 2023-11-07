@@ -19,7 +19,7 @@ h2 {
 
 body {
     margin: auto;
-    background-color: rgb(10, 5, 20);
+    background-color: rgb(30, 5, 60);
     width: 100vw;
     height: 100vh;
 }
@@ -46,13 +46,13 @@ a {
     margin: 3px;
     display: inline-block;
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-    /* transform: scale(0.95) */
+    transform: scale(0.95)
 }
 
 .chip:hover {
     /* background-color: rgb(20, 10, 30); */
-    /* transform: scale(1); */
-    font-size: 1.35rem;
+    transform: scale(1);
+    /* font-size: 1.35rem; */
     border-color: white;
 }
 
@@ -151,12 +151,10 @@ hr {
     0% {
         opacity: 0;
         transform: translateY(20%);
-        background-color: black;
     }
 
     100% {
         opacity: 1;
         transform: none;
-        background-color: rgb(15, 5, 30);
     }
 }
