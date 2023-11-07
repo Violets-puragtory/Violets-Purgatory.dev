@@ -16,4 +16,3 @@ app.get("/curl", (req, res) => {
 app.listen(PORT, () => {
     console.log("Violets-Purgatory is now listening on port: " + PORT)
 })
-
