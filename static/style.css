@@ -24,7 +24,6 @@ body, html {
     height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden
 }
 
 .fadediv {
@@ -102,6 +101,10 @@ hr {
     max-width: 1000px;
     width: 98%;
     
+}
+
+.me {
+    border-color: limegreen;
 }
 
 /* I am so sorry about this code,,, */
