@@ -18,8 +18,8 @@ Violet's Purgatory is hosting multiple useful resoures, such as SearXNG, and a c
 ## Hosting
 - [ ] Add submission forum for hosting suggestions
 - [ ] Host Fediverse instance
-- [ ] Host Matrix instance
-- [ ] SearX (normal)
+- [ ] Host Matrix instance (Almost done!)
 - [ ] Minecraft
 - [ ] A forum
 - [x] SearXNG
+- [x] SearX (normal)
