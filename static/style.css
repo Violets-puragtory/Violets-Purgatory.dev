@@ -18,6 +18,7 @@ h2 {
 }
 
 body, html {
+    overflow-x: hidden;
     margin: auto;
     background-color: rgb(30, 5, 60);
     width: 100vw;
