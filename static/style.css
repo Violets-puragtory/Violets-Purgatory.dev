@@ -20,7 +20,7 @@ h2 {
 body, html {
     overflow-x: hidden;
     margin: auto;
-    background-color: rgb(30, 5, 60);
+    background-color: rgb(20, 5, 60);
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -34,7 +34,7 @@ body, html {
 }
 
 a {
-    color: rgb(230, 175, 255);
+    color: rgb(175, 225, 255);
     text-decoration: none;
     display: inline-block;
     transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -43,7 +43,7 @@ a {
 .chip {
     font-size: 1.3rem;
     border: 2px gray solid;
-    border-radius: 8px;
+    /* border-radius: 4px; */
     background-color: black;
     padding: 8px;
     margin: 3px;
@@ -94,8 +94,7 @@ hr {
 }
 
 #card {
-    background-image: linear-gradient(-45deg, rgb(75, 25, 125), rgb(100, 30, 100));
-    background-color: rgb(50, 25, 100);
+    background-color: rgb(75, 25, 100);
     padding: 15px;
     border: 2px white solid;
     margin: auto;
