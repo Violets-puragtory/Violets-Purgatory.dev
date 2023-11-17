@@ -22,6 +22,9 @@ app.listen(PORT, () => {
 })
 
 app.get("/", (req, res) => {
+
+    res.setHeader("X-Content-Type-Options", "none")
+
     var statuses = {
         "online": {
             "text": "Online",
