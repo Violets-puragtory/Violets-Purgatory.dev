@@ -21,10 +21,7 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
-app.get("/", (req, res) => {
-
-    res.setHeader("X-Content-Type-Options", "none")
-
+function pageUpdate() {
     var statuses = {
         "online": {
             "text": "Online",
@@ -45,43 +42,34 @@ app.get("/", (req, res) => {
     }
     
     var html = fs.readFileSync(mainpage).toString()
-    
-    var checkpoint = ["{LANYARD_STATUS}", "{LANYARD}"]
 
-    function io(numb, end=false) {
-        if (end) {
-            return html.indexOf(checkpoint[numb]) + checkpoint[numb].length
-        }
-        return html.indexOf(checkpoint[numb])
-    }
-
-    res.write(html.substring(0, io(0)))
+    var addedHTML = ""
 
     var statusData = statuses[lanyardData.discord_status]
 
-    res.write(`<p style="color: ${statusData.color}">${statusData.text}</p>`)
-    res.write(`<style>.pfp { border-color: ${statusData.color} !important }</style>`)
+    addedHTML += `<p style="color: ${statusData.color}">${statusData.text}</p>`
+    addedHTML += `<style>.pfp { border-color: ${statusData.color} !important }</style>`
 
-    res.write(html.substring(io(0, true), io(1)))
+    html = html.replace("{LANYARD_STATUS}", addedHTML)
+
+    addedHTML = ""
 
     if (lanyardData) {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
             console.log(activity)
             if (activity.type == 2) {
-                res.write(`<p class="chip">Listening on <a style="color: limegreen">${activity.name}</a>: ${activity.details} (by ${activity.state})</p>`)
+                addedHTML += `<p class="chip">Listening on <a style="color: limegreen">${activity.name}</a>: ${activity.details} (by ${activity.state})</p>`
             } else if (activity.type == 4) {
-                res.write(`<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`)
+                addedHTML += `<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
             }
         }
-
-        console.log(lanyardData.activities)
     }
-    console.log(io(checkpoint.length - 1, true))
-    res.write(html.substring(io(checkpoint.length - 1, true), html.length) + "<p>Thank you for checking out my website <3</p>", () => {
-        res.end()
-    })
-})
+
+    html = html.replace("{LANYARD}", addedHTML)
+
+    fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+}
 
 // Lanyard Stuffs
 
@@ -108,6 +96,7 @@ lanyard.addEventListener("message", (res) => {
         }))
     } else if (data.op == 0) {
         lanyardData = data.d
+        pageUpdate()
     } else {
         console.log(data.d)
     }
