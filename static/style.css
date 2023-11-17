@@ -1,9 +1,10 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
 
-:root {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+* {
+    font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
     text-align: center;
+    line-height: 1.5rem;
 }
 
 h1 {
@@ -14,17 +15,21 @@ h1 {
 
 h2 {
     color: white;
-    font-size: 2rem;
 }
 
 body, html {
     overflow-x: hidden;
     margin: auto;
     background-color: rgb(20, 5, 60);
+    background: linear-gradient(rgb(25, 5, 75), black);
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
+}
+
+body {
+    padding: 5%;
 }
 
 .fadediv {
@@ -90,16 +95,15 @@ hr {
     color: white;
     opacity: 0.25;
     border-width: 2px;
-    margin: 20px 10%;
+    margin: 15px 10%;
 }
 
 #card {
     background-color: rgb(75, 25, 100);
     padding: 15px;
     border: 2px white solid;
-    margin: auto;
-    max-width: 1000px;
-    width: 98%;
+    margin: 25px auto;
+    width: 95%;
     
 }
 

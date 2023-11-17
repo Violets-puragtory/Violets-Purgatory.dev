@@ -31,11 +31,9 @@ app.get("/", (req, res) => {
             const activity = lanyardData.activities[index];
             console.log(activity)
             if (activity.type == 2) {
-                addedHTML += `<p>Listening to on <span style="color: limegreen">${activity.name}</span>: ${activity.details} (by ${activity.state})</p>`
+                addedHTML += `<p class="chip">Listening to on <span style="color: limegreen">${activity.name}</span>: ${activity.details} (by ${activity.state})</p>`
             } else if (activity.type == 4) {
                 addedHTML += `<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
-            } else if (activity.type == 0) {
-                addedHTML += `<p>Playing: ${activity.name}</p>`
             }
         }
 
@@ -59,13 +57,14 @@ app.get("/", (req, res) => {
         }
         var statusData = statuses[lanyardData.discord_status]
 
-        addedHTML += `<p style="color: ${statusData.color}">${statusData.text}</p>`
         addedHTML += `<style>.pfp { border-color: ${statusData.color} !important }</style>`
 
         console.log(lanyardData.activities)
     }
 
-    html = html.replace("{LANYARD}", addedHTML + "</p>")
+    html = html.replace("{LANYARD_STATUS}", `<p style="color: ${statusData.color}">${statusData.text}</p>`)
+
+    html = html.replace("{LANYARD}", addedHTML)
 
     res.send(html)
 })
