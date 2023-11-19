@@ -122,6 +122,7 @@ hr {
     border: 2px white solid;
     margin: 20px auto;
     width: 95%;
+    max-width: 800px;
     
 }
 
