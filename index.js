@@ -60,8 +60,8 @@ function pageUpdate() {
     var currentHour = currentTime.getHours()
 
     if (currentHour >= 8 && currentHour <= 16 && !(currentTime.getDay() == 6 || currentTime.getDay() == 7)) {
-        addedHTML = `<span style="color: yellow">at school</span>`
-    } else if (currentHour <= 10 && currentHour > 0) {
+        addedHTML = `<span style="color: yellow">busy</span>`
+    } else if (currentHour <= 9 && currentHour > 0) {
         addedHTML = `<span style="color: rgb(200, 150, 255)">eeping</span>`
     } else {
         addedHTML = `<span style="color: limegreen">active?</span>`
@@ -182,7 +182,8 @@ function pageUpdate() {
     addedHTML = ""
 
     var socialsHTML = fs.readFileSync(path.join(__dirname, 'static/socials/index.html')).toString()
-    addedHTML += socialsHTML.substr(socialsHTML.indexOf("<h1>"), socialsHTML.indexOf("</body>"))
+    addedHTML += socialsHTML.substring(socialsHTML.indexOf("<h1>"), socialsHTML.indexOf("</body>"))
+    console.log(addedHTML)
 
     html = html.replace("{SOCIALS}", addedHTML)
 

@@ -55,8 +55,8 @@ a {
     padding: 8px;
     margin: 3px;
     display: inline-block;
-    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-    transform: scale(0.95)
+    transform: scale(0.95);
+    transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .chip:hover {
@@ -64,6 +64,7 @@ a {
     transform: scale(1);
     /* font-size: 1.35rem; */
     border-color: white;
+    transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .activity {
