@@ -86,8 +86,6 @@ function pageUpdate() {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
 
-            console.log(activity)
-
             if (!debounce && activity.type != 4) {
                 addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
@@ -116,7 +114,8 @@ function pageUpdate() {
                         <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
-                                <br> Album: "${activity.details}"
+                                <br> Song: "${activity.details}"
+                                <br> Album: "${activity.assets.large_text}"
                                 <br> Artist: "${activity.state}"
                             </p>
                     </div>
@@ -165,6 +164,13 @@ function pageUpdate() {
     }
 
     html = html.replace("{LANYARD_FULL}", addedHTML)
+
+    addedHTML = ""
+
+    var socialsHTML = fs.readFileSync(path.join(__dirname, 'static/socials/index.html')).toString()
+    addedHTML += socialsHTML.substr(socialsHTML.indexOf("<h1>"), socialsHTML.indexOf("</body>"))
+
+    html = html.replace("{SOCIALS}", addedHTML)
 
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 
