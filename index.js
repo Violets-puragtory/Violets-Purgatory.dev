@@ -139,7 +139,8 @@ function pageUpdate() {
                             <img src="${get_img()}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                                <br> ${activity.state}
+                                <br> ${activity.state || activity.assets.small_text}
+                                <br> ${activity.details || activity.assets.large_text}
                             </p>
 
                     </div>
