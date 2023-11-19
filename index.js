@@ -22,7 +22,6 @@ app.listen(PORT, () => {
 })
 
 function pageUpdate() {
-    console.log("Updating...")
     var statuses = {
         "online": {
             "text": "Online",
@@ -54,6 +53,21 @@ function pageUpdate() {
     }
 
     html = html.replace("{LANYARD_STATUS}", addedHTML)
+
+    addedHTML = ""
+
+    var currentTime = new Date(Date.now())
+    var currentHour = currentTime.getHours()
+
+    if (currentHour >= 8 && currentHour <= 16 && !(currentTime.getDay() == 6 || currentTime.getDay() == 7)) {
+        addedHTML = `<span style="color: yellow">at school</span>`
+    } else if (currentHour <= 10 && currentHour > 0) {
+        addedHTML = `<span style="color: rgb(200, 150, 255)">eeping</span>`
+    } else {
+        addedHTML = `<span style="color: limegreen">active?</span>`
+    }
+
+    html = html.replace("{ACTIVE_STATUS}", addedHTML)
 
     addedHTML = ""
 
@@ -173,8 +187,6 @@ function pageUpdate() {
     html = html.replace("{SOCIALS}", addedHTML)
 
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
-
-    console.log("Updated!")
 }
 
 // Lanyard Stuffs
