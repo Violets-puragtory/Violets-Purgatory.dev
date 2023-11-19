@@ -36,6 +36,8 @@ body {
     animation-name: fade-in;
     animation-duration: .75s;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin: auto;
+    max-width: 1000px;
 }
 
 a {

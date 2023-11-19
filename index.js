@@ -110,7 +110,7 @@ function pageUpdate() {
             if (activity.type == 2) {
                 if (get_img()) {
                     addedHTML += `
-                    <div class="chip activity col-md-6 col-xl-4">
+                    <div class="chip activity col-md-6 testing">
                         <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
@@ -122,7 +122,7 @@ function pageUpdate() {
                 `
                 } else {
                     addedHTML += `
-                    <div class="chip activity col-md-6 col-xl-4">
+                    <div class="chip activity col-md-6 testing">
                         <p style="width: 100%;">
                             Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                             <br> ${activity.state}
@@ -134,7 +134,7 @@ function pageUpdate() {
             } else if (activity.type == 0) {
                 if (get_img()) {
                     addedHTML += `
-                    <div class="chip activity col-md-6 col-xl-4">
+                    <div class="chip activity col-md-6 testing">
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
@@ -146,7 +146,7 @@ function pageUpdate() {
                 `
                 } else {
                     addedHTML += `
-                    <div class="chip activity col-md-6 col-xl-4">
+                    <div class="chip activity col-md-6 testing">
                         <p>
                             Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                             <br> ${activity.state}
