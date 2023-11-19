@@ -102,12 +102,12 @@ img {
     border-radius: 15px;
     border: darkgray 4px solid;
     width: 60%;
-    transform: scale(0.95);
+    transform: scale(0.9);
     border-radius: 50%;
 }
 
 .pfp:hover {
-    transform: scale(1.05);
+    transform: scale(1);
     border-color: rgb(255, 200, 255);
     object-fit: cover;
 }

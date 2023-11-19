@@ -183,7 +183,6 @@ function pageUpdate() {
 
     var socialsHTML = fs.readFileSync(path.join(__dirname, 'static/socials/index.html')).toString()
     addedHTML += socialsHTML.substring(socialsHTML.indexOf("<h1>"), socialsHTML.indexOf("</body>"))
-    console.log(addedHTML)
 
     html = html.replace("{SOCIALS}", addedHTML)
 
