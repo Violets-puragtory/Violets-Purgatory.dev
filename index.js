@@ -113,7 +113,7 @@ function pageUpdate() {
                 if (get_img()) {
                     addedHTML += `
                     <div class="chip activity col-md-6 col-xl-4">
-                            <img src="${get_img()}">
+                        <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
                                 <br> Album: "${activity.details}"
@@ -136,7 +136,7 @@ function pageUpdate() {
                 if (get_img()) {
                     addedHTML += `
                     <div class="chip activity col-md-6 col-xl-4">
-                            <img src="${get_img()}">
+                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.state || activity.assets.small_text}
