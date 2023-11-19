@@ -22,6 +22,7 @@ app.listen(PORT, () => {
 })
 
 function pageUpdate() {
+    console.log("Updating...")
     var statuses = {
         "online": {
             "text": "Online",
@@ -40,35 +41,133 @@ function pageUpdate() {
             "color": "rgb(125, 125, 125)"
         }
     }
-    
+
     var html = fs.readFileSync(mainpage).toString()
 
     var addedHTML = ""
 
-    var statusData = statuses[lanyardData.discord_status]
+    if (lanyardData) {
+        var statusData = statuses[lanyardData.discord_status]
 
-    addedHTML += `<p style="color: ${statusData.color}">${statusData.text}</p>`
-    addedHTML += `<style>.pfp { border-color: ${statusData.color} !important }</style>`
+        addedHTML += `<p style="color: ${statusData.color}">${statusData.text}</p>`
+        addedHTML += `<style>.pfp { border-color: ${statusData.color} !important }</style>`
+    }
 
     html = html.replace("{LANYARD_STATUS}", addedHTML)
+
+    addedHTML = ""
+
+    if (lanyardData && lanyardData.activities.length > 0) {
+        if (lanyardData.activities[0].type == 4) {
+            addedHTML += `<hr><p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
+        }
+    }
+
+    html = html.replace("{LANYARD_QUOTE}", addedHTML)
 
     addedHTML = ""
 
     if (lanyardData) {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
-            console.log(activity)
-            if (activity.type == 2) {
-                addedHTML += `<p class="chip">Listening on <a style="color: limegreen">${activity.name}</a>: ${activity.details} (by ${activity.state})</p>`
-            } else if (activity.type == 4) {
+            if (activity.type == 4) {
                 addedHTML += `<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
             }
         }
     }
 
-    html = html.replace("{LANYARD}", addedHTML)
+    html = html.replace("{LANYARD_SPOTIFY}", addedHTML)
+
+    addedHTML = ""
+
+    var debounce = false
+
+    if (lanyardData && lanyardData.activities.length > 0) {
+        for (let index = 0; index < lanyardData.activities.length; index++) {
+            const activity = lanyardData.activities[index];
+
+            console.log(activity)
+
+            if (!debounce && activity.type != 4) {
+                addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
+                debounce = true
+            }
+            function get_img() {
+                if ("assets" in activity) {
+                    var image = undefined
+                    if ("large_image" in activity.assets) {
+                        image = activity.assets.large_image
+                    } else if ("small_image" in activity.assets) {
+                        image = activity.assets.small_image
+                    }
+                    if (image) {
+                        if (image.includes("https/")) {
+                            return 'https://' + image.substr(image.indexOf('https/') + 6, image.length)
+                        } else if (image.includes("spotify")) {
+                            return 'https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length)
+                        }
+                    }
+                }
+            }
+            if (activity.type == 2) {
+                if (get_img()) {
+                    addedHTML += `
+                    <div class="chip activity col-md-6 col-xl-4">
+                            <img src="${get_img()}">
+                            <p>
+                                Listening to <span style="color: limegreen;">${activity.name}</span> 
+                                <br> Album: "${activity.details}"
+                                <br> Artist: "${activity.state}"
+                            </p>
+                    </div>
+                `
+                } else {
+                    addedHTML += `
+                    <div class="chip activity col-md-6 col-xl-4">
+                        <p style="width: 100%;">
+                            Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
+                            <br> ${activity.state}
+                            <br> ${activity.details}
+                        </p>
+                    </div>
+                    `
+                }
+            } else if (activity.type == 0) {
+                if (get_img()) {
+                    addedHTML += `
+                    <div class="chip activity col-md-6 col-xl-4">
+                            <img src="${get_img()}">
+                            <p>
+                                Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
+                                <br> ${activity.state}
+                            </p>
+
+                    </div>
+                `
+                } else {
+                    addedHTML += `
+                    <div class="chip activity col-md-6 col-xl-4">
+                        <p>
+                            Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
+                            <br> ${activity.state}
+                            <br> ${activity.details}
+                        </p>
+                    </div>
+                    `
+                }
+            }
+        }
+    }
+
+    if (addedHTML) {
+        addedHTML += "</div>"
+    }
+
+    html = html.replace("{LANYARD_FULL}", addedHTML)
 
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+
+    console.log("Updated!")
 }
 
 // Lanyard Stuffs

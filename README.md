@@ -8,9 +8,9 @@ Violet's Purgatory is hosting multiple useful resoures, such as SearXNG, and a c
 
 # To-Do:
 ## Main site
-- [ ] Make a page about my games
+- [ ] Make a page about my games & other projects
 - [ ] Make a portfolio
-- [ ] Have information on socials page dynamically update in real time (E.G. Pull Discord user from ID)
+- [x] Have information on socials page dynamically update in real time (E.G. Pull Discord user from ID)
 - [x] Make the README ~~not~~ slightly less garbage
 - [x] Add page for hosted sites
 - [x] Make Socials Page

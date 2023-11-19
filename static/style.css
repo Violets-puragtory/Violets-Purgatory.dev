@@ -1,9 +1,5 @@
-@font-face {
-    font-family: 'Rubik';
-    src: url("./Rubik/Rubik-VariableFont_wght.ttf");
-    font-style: normal;
-    font-weight: 400;
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
 
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
@@ -57,7 +53,7 @@ a {
     padding: 8px;
     margin: 3px;
     display: inline-block;
-    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     transform: scale(0.95)
 }
 
@@ -66,6 +62,19 @@ a {
     transform: scale(1);
     /* font-size: 1.35rem; */
     border-color: white;
+}
+
+.activity {
+    border-width: 3px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+    display: flex;
+}
+
+.activity > p {
+    width: 100%;
 }
 
 a:hover {
@@ -81,15 +90,20 @@ p {
 }
 
 img {
-    width: 60%;
+    width: 100%;
     max-width: 135px;
-    border: darkgray 4px solid;
-    border-radius: 50%;
-    transform: scale(0.95);
     transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-img:hover {
+.pfp {
+    border-radius: 15px;
+    border: darkgray 4px solid;
+    width: 60%;
+    transform: scale(0.95);
+    border-radius: 50%;
+}
+
+.pfp:hover {
     transform: scale(1.05);
     border-color: rgb(255, 200, 255);
     object-fit: cover;
