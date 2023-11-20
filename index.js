@@ -56,21 +56,6 @@ function pageUpdate() {
 
     addedHTML = ""
 
-    var currentTime = new Date(Date.now())
-    var currentHour = currentTime.getHours()
-
-    if (currentHour >= 8 && currentHour <= 16 && !(currentTime.getDay() == 6 || currentTime.getDay() == 7)) {
-        addedHTML = `<span style="color: yellow">busy</span>`
-    } else if (currentHour <= 9 && currentHour > 0) {
-        addedHTML = `<span style="color: rgb(200, 150, 255)">eeping</span>`
-    } else {
-        addedHTML = `<span style="color: limegreen">active?</span>`
-    }
-
-    html = html.replace("{ACTIVE_STATUS}", addedHTML)
-
-    addedHTML = ""
-
     if (lanyardData && lanyardData.activities.length > 0) {
         if (lanyardData.activities[0].type == 4) {
             addedHTML += `<hr><p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
