@@ -117,6 +117,8 @@ function pageUpdate() {
                             return 'https://' + image.substr(image.indexOf('https/') + 6, image.length)
                         } else if (image.includes("spotify")) {
                             return 'https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length)
+                        } else {
+                            return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${image}.png`
                         }
                     }
                 }
@@ -159,6 +161,7 @@ function pageUpdate() {
                     </div>
                 `
                 } else {
+                    console.log(get_img())
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                         <p>
