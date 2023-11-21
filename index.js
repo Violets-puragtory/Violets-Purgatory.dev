@@ -86,7 +86,7 @@ function pageUpdate() {
             const activity = lanyardData.activities[index];
 
             if (!debounce && activity.type != 4) {
-                addedHTML += `<h2><hr>What I'm up to:</h2><p>This section is pulled automatically from my discord. If Discord is down, or i'm offline, it won't be here.<br> Huge credit to <a href="https://github.com/Phineas/lanyard/">Phineas' Lanyard</a> for making this possible :D <br>(This is extremely experimental, so PLEASE report any issues on <a href="https://codeberg.org/Bingus_Violet/Violets-Purgatory">Codeberg!</a></p><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
+                addedHTML += `<h2><hr>What I'm up to:</h2><p>This section is pulled automatically from my discord. If Discord is down, or i'm offline, it won't be here.<br> Huge credit to <a href="https://github.com/Phineas/lanyard/">Phineas' Lanyard</a> for making this possible :D <br>(This is extremely experimental, so PLEASE report any issues on <a href="https://codeberg.org/Bingus_Violet/Violets-Purgatory">Codeberg!</a>)</p><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
             }
             function get_img() {
