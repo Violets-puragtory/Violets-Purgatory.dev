@@ -188,18 +188,6 @@ hr {
     border-color: red;
 }
 
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        transform: translateY(20%);
-    }
-
-    100% {
-        opacity: 1;
-        transform: none;
-    }
-}
-
 .up {
     border-color: limegreen;
 }
@@ -227,4 +215,16 @@ hr {
     margin-right: 10px;
     border: 2px lightgray solid;
     border-radius: 5px;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }

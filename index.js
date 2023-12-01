@@ -2,7 +2,7 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    xml2json = require('xml2json')
+    xml2json = require('xml-js')
 
 var app = express()
 
@@ -221,22 +221,22 @@ function mastoUpdate() {
         return data.text()
     })
     .then((xml) => {
-        var data = JSON.parse(xml2json.toJson(xml)).rss.channel
+        var data = xml2json.xml2js(xml, { compact: true }).rss.channel
         var posts = data.item
 
-        var newHTML = ``
+        var newHTML = `<div>`
 
         for (let index = 0; index < posts.length; index++) {
             const post = posts[index];
-            newHTML += `<a href="${post.link}"><div class="post">`
-            newHTML += `<img class="minipfp" src="${data.image.url}">`
-            newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title + `</h3><br>`
-            newHTML += post.description
+            console.log(post)
+            newHTML += `<a href="${post.link._text}"><div class="post">`
+            newHTML += `<img class="minipfp" src="${data.image.url._text}">`
+            newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title._text + `</h3><br>`
+            newHTML += post.description._text
             newHTML += `</a></div><br>`
         }
-        console.log(data)
 
-        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML
+        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML + "</div>"
         
         pageUpdate()
     })
