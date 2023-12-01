@@ -99,11 +99,11 @@ function pageUpdate() {
                     }
                     if (image) {
                         if (image.includes("https/")) {
-                            return 'https://' + image.substr(image.indexOf('https/') + 6, image.length)
+                            return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
                         } else if (image.includes("spotify")) {
-                            return 'https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length)
+                            return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
                         } else {
-                            return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${image}.png`
+                            return decodeURIComponent(`https://cdn.discordapp.com/app-assets/${activity.application_id}/${image}.png`)
                         }
                     }
                 }
