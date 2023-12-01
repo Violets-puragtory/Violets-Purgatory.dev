@@ -232,7 +232,7 @@ function mastoUpdate() {
             newHTML += `<img class="minipfp" src="${data.image.url}">`
             newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title + `</h3><br>`
             newHTML += post.description
-            newHTML += `</a></div>`
+            newHTML += `</a></div><br>`
         }
         console.log(data)
 

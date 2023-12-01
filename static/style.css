@@ -213,11 +213,12 @@ hr {
 }
 
 .post {
-    background-color: rgb(85, 50, 150);
-    border: 2px white solid;
-    display: block;
-    border-radius: 15px;
+    background-color: rgba(85, 50, 150, 0.3);
+    border: 2px gray solid;
+    display: inline-block;
+    /* border-radius: 15px; */
     padding: 10px;
+    margin: 8px;
 }
 
 .minipfp {
