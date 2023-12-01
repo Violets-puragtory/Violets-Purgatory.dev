@@ -228,7 +228,6 @@ function mastoUpdate() {
 
         for (let index = 0; index < posts.length; index++) {
             const post = posts[index];
-            console.log(post)
             newHTML += `<a href="${post.link._text}"><div class="post">`
             newHTML += `<img class="minipfp" src="${data.image.url._text}">`
             newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title._text + `</h3><br>`
