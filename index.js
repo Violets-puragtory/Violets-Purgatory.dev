@@ -244,4 +244,4 @@ function mastoUpdate() {
     }, 1000 * 60 * 60)
 }
 
-mastoUpdate()
+// mastoUpdate()
