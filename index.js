@@ -226,7 +226,7 @@ function mastoUpdate() {
 
         var newHTML = `<div>`
 
-        for (let index = 0; index < posts.length; index++) {
+        for (let index = 0; index < Math.min(posts.length, 7); index++) {
             const post = posts[index];
             newHTML += `<a href="${post.link._text}"><div class="post">`
             newHTML += `<img class="minipfp" src="${data.image.url._text}">`
@@ -235,7 +235,7 @@ function mastoUpdate() {
             newHTML += `</a></div><br>`
         }
 
-        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML + "</div>"
+        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML + "</div>" + `<br> <a class="chip" href="https://tech.lgbt/@bingus_violet">See more on Mastodon</a>`
         
         pageUpdate()
     })
