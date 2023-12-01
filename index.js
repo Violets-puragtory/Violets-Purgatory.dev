@@ -139,14 +139,13 @@ function pageUpdate() {
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                                <br> ${activity.state || activity.assets.small_text}
                                 <br> ${activity.details || activity.assets.large_text}
+                                <br> ${activity.state || activity.assets.small_text}
                             </p>
 
                     </div>
                 `
                 } else {
-                    console.log(get_img())
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                         <p>
@@ -203,7 +202,5 @@ lanyard.addEventListener("message", (res) => {
     } else if (data.op == 0) {
         lanyardData = data.d
         pageUpdate()
-    } else {
-        console.log(data.d)
     }
 })
