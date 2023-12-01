@@ -1,7 +1,8 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    WebSocket = require('ws')
+    WebSocket = require('ws'),
+    xml2json = require('xml2json')
 
 var app = express()
 
@@ -14,6 +15,11 @@ const mainpage = resourcePath + '/mainPage.html'
 var lanyardData = undefined
 
 var discData = null
+
+var mastoData = {
+    "lastUpdate": 0,
+    "HTML": ""
+}
 
 app.use(express.static(staticpath))
 
@@ -115,9 +121,9 @@ function pageUpdate() {
                         <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
-                                <br> Song: "${activity.details}"
-                                <br> Album: "${activity.assets.large_text}"
-                                <br> Artist: "${activity.state}"
+                                <br> Song: ${activity.details}
+                                <br> Album: ${activity.assets.large_text}
+                                <br> Artist: ${activity.state}
                             </p>
                     </div>
                 `
@@ -173,6 +179,8 @@ function pageUpdate() {
 
     html = html.replace("{SOCIALS}", addedHTML)
 
+    html = html.replace("{MASTODON_FEED}", mastoData.HTML)
+
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
@@ -204,3 +212,37 @@ lanyard.addEventListener("message", (res) => {
         pageUpdate()
     }
 })
+
+// Mastodon Updates
+
+function mastoUpdate() {
+    fetch("https://tech.lgbt/@bingus_violet.rss")
+    .then((data) => {
+        return data.text()
+    })
+    .then((xml) => {
+        var data = JSON.parse(xml2json.toJson(xml)).rss.channel
+        var posts = data.item
+
+        var newHTML = ``
+
+        for (let index = 0; index < posts.length; index++) {
+            const post = posts[index];
+            newHTML += `<a href="${post.link}"><div class="post">`
+            newHTML += `<img class="minipfp" src="${data.image.url}">`
+            newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title + `</h3><br>`
+            newHTML += post.description
+            newHTML += `</a></div>`
+        }
+        console.log(data)
+
+        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML
+        
+        pageUpdate()
+    })
+    setTimeout(()=> {
+        mastoUpdate()
+    }, 1000 * 60 * 60)
+}
+
+mastoUpdate()

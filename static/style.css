@@ -13,11 +13,13 @@ h1 {
     font-size: 2.5rem;
 }
 
-h2 {
+h2,
+h3 {
     color: white;
 }
 
-body, html {
+body,
+html {
     overflow-x: hidden;
     margin: auto;
     background-color: rgb(20, 5, 60);
@@ -76,11 +78,11 @@ a {
     display: flex;
 }
 
-.activity > p {
+.activity>p {
     width: 100%;
 }
 
-.activity > img {
+.activity>img {
     width: 128px;
     aspect-ratio: 1/1;
     object-fit: cover;
@@ -132,7 +134,7 @@ hr {
     margin: 20px auto;
     width: 95%;
     max-width: 800px;
-    
+
 }
 
 .me {
@@ -208,4 +210,20 @@ hr {
 
 .down {
     border-color: red;
+}
+
+.post {
+    background-color: rgb(85, 50, 150);
+    border: 2px white solid;
+    display: block;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.minipfp {
+    width: 70px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 2px lightgray solid;
+    border-radius: 5px;
 }
