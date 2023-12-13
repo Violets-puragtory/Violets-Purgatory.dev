@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Violet's Purgatory</title>
+
+    <meta content="Welcome to Violet's Purgatory" property="og:title" />
+    <meta
+        content="I'm Violet, a 14yo web and game developer. On my site i'm hosting various services, so please check out the site for more info!!!"
+        property="og:description" />
+    <meta content="https://api.lanyard.rest/534132311781015564.png" property="og:image" />
+    <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
+
+    <!-- To any who dare read this code! I stole the code above off of stack overflow :P-->
+</head>
+
+<body>
+    <h1>Welcome to Violet's Purgatory</h1>
+    <div class="fadediv">
+        <div class="container-fluid row" id="card">
+            <h2>Violet</h2>
+            <div class="col-sm-12" style="display: flex; justify-content: center; align-items: center;">
+                <img src="https://api.lanyard.rest/534132311781015564.png" class="pfp">
+                <div>
+                    <p>They/Them</p>
+                    <p>Non-binary</p>
+                    <p>Game & web developer</p>
+                    {LANYARD_STATUS}
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <hr>
+                <p class="chip"><a href="./hosted">Stuff i'm hosting!</a></p>
+                <p class="chip"><a href="./socials">Socials</a></p>
+                <p class="chip"><a href="./pronouns">Pronouns</a></p>
+                {LANYARD_QUOTE}
+            </div>
+        </div>
+        <p><em>The world's worst developer</em></p>
+        <noscript>
+            <p style="font-size: 0.9rem;">Fun fact: This website uses no Javascript! Everything dynamic (E.G. The discord status) is done
+                server-side, so enjoy :D <br> P.S. Your really cool, I look up to people like u :> (Atleast, assuming you disabled javascript urself...)</p>
+        </noscript>
+        {LANYARD_FULL}
+        {SOCIALS}
+        
+        {MASTODON_FEED}
+    </div>
+</body>
+</html>

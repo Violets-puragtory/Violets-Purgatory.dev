@@ -4,7 +4,7 @@
   "description": "Violets Purgatory is a personal webapp for",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
-    "ws": "^8.14.2"
+    "ws": "^8.14.2",
+    "xml-js": "^1.6.11"
   }
 }
