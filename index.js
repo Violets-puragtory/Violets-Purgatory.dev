@@ -181,6 +181,56 @@ function pageUpdate() {
 
     html = html.replace("{MASTODON_FEED}", mastoData.HTML)
 
+    var now = new Date()
+    currentMonth = now.getMonth() + 1
+
+    if ([11, 12, 1].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
+        html = html.replace("{SEASONAL_EFFECT}", `
+        <div class="snowflakes" aria-hidden="true">
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+            <div class="snowflake">
+                <div class="inner">●</div>
+            </div>
+        </div>
+        <br>
+        <p>I love the winter :></p>
+`)
+    } else {
+        html = html.replace("{SEASONAL_EFFECT}", "")
+    }
+
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
