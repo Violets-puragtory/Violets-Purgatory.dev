@@ -50,6 +50,7 @@ a {
 }
 
 .chip {
+    position: relative;
     z-index: 3;
     font-size: 1.3rem;
     border: 2px gray solid;
@@ -235,9 +236,10 @@ hr {
 
 .snowflake {
     color: white;
-    font-size: 0.5rem;
+    font-size: 0.5em;
     font-family: Arial, sans-serif;
     text-shadow: 0 0 5px #000;
+    visibility: hidden;
 }
 
 .snowflake,
@@ -249,10 +251,12 @@ hr {
 
 @keyframes snowflakes-fall {
     0% {
+        visibility: visible;
         transform: translateY(0)
     }
 
     100% {
+        visibility: visible;
         transform: translateY(110vh)
     }
 }
@@ -276,12 +280,14 @@ hr {
     user-select: none;
     cursor: default;
     animation-name: snowflakes-shake;
+    animation-delay: 0.5s;
     animation-duration: 3s;
     animation-timing-function: ease-in-out
 }
 
 .snowflake .inner {
     animation-duration: 10s;
+    animation-delay: 0.5s;
     animation-name: snowflakes-fall;
     animation-timing-function: linear
 }
