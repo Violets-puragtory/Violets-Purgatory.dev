@@ -2,7 +2,8 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    xml2json = require('xml-js')
+    xml2json = require('xml-js'),
+    commitCount = require('git-commit-count');
 
 var app = express()
 
@@ -230,6 +231,8 @@ function pageUpdate() {
     } else {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
+
+    html = html.replace("{COMMITS}", commitCount('https://codeberg.org/Bingus_Violet/Violets-Purgatory'))
 
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
