@@ -298,7 +298,7 @@ function mastoUpdate() {
 
 app.use((req, res, next) => { 
     res.status(404).send( 
-        `<link rel="stylesheet" href="./style.css">
+        `<link rel="stylesheet" href="/style.css">
         <h1>...what?</h1>
         <p>Uh oh... I think your lost? There's nothing here :P
         <br>Maybe you were sent the wrong link? Try going to 'fs.violets-purgatory.dev' instead if you were expecting a file...</p>`
