@@ -232,7 +232,7 @@ function pageUpdate() {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
 
-    html = html.replace("{COMMITS}", commitCount("https://codeberg.org/Bingus_Violet/Violets-Purgatory"))
+    // html = html.replace("{COMMITS}", commitCount("https://codeberg.org/Bingus_Violet/Violets-Purgatory"))
 
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
