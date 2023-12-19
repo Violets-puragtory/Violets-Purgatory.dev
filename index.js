@@ -263,45 +263,12 @@ lanyard.addEventListener("message", (res) => {
     }
 })
 
-// Mastodon Updates
-
-function mastoUpdate() {
-    fetch("https://tech.lgbt/@bingus_violet.rss")
-    .then((data) => {
-        return data.text()
-    })
-    .then((xml) => {
-        var data = xml2json.xml2js(xml, { compact: true }).rss.channel
-        var posts = data.item
-
-        var newHTML = `<div>`
-
-        for (let index = 0; index < Math.min(posts.length, 7); index++) {
-            const post = posts[index];
-            newHTML += `<a href="${post.link._text}"><div class="post">`
-            newHTML += `<img class="minipfp" src="${data.image.url._text}">`
-            newHTML += `<h3 style="display: inline-block; vertical-align: -15%;">` + data.title._text + `</h3><br>`
-            newHTML += post.description._text
-            newHTML += `</a></div><br>`
-        }
-
-        mastoData.HTML = `<h2><hr>Mastodon Posts: </h2>` + newHTML + "</div>" + `<br> <a class="chip" href="https://tech.lgbt/@bingus_violet">See more on Mastodon</a>`
-        
-        pageUpdate()
-    })
-    setTimeout(()=> {
-        mastoUpdate()
-    }, 1000 * 60 * 60)
-}
-
-// mastoUpdate()
-
 app.use((req, res, next) => { 
-    res.status(404).send( 
-        `<link rel="stylesheet" href="/style.css">
+    res.status(404).send(`
+        <link rel="stylesheet" href="/style.css">
         <h1>...what?</h1>
         <p>Uh oh... I think your lost? There's nothing here :P
-        <br>Maybe you were sent the wrong link? Try going to 'fs.violets-purgatory.dev' instead if you were expecting a file...</p>`
-    ) 
+        <br>Maybe you were sent the wrong link? Try going to 'fs.violets-purgatory.dev' instead if you were expecting a file...</p>
+        `) 
 }) 
   
