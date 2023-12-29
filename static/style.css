@@ -24,7 +24,7 @@ ul {
 }
 
 li {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: left;
 }
 
@@ -55,7 +55,6 @@ body {
 
 a {
     color: rgb(175, 225, 255);
-    text-decoration: none;
     display: inline-block;
     transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -72,6 +71,10 @@ a {
     display: inline-block;
     transform: scale(0.95);
     transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip, .chip > * {
+    text-decoration: none;
 }
 
 .chip:hover {
