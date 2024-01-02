@@ -144,8 +144,10 @@ function pageUpdate() {
                 }
             } else if (activity.type == 0) {
                 if (get_img()) {
-                    var time = activity.timestamps.start || activity.created_at
-                    console.log(activity)
+                    var time = activity.created_at
+                    if (activity.timestamps) {
+                        time = activity.timestamps.start
+                    }
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
