@@ -144,6 +144,8 @@ function pageUpdate() {
                 }
             } else if (activity.type == 0) {
                 if (get_img()) {
+                    var time = activity.timestamps.start || activity.created_at
+                    console.log(activity)
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
@@ -151,7 +153,7 @@ function pageUpdate() {
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
                                 <br> ${activity.state || activity.assets.small_text || " "}
-                                <br> ${Math.floor(((Date.now() - activity.timestamps.start) / 1000 / 60)).toString() + " Minutes" || " "}
+                                <br> ${Math.floor(((Date.now() - time) / 1000 / 60)).toString() + " Minutes" || " "}
                             </p>
 
                     </div>
