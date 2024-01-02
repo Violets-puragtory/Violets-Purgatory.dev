@@ -115,6 +115,20 @@ function pageUpdate() {
                     }
                 }
             }
+            function songStats() {
+                var html = ``
+
+                if (activity.assets && activity.assets.large_text != activity.details) {
+                    html += `
+                    <br> Album: ${activity.assets.large_text || " "}
+                    <br> Artist: ${activity.state || " "}
+                    `
+                } else {
+                    html += `<br> Artist: ${activity.state || " "}`
+                }
+
+                return html
+            }
             if (activity.type == 2) {
                 if (get_img()) {
                     addedHTML += `
@@ -122,22 +136,11 @@ function pageUpdate() {
                         <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
-                                <br> Song: ${activity.details}
-                                <br> Album: ${activity.assets.large_text}
-                                <br> Artist: ${activity.state}
+                                <br> Song: ${activity.details || " "}
+                                ${songStats()}
                             </p>
                     </div>
                 `
-                } else {
-                    addedHTML += `
-                    <div class="chip activity col-md-6 testing">
-                        <p style="width: 100%;">
-                            Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                            <br> ${activity.state}
-                            <br> ${activity.details}
-                        </p>
-                    </div>
-                    `
                 }
             } else if (activity.type == 0) {
                 if (get_img()) {
@@ -146,23 +149,14 @@ function pageUpdate() {
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                                <br> ${activity.details || activity.assets.large_text}
-                                <br> ${activity.state || activity.assets.small_text}
+                                <br> ${activity.details || activity.assets.large_text || " "}
+                                <br> ${activity.state || activity.assets.small_text || " "}
+                                <br> ${Math.floor(((Date.now() - activity.timestamps.start) / 1000 / 60)).toString() + " Minutes" || " "}
                             </p>
 
                     </div>
                 `
-                } else {
-                    addedHTML += `
-                    <div class="chip activity col-md-6 testing">
-                        <p>
-                            Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                            <br> ${activity.state}
-                            <br> ${activity.details}
-                        </p>
-                    </div>
-                    `
-                }
+                } 
             }
         }
     }
