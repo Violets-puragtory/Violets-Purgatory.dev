@@ -155,7 +155,7 @@ function pageUpdate() {
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
                                 <br> ${activity.state || activity.assets.small_text || " "}
-                                <br> ${Math.floor(((Date.now() - time) / 1000 / 60)).toString() + " Minutes" || " "}
+                                <br> ${Math.ceil(((Date.now() - time) / 1000 / 60)).toString() + " Minutes" || " "}
                             </p>
 
                     </div>
