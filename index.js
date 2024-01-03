@@ -183,7 +183,7 @@ function pageUpdate() {
     var now = new Date()
     currentMonth = now.getMonth() + 1
 
-    if ([11, 12, 1].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
+    if ([11, 12].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
         html = html.replace("{SEASONAL_EFFECT}", `
         <div class="snowflakes" aria-hidden="true">
             <div class="snowflake">
