@@ -114,9 +114,6 @@ function pageUpdate() {
                 debounce = true
             }
             function get_img() {
-                if (activity.name in activityImages) {
-                    return decodeURIComponent(activityImages[activity.name])
-                }
 
                 if ("assets" in activity) {
                     var image = undefined
@@ -135,6 +132,14 @@ function pageUpdate() {
                         }
                     }
                 }
+
+                if (!image) {
+                    if (activity.name in activityImages) {
+                        return decodeURIComponent(activityImages[activity.name])
+                    } else {
+                        return decodeURIComponent(`https://cdn.discordapp.com/app-assets/680748054038577165/680775885317472448.png`)
+                    }
+                }
             }
             function songStats() {
                 var html = ``
@@ -151,7 +156,6 @@ function pageUpdate() {
                 return html
             }
             if (activity.type == 2) {
-                if (get_img()) {
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                         <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
@@ -162,9 +166,7 @@ function pageUpdate() {
                             </p>
                     </div>
                 `
-                }
             } else if (activity.type == 0) {
-                if (get_img()) {
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
@@ -185,7 +187,6 @@ function pageUpdate() {
 
                     </div>
                 `
-                }
             }
         }
     }
