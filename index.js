@@ -17,6 +17,10 @@ var lanyardData = undefined
 
 var discData = null
 
+const activityImages = {
+    "ULTRAKILL": "https://thumbor-production-0e82.up.railway.app/unsafe/512x512/https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
+}
+
 var mastoData = {
     "lastUpdate": 0,
     "HTML": ""
@@ -92,11 +96,28 @@ function pageUpdate() {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
 
+            var found = false
+            for (let index = 0; index < lanyardData.activities.length; index++) {
+                const act = lanyardData.activities[index]
+                if (act.name == activity.name) {
+                    if (Object.keys(act).length > Object.keys(activity).length) {
+                        found = true
+                    }
+                }
+            }
+            if (found) {
+                continue
+            }
+            
             if (!debounce && activity.type != 4) {
                 addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
             }
             function get_img() {
+                if (activity.name in activityImages) {
+                    return decodeURIComponent(activityImages[activity.name])
+                }
+
                 if ("assets" in activity) {
                     var image = undefined
                     if ("large_image" in activity.assets) {
@@ -148,6 +169,10 @@ function pageUpdate() {
                     if (activity.timestamps) {
                         time = activity.timestamps.start
                     }
+                    if (!activity.assets) {
+                        activity.assets = {"large_text": " ", "small_text": " "}
+                    }
+
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
@@ -160,7 +185,7 @@ function pageUpdate() {
 
                     </div>
                 `
-                } 
+                }
             }
         }
     }
