@@ -138,6 +138,12 @@ img {
     object-fit: cover;
 }
 
+.emoji {
+    width: 32px;
+    border-radius: 10%;
+    border: 1px gray solid;
+}
+
 hr {
     color: white;
     opacity: 0.25;

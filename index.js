@@ -69,7 +69,14 @@ function pageUpdate() {
 
     if (lanyardData && lanyardData.activities.length > 0) {
         if (lanyardData.activities[0].type == 4) {
-            addedHTML += `<hr><p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
+            var status = lanyardData.activities[0]
+            addedHTML += "<hr><p>"
+            if (status.emoji) {
+                addedHTML += `<img class="emoji" src="https://cdn.discordapp.com/emojis/${lanyardData.activities[0].emoji.id}.webp?size=32&quality=lossless"/>`
+            }
+            addedHTML += `<em><span style="color: lightgray">"`
+            addedHTML += (lanyardData.activities[0].state || "")
+            addedHTML += `"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
         }
     }
 
