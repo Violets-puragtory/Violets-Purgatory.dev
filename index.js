@@ -204,6 +204,13 @@ function pageUpdate() {
 
     html = html.replace("{SOCIALS}", addedHTML)
 
+    addedHTML = ""
+
+    var faqHTML = fs.readFileSync(path.join(__dirname, 'static/faq/index.html')).toString()
+    addedHTML += faqHTML.substring(faqHTML.indexOf("<h1>"), faqHTML.indexOf("</body>"))
+
+    html = html.replace("{FAQ}", addedHTML)
+
     html = html.replace("{MASTODON_FEED}", mastoData.HTML)
 
     var now = new Date()
