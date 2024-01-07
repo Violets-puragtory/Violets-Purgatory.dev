@@ -171,6 +171,8 @@ hr {
     background-color: rgba(35, 35, 35, 0.8);
     padding: 15px;
     border: 2px gray solid;
+    margin: 20px 0px;
+    border-radius: 15px;
 }
 
 .project-inner {
@@ -186,6 +188,7 @@ hr {
     width: 80%;
     max-width: 500px;
     margin: auto;
+    border-radius: 10px;
 }
 
 .project > p {
