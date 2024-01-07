@@ -118,7 +118,7 @@ p {
     margin: 10px;
 }
 
-img {
+img:not(.project-inner > img) {
     width: 100%;
     max-width: 135px;
     transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -165,6 +165,31 @@ hr {
 
 .me {
     border-color: limegreen;
+}
+
+.project {
+    background-color: rgba(35, 35, 35, 1);
+    padding: 10px;
+}
+
+.project-inner {
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    position: relative;
+    z-index: 3;
+}
+
+.project-inner > img {
+    object-fit: cover;
+    max-width: 300px;
+    border: 2px lightgray solid;
+}
+
+.project > p {
+    text-align: right;
+    display: inline-block;
 }
 
 /* I am so sorry about this code,,, */
