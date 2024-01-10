@@ -24,7 +24,7 @@
         <h2><hr>How?</h2>
         <p>Well, believe it or not, there's no javascript involved!!!! :D<br><span style="color: darkgray; font-size: 0.9rem;">Or well no client side javascript anyway...</span></p>
         <p>Using a wonderful program <a>called lanyard</a>, my website is connected to a websocket that sends a signal every time my discord updates (E.G. My status changes... or I open a game...)</p>
-        <p>Then, it uses the new info to dynamically generate this page!<br>The more technically advanced of you can check it out on Codeberg, but be warned, it's coded <b>TERRIBLY.</b> I didn't really wanna use a library so i coded it all myself, and there's no actual system, just pure chaos :/</p>
+        <p>Then, it uses the new info to dynamically generate the main page!<br>The more technically advanced of you can check it out on Codeberg, but be warned, it's coded <b>TERRIBLY.</b> I didn't really wanna use a library so i coded it all myself, and there's no actual system, just pure chaos :/</p>
         <h2><hr>Why?</h2>
         <p>Actually, i'm not really sure<br>
             Originally I think this site started out because I saw people had these cool "carrd" sites and stuff
@@ -34,6 +34,12 @@
             <p>For example, my Youtube Converter, Univerter, I was only able to make because I already learnt how to make
                 dynamically generated HTML. (Univerter, as I am writing this, has no dynamically generated HTML, but it used to!)
             </p>
+        <h2><hr>How does it update?</h2>
+        <p>
+        I use a site called railway for hosting, which connects to a github repository, which is synced with a codeberg repository. The github repo is only there because, <em>annoyingly</em>, Railway only supports docker and Github.
+        <br>
+        The main site (violets-purgatory.dev) updates with the origin branch, while the beta site (beta.violets-purgatory.dev) updates with the dev branch. I originally wanted to use dev as the subdomain for the sake of consistancy, but, dev.violets-purgatory.dev just doesn't really work.
+        </p>
     </div>
 </body>
 </html>
