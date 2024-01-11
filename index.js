@@ -227,48 +227,8 @@ function pageUpdate() {
     currentMonth = now.getMonth() + 1
 
     if ([11, 12].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
-        html = html.replace("{SEASONAL_EFFECT}", `
-        <div class="snowflakes" aria-hidden="true">
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-            <div class="snowflake">
-                <div class="inner">●</div>
-            </div>
-        </div>
-        <br>
-        <p>I love the winter :></p>
-`)
+        html = html.replace("{SEASONAL_EFFECT}", fs.readFileSync(path.join(__dirname, 'static/snow.html')))
+        console.log("beep")
     } else {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
