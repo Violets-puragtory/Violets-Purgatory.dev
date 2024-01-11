@@ -77,7 +77,6 @@ function pageUpdate() {
                 } else {
                     addedHTML += status.emoji.name
                 }
-                
             }
             if (status.state) {
                 addedHTML += `<em><span style="color: lightgray">"`

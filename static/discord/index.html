@@ -19,7 +19,8 @@
 </head>
 
 <body>
-    <noscript><h2>Sorry! This page requires javascript... The rest of this site doesn't, though!</h2></noscript>
+    <div class="fadediv">
+        <noscript><h2>Sorry! This page requires javascript... The rest of this site doesn't, though!</h2></noscript>
     <h1>Discord Status</h1>
     <p>This is a more fleshed out version of the main discord status on my site, issue being, it requires Javascript. So, I choose not to use it, though it coulda been cool...</p>
     <p>I still am tempted to add something like it to the main page, and just make it compatible without javascript, but I worry that'd upset people.</p>
@@ -27,9 +28,8 @@
     <div class="container-fluid row" id="card">
         <h2>Violet</h2>
         <div style="display: flex; justify-content: center; align-items: center;">
-            <img src="https://api.lanyard.rest/534132311781015564.png?" class="pfp">
+            <img src="https://api.lanyard.rest/534132311781015564.png" class="pfp">
             <div>
-                <p><a href="pronouns">They/Them</a></p>
                 <p>Developer</p>
                 <p id="discStatus" style="transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);">Offline</p>
             </div>
@@ -37,6 +37,7 @@
         <div>
             <p id="discQuote"></p>
         </div>
+    </div>
     </div>
 </body>
 <script src="./index.js"></script>

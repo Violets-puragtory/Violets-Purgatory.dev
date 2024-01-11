@@ -50,10 +50,23 @@ lanyard.addEventListener("message", (res) => {
         $(".pfp").css("border-color", statusData.color)
 
         if (lanyardData) {
+            $("#discQuote").html("")
             for (let index = 0; index < lanyardData.activities.length; index++) {
                 const activity = lanyardData.activities[index];
+                var status = lanyardData.activities[0]
+                var addedHTML = ""
+                addedHTML += "<hr>"
+
                 if (activity.type == 4) {
-                    $("#discQuote").html(`<hr><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em>`)
+                    if (status.emoji) {
+                        if (status.emoji.id) {
+                            addedHTML += `<img class="emoji" src="https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                        } else {
+                            addedHTML += status.emoji.name
+                        }
+                    }
+                    addedHTML += `<em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em>`
+                    $("#discQuote").html(addedHTML)
                 }
             }
         }
