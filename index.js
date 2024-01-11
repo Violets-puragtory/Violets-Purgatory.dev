@@ -92,19 +92,6 @@ function pageUpdate() {
 
     addedHTML = ""
 
-    if (lanyardData) {
-        for (let index = 0; index < lanyardData.activities.length; index++) {
-            const activity = lanyardData.activities[index];
-            if (activity.type == 4) {
-                addedHTML += `<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
-            }
-        }
-    }
-
-    html = html.replace("{LANYARD_SPOTIFY}", addedHTML)
-
-    addedHTML = ""
-
     var debounce = false
 
     if (lanyardData && lanyardData.activities.length > 0) {
