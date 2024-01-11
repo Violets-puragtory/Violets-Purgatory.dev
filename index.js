@@ -72,7 +72,12 @@ function pageUpdate() {
             var status = lanyardData.activities[0]
             addedHTML += "<hr><p>"
             if (status.emoji) {
-                addedHTML += `<img class="emoji" src="https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                if (status.emoji.id) {
+                    addedHTML += `<img class="emoji" src="https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                } else {
+                    addedHTML += status.emoji.name
+                }
+                
             }
             if (status.state) {
                 addedHTML += `<em><span style="color: lightgray">"`
