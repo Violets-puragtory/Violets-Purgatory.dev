@@ -226,6 +226,7 @@ function pageUpdate() {
 
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
+    console.log(commitCount(), commitCount('https://github.com/Violets-puragtory/Violets-Purgatory.dev'), commitCount('https://codeberg.org/Bingus_Violet/Violets-Purgatory'), commitCount('.git'))
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
