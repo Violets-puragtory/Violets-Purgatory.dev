@@ -226,7 +226,7 @@ function pageUpdate() {
 
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
-    fetch('https://codeberg.org/Bingus_Violet/Violets-Purgatory/commits/branch/origin')
+    fetch('https://github.com/Violets-puragtory/Violets-Purgatory.dev')
     .then(((data) => data.text()))
     .then((text) => {
         console.log(text)
