@@ -18,7 +18,7 @@ var lanyardData = undefined
 var discData = null
 
 const activityImages = {
-    "ULTRAKILL": "https://thumbor-production-0e82.up.railway.app/unsafe/512x512/https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
+    "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
 }
 
 var mastoData = {
@@ -160,7 +160,7 @@ function pageUpdate() {
             if (activity.type == 2) {
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/512x512/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
                                 <br> Song: ${activity.details || " "}
