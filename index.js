@@ -226,7 +226,7 @@ function pageUpdate() {
 
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
-    console.log(fetch('https://codeberg.org/Bingus_Violet/Violets-Purgatory'))
+    fetch('https://codeberg.org/Bingus_Violet/Violets-Purgatory').then(((data) => console.log(data.text())))
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
