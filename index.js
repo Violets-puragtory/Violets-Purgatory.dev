@@ -220,7 +220,6 @@ function pageUpdate() {
 
     if ([11, 12].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
         html = html.replace("{SEASONAL_EFFECT}", fs.readFileSync(path.join(__dirname, 'static/snow.html')))
-        console.log("beep")
     } else {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
