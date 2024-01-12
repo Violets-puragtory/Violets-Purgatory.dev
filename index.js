@@ -18,7 +18,7 @@ var lanyardData = undefined
 var discData = null
 
 const activityImages = {
-    "ULTRAKILL": "https://thumbor-production-0e82.up.railway.app/unsafe/512x512/https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
+    "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
 }
 
 var mastoData = {
@@ -72,7 +72,11 @@ function pageUpdate() {
             var status = lanyardData.activities[0]
             addedHTML += "<hr><p>"
             if (status.emoji) {
-                addedHTML += `<img class="emoji" src="https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                if (status.emoji.id) {
+                    addedHTML += `<img class="emoji" src="https://thumbor-production-0e82.up.railway.app/unsafe/https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                } else {
+                    addedHTML += status.emoji.name
+                }
             }
             if (status.state) {
                 addedHTML += `<em><span style="color: lightgray">"`
@@ -84,19 +88,6 @@ function pageUpdate() {
     }
 
     html = html.replace("{LANYARD_QUOTE}", addedHTML)
-
-    addedHTML = ""
-
-    if (lanyardData) {
-        for (let index = 0; index < lanyardData.activities.length; index++) {
-            const activity = lanyardData.activities[index];
-            if (activity.type == 4) {
-                addedHTML += `<p><em><span style="color: lightgray">"${lanyardData.activities[0].state}"</span> - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
-            }
-        }
-    }
-
-    html = html.replace("{LANYARD_SPOTIFY}", addedHTML)
 
     addedHTML = ""
 
@@ -148,6 +139,7 @@ function pageUpdate() {
                         return decodeURIComponent(activityImages[activity.name])
                     } else {
                         return decodeURIComponent(`https://cdn.discordapp.com/app-assets/680748054038577165/680775885317472448.png`)
+                        // This was supposed to be temporary but it kinda stuck honestly lol (It's an ultrakill icon)
                     }
                 }
             }
@@ -168,7 +160,7 @@ function pageUpdate() {
             if (activity.type == 2) {
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                        <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/512x512/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
                                 <br> Song: ${activity.details || " "}
@@ -187,7 +179,7 @@ function pageUpdate() {
 
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="https://thumbor-production-0e82.up.railway.app/unsafe/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
