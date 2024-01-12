@@ -225,6 +225,8 @@ function pageUpdate() {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
 
+    html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
+
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 

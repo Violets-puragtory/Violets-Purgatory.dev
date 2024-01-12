@@ -78,7 +78,7 @@ a {
 }
 
 .chip:hover {
-    /* background-color: rgb(20, 10, 30); */
+    background-color: rgb(20, 10, 30);
     transform: scale(1);
     /* font-size: 1.35rem; */
     border-color: white;
