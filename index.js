@@ -1,9 +1,7 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    WebSocket = require('ws'),
-    xml2json = require('xml-js'),
-    commitCount = require('git-commit-count');
+    WebSocket = require('ws')
 
 var app = express()
 
