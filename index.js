@@ -160,7 +160,7 @@ function pageUpdate() {
             if (activity.type == 2) {
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/512x512/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
                                 <br> Song: ${activity.details || " "}
@@ -226,6 +226,11 @@ function pageUpdate() {
 
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
+    // fetch('https://github.com/Violets-puragtory/Violets-Purgatory.dev')
+    // .then(((data) => data.text()))
+    // .then((text) => {
+    //     console.log(text)
+    // })
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
