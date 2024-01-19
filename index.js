@@ -15,6 +15,20 @@ var lanyardData = undefined
 
 var discData = null
 
+var thumborInstances = [
+    "https://thumbor-production-0e82.up.railway.app/",
+    "https://enormous-book-production.up.railway.app/",
+    "https://unusual-back-production.up.railway.app/",
+    "https://axiomatic-hair-production.up.railway.app/",
+]
+
+var thumbCount = 0
+
+function getThumbor() {
+    thumbCount += 1
+    return thumborInstances[thumbCount % thumborInstances.length] + "unsafe"
+}
+
 const activityImages = {
     "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
 }
@@ -71,7 +85,7 @@ function pageUpdate() {
             addedHTML += "<hr><p>"
             if (status.emoji) {
                 if (status.emoji.id) {
-                    addedHTML += `<img class="emoji" src="https://thumbor-production-0e82.up.railway.app/unsafe/https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
+                    addedHTML += `<img class="emoji" src="${getThumbor()}/https://cdn.discordapp.com/emojis/${status.emoji.id}.webp?size=32&quality=lossless"/> `
                 } else {
                     addedHTML += status.emoji.name
                 }
@@ -158,7 +172,7 @@ function pageUpdate() {
             if (activity.type == 2) {
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                        <img src="https://thumbor-production-0e82.up.railway.app/unsafe/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                        <img src="${getThumbor()}/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Listening to <span style="color: limegreen;">${activity.name}</span> 
                                 <br> Song: ${activity.details || " "}
@@ -177,7 +191,7 @@ function pageUpdate() {
 
                     addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="https://thumbor-production-0e82.up.railway.app/unsafe/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${getThumbor()}/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
@@ -224,6 +238,7 @@ function pageUpdate() {
 
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
+    html = html.replace("{THUMBOR}", getThumbor())
     // fetch('https://github.com/Violets-puragtory/Violets-Purgatory.dev')
     // .then(((data) => data.text()))
     // .then((text) => {
