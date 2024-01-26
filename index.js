@@ -44,6 +44,10 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
+app.get('/', (req, res) => {
+    res.send(pageUpdate())
+})
+
 function pageUpdate() {
     var statuses = {
         "online": {
@@ -261,12 +265,10 @@ function pageUpdate() {
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
     html = html.replace("{THUMBOR}", getThumbor())
-    // fetch('https://github.com/Violets-puragtory/Violets-Purgatory.dev')
-    // .then(((data) => data.text()))
-    // .then((text) => {
-    //     console.log(text)
-    // })
-    fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+
+    // fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+
+    return html
 }
 
 // Lanyard Stuffs
@@ -297,8 +299,6 @@ lanyard.addEventListener("message", (res) => {
         pageUpdate()
     }
 })
-
-pageUpdate()
 
 app.use((req, res, next) => { 
     res.status(404).send(`
