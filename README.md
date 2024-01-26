@@ -16,4 +16,5 @@ We also have an API, which can be located at https://api.violets-purgatory.dev, 
 ## To-do
 - [ ] Add image caching instead of using image proxies (keeps the security benefit and decreases loading times)
 - [ ] Cut the main CSS file into multiple so that only the nessacary CSS is loaded (Reduces traffic and loading times)
+- [ ] Make Spotify updates *actually* accurate
 - [ ] Add a commit counter
