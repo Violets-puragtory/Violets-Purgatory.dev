@@ -33,7 +33,7 @@ html {
     overflow-x: hidden;
     margin: auto;
     background-color: rgb(15, 2.5, 30);
-    background: linear-gradient(rgb(15, 2.5, 30), black);
+    background: linear-gradient(rgb(15, 4, 40), black);
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -153,7 +153,7 @@ hr {
 }
 
 #card {
-    background-color: rgb(25, 0, 80);
+    background-color: rgb(15, 0, 60);
     padding: 15px;
     border: 2px white solid;
     margin: 20px auto;
