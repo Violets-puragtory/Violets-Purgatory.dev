@@ -279,7 +279,11 @@ function pageUpdate() {
 
     html = html.replace("{THUMBOR}", getThumbor())
 
-    html = html.replace("{RANDOM_QUOTE}", randomQuotes[Math.floor(Math.random() * randomQuotes.length)])
+    var quote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)]
+    
+    quote = quote.replace("{QUOTE_COUNT}", randomQuotes.length)
+
+    html = html.replace("{RANDOM_QUOTE}", quote)
 
     if (process.env.BRANCH == "dev") {
         html = html.replace("{OPPOSITE_URL}", "www")
