@@ -44,10 +44,6 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
-app.get('/', (req, res) => {
-    res.send(pageUpdate())
-})
-
 function pageUpdate() {
     var statuses = {
         "online": {
@@ -266,9 +262,7 @@ function pageUpdate() {
 
     html = html.replace("{THUMBOR}", getThumbor())
 
-    // fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
-
-    return html
+    fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
 // Lanyard Stuffs
@@ -299,6 +293,8 @@ lanyard.addEventListener("message", (res) => {
         pageUpdate()
     }
 })
+
+pageUpdate()
 
 app.use((req, res, next) => { 
     res.status(404).send(`
