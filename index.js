@@ -48,6 +48,9 @@ function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.floor(seconds / 60)
 
+    if (seconds < 10) {
+        return `${minutes}:0${seconds % 60}`
+    }
     return `${minutes}:${seconds % 60}`
 }
 
@@ -59,9 +62,10 @@ function gameTimeFormatter(seconds) {
         return 'Under a minute ago'
     } else if (minutes < 60) {
         return `${minutes} Minutes`
-    } else {
-        return `${hours} hours and ${minutes % 60} minutes`
     }
+    
+    return `${hours} hours and ${minutes % 60} minutes`
+    
 }
 
 function pageUpdate() {
