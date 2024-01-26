@@ -44,6 +44,17 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
+function timeFormatter(seconds) {
+    seconds = Math.ceil(seconds)
+    var minutes = 0
+    while (seconds > 60) {
+        seconds -= 60
+        minutes += 1
+    }
+
+    return `${minutes}:${seconds}`
+}
+
 function pageUpdate() {
     var statuses = {
         "online": {
@@ -181,6 +192,7 @@ function pageUpdate() {
                             ${songStats()}
                             <br>
                             <span class="lengthBar lengthBar${index}"><span></span></span>
+                            ${timeFormatter((activity.timestamps.end - activity.timestamps.start) / 1000)}
                         </p>
                     </div>
 
