@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 8080
 const staticpath = path.join(__dirname, 'static')
 const resourcePath = path.join(__dirname, 'resources')
 
-
-
 const mainpage = resourcePath + '/mainPage.html'
 var lanyardData = undefined
 
