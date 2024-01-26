@@ -194,7 +194,7 @@ function pageUpdate() {
                 var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
                 addedHTML += `
                 <div class="chip activity col-md-6 testing">
-                    <img src="${getThumbor()}/128x128/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                    <img src="${getThumbor()}/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                         <p>
                             Listening to <span style="color: limegreen;">${activity.name}</span> 
                             <br> Song: ${activity.details || " "}
