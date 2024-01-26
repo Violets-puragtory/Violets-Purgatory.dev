@@ -32,8 +32,8 @@ body,
 html {
     overflow-x: hidden;
     margin: auto;
-    background-color: rgb(15, 2.5, 30);
-    background: linear-gradient(rgb(15, 4, 40), black);
+    background-color: rgb(15, 4, 45);
+    background: linear-gradient(rgb(20, 4, 55), black);
     width: 100vw;
     height: 100vh;
     margin: 0;
