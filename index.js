@@ -289,6 +289,14 @@ function pageUpdate() {
 
     html = html.replace("{THUMBOR}", getThumbor())
 
+    if (process.env.BRANCH == "dev") {
+        html = html.replace("{OPPOSITE_URL}", "www")
+        html = html.replace("{OPPOSITE_BRANCH}", "Main")
+    } else {
+        html = html.replace("{OPPOSITE_URL}", "beta")
+        html = html.replace("{OPPOSITE_BRANCH}", "Beta")
+    }
+
     fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
 }
 
