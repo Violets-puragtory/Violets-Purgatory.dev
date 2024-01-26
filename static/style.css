@@ -285,7 +285,7 @@ hr {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: white;
+    background-color: rgb(200, 200, 230);
     height: 20px;
     display: inline-block;
     position: relative;
