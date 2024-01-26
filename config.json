@@ -1,0 +1,20 @@
+{
+    "activityImages": {
+        "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
+    },
+
+    "quotes": [
+        "Remember the 14th commandment: Thou shalt always clean thy plate and not waste anything, whether thy stomach is full, or not.",
+        "Remember son, dying is gay!",
+        "Your friendly neighborhood queer",
+        "Boykisser",
+        "I hate javascript!!!"
+    ],
+
+    "thumborInstances": [
+        "https://thumbor-production-0e82.up.railway.app/",
+        "https://enormous-book-production.up.railway.app/",
+        "https://unusual-back-production.up.railway.app/",
+        "https://axiomatic-hair-production.up.railway.app/"
+    ]
+}

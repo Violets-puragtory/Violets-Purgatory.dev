@@ -8,19 +8,16 @@ var app = express()
 const PORT = process.env.PORT || 8080
 
 const staticpath = path.join(__dirname, 'static')
-const resourcePath = path.join(__dirname, "resources")
+const resourcePath = path.join(__dirname, 'resources')
 
 const mainpage = resourcePath + '/mainPage.html'
 var lanyardData = undefined
 
 var discData = null
 
-var thumborInstances = [
-    "https://thumbor-production-0e82.up.railway.app/",
-    "https://enormous-book-production.up.railway.app/",
-    "https://unusual-back-production.up.railway.app/",
-    "https://axiomatic-hair-production.up.railway.app/",
-]
+var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+
+var thumborInstances = config.thumborInstances
 
 var thumbCount = 0
 
@@ -28,21 +25,13 @@ function getThumbor() {
     thumbCount += 1
     return thumborInstances[thumbCount % thumborInstances.length] + "unsafe"
 }
-
-const activityImages = {
-    "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
-}
-
-var mastoData = {
-    "lastUpdate": 0,
-    "HTML": ""
-}
-
 app.use(express.static(staticpath))
 
 app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
+
+var randomQuotes = config.quotes
 
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
@@ -274,9 +263,8 @@ function pageUpdate() {
 
     html = html.replace("{FAQ}", ``)
 
-    html = html.replace("{MASTODON_FEED}", mastoData.HTML)
-
     var now = new Date()
+
     currentMonth = now.getMonth() + 1
 
     if ([11, 12].includes(currentMonth)) { // The Below HTML is copy and pasted from that one site :>
@@ -288,6 +276,8 @@ function pageUpdate() {
     html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
 
     html = html.replace("{THUMBOR}", getThumbor())
+
+    html = html.replace("{RANDOM_QUOTE}", randomQuotes[Math.floor(Math.random() * randomQuotes.length)])
 
     if (process.env.BRANCH == "dev") {
         html = html.replace("{OPPOSITE_URL}", "www")
