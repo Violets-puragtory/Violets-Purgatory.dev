@@ -271,6 +271,26 @@ hr {
     border-radius: 5px;
 }
 
+.lengthBar {
+    background-color: rgb(50, 40, 60);
+    display: inline-block;
+    width: 80%;
+    height: 10px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.lengthBar > span {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;

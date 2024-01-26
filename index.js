@@ -170,15 +170,37 @@ function pageUpdate() {
                 return html
             }
             if (activity.type == 2) {
-                    addedHTML += `
-                    <div class="chip activity col-md-6 testing">
-                        <img src="${getThumbor()}/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
-                            <p>
-                                Listening to <span style="color: limegreen;">${activity.name}</span> 
-                                <br> Song: ${activity.details || " "}
-                                ${songStats()}
-                            </p>
+                var timeLeft = Math.round((activity.timestamps.end - Date.now()) / 1000)
+                var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
+                addedHTML += `
+                <div class="chip activity col-md-6 testing">
+                    <img src="${getThumbor()}/128x128/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                        <p>
+                            Listening to <span style="color: limegreen;">${activity.name}</span> 
+                            <br> Song: ${activity.details || " "}
+                            ${songStats()}
+                            <br>
+                            <span class="lengthBar lengthBar${index}"><span></span></span>
+                        </p>
                     </div>
+
+                <style>
+
+                .lengthBar${index} > span {
+                    animation-name: songSlider${index};
+                    animation-duration: ${timeLeft}s;
+                    animation-timing-function: linear;
+                }
+
+                @keyframes songSlider${index} {
+                    0% {
+                        width: ${currentPercent}%;
+                    }
+                    100% {
+                        width: 100%;
+                    }
+                }
+                </style>
                 `
             } else if (activity.type == 0) {
                     var time = activity.created_at
@@ -284,5 +306,4 @@ app.use((req, res, next) => {
         <h1>404</h1>
         <p>Uh oh... I think your lost? There's nothing here :P</p>
         `) 
-}) 
-  
+})
