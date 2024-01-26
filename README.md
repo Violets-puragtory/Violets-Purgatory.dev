@@ -3,7 +3,7 @@
 Violet's Purgatory is a website filled to the brim with whatever I feel like adding! Currently, the stable version can be found at https://violets-purgatory.dev and the beta (based on the dev branch) can be found at https://beta.violets-purgatory.dev
 Although beta probably *isn't* the right term, `dev.violets-purgatory.dev` is just kinda ugly :/
 
-The main web page on the site is dynamically generated. To prevent slow loading times, though, the HTML is generated and outputted into a file when nessacary instead of on request! The website will continiously be actively under development until I die.
+The main web page on the site is dynamically generated. ~~To prevent slow loading times, though, the HTML is generated and outputted into a file when nessacary instead of on request!~~ The website will continiously be actively under development until I die.
 
 I have made sure that as much of the site functions as possible without any modifications from me. The website updates with my Discord information, such as my current activities (games and music), my status, and more.
 
