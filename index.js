@@ -46,29 +46,21 @@ app.listen(PORT, () => {
 
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
-    var minutes = 0
-    while (seconds > 60) {
-        seconds -= 60
-        minutes += 1
-    }
+    var minutes = Math.floor(seconds / 60)
 
-    return `${minutes}:${seconds}`
+    return `${minutes}:${seconds % 60}`
 }
 
 function gameTimeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.ceil(seconds / 60)
-    var hours = 0
+    var hours = Math.floor(minutes / 60)
     if (seconds < 60) {
         return 'Under a minute ago'
     } else if (minutes < 60) {
         return `${minutes} Minutes`
     } else {
-        while (minutes > 60) {
-            minutes -= 60
-            hours += 1
-        }
-        return `${hours} hours and ${minutes} minutes`
+        return `${hours} hours and ${minutes % 60} minutes`
     }
 }
 
