@@ -10,10 +10,10 @@ const PORT = process.env.PORT || 8080
 const staticpath = path.join(__dirname, 'static')
 const resourcePath = path.join(__dirname, 'resources')
 
+
+
 const mainpage = resourcePath + '/mainPage.html'
 var lanyardData = undefined
-
-var discData = null
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
@@ -51,8 +51,8 @@ function gameTimeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.ceil(seconds / 60)
     var hours = Math.floor(minutes / 60)
-    if (seconds < 60) {
-        return 'Under a minute ago'
+    if (seconds <= 60) {
+        return 'Under a minute'
     } else if (minutes < 60) {
         return `${minutes} Minutes`
     }
