@@ -19,6 +19,8 @@ var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
 var thumborInstances = config.thumborInstances
 
+var activityImages = config.activityImages
+
 var thumbCount = 0
 
 function getThumbor() {
