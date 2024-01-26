@@ -55,6 +55,23 @@ function timeFormatter(seconds) {
     return `${minutes}:${seconds}`
 }
 
+function gameTimeFormatter(seconds) {
+    seconds = Math.ceil(seconds)
+    var minutes = Math.ceil(seconds / 60)
+    var hours = 0
+    if (seconds < 60) {
+        return 'Under a minute ago'
+    } else if (minutes < 60) {
+        return `${minutes} Minutes`
+    } else {
+        while (minutes > 60) {
+            minutes -= 60
+            hours += 1
+        }
+        return `${hours} hours and ${minutes} minutes`
+    }
+}
+
 function pageUpdate() {
     var statuses = {
         "online": {
@@ -230,7 +247,7 @@ function pageUpdate() {
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
                                 <br> ${activity.state || activity.assets.small_text || " "}
-                                <br> ${Math.ceil(((Date.now() - time) / 1000 / 60)).toString() + " Minutes" || " "}
+                                <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
                             </p>
 
                     </div>
