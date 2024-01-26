@@ -48,10 +48,12 @@ function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.floor(seconds / 60)
 
-    if (seconds < 10) {
+    if (seconds % 60 < 10) {
         return `${minutes}:0${seconds % 60}`
+    } else {
+        return `${minutes}:${seconds % 60}`
     }
-    return `${minutes}:${seconds % 60}`
+    
 }
 
 function gameTimeFormatter(seconds) {
