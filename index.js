@@ -291,7 +291,8 @@ function pageUpdate() {
         html = html.replace("{OPPOSITE_BRANCH}", "Beta")
     }
 
-    fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+    //fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
+    return html
 }
 
 // Lanyard Stuffs
@@ -319,11 +320,12 @@ lanyard.addEventListener("message", (res) => {
         }))
     } else if (data.op == 0) {
         lanyardData = data.d
-        pageUpdate()
     }
 })
 
-pageUpdate()
+app.get('/', (req, res) => {
+    res.send(pageUpdate())
+})
 
 app.use((req, res, next) => { 
     res.status(404).send(`
