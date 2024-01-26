@@ -70,7 +70,7 @@ a {
     margin: 3px;
     display: inline-block;
     transform: scale(0.95);
-    transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .chip, .chip > * {
@@ -82,7 +82,7 @@ a {
     transform: scale(1);
     /* font-size: 1.35rem; */
     border-color: white;
-    transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .activity {
