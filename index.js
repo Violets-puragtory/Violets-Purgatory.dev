@@ -68,7 +68,7 @@ function get_img_url(activity) {
         if (activity.name in activityImages) {
             return decodeURIComponent(activityImages[activity.name])
         } else {
-            return decodeURIComponent(`https://cdn.discordapp.com/app-assets/680748054038577165/680775885317472448.png`)
+            return ''
             // This was supposed to be temporary but it kinda stuck honestly lol (It's an ultrakill icon)
         }
     }
@@ -201,6 +201,13 @@ async function pageUpdate() {
 
             function get_img() {
                 var fn = sha256(get_img_url(activity))
+                var fp = path.join(staticpath, 'cached', fn)
+
+                if (!fs.existsSync(fp)) {
+                    return 'imgs/notFound.png'
+                } else if (fs.readFileSync(fp).length < 1) {
+                    fs.rmSync(fp)
+                }
 
                 return '/cached/' + fn
             }
@@ -412,17 +419,19 @@ lanyard.addEventListener("message", (res) => {
             if (!fs.existsSync(fp)) {
                 var wrst = fs.createWriteStream(fp)
 
-                fetch(`${getThumbor()}/256x256/${get_img_url(activity)}`)
-                    .then((response) => response.body)
-                    .then((body) => {
-                        const stream = new WritableStream({
-                            write(chunk) {
-                                wrst.write(chunk)
-                            }
-                        })
+                if (get_img_url(activity)) {
+                    fetch(`${get_img_url(activity)}`)
+                        .then((response) => response.body)
+                        .then((body) => {
+                            const stream = new WritableStream({
+                                write(chunk) {
+                                    wrst.write(chunk)
+                                }
+                            })
 
-                        body.pipeTo(stream)
-                    })
+                            body.pipeTo(stream)
+                        })
+                }
             }
         }
     }
