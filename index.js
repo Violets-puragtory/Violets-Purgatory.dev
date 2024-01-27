@@ -239,6 +239,27 @@ function pageUpdate() {
 
                     </div>
                 `
+            } else if (activity.type != 4) {
+                var time = activity.created_at
+                    if (activity.timestamps) {
+                        time = activity.timestamps.start
+                    }
+                    if (!activity.assets) {
+                        activity.assets = {"large_text": " ", "small_text": " "}
+                    }
+
+                    addedHTML += `
+                    <div class="chip activity col-md-6 testing">
+                            <img src="${getThumbor()}/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <p>
+                                <span style="color: rgb(225, 200, 255);">${activity.name}</span> 
+                                <br> ${activity.details || activity.assets.large_text || " "}
+                                <br> ${activity.state || activity.assets.small_text || " "}
+                                <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
+                            </p>
+
+                    </div>
+                `
             }
         }
     }
