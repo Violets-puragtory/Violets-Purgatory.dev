@@ -199,7 +199,7 @@ async function pageUpdate() {
             }
 
 
-            function get_img() {
+            function get_img(activity) {
                 var fn = sha256(get_img_url(activity))
                 var fp = path.join(staticpath, 'cached', fn)
 
@@ -231,7 +231,7 @@ async function pageUpdate() {
                 var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
                 addedHTML += `
                 <div class="chip activity col-md-6 testing">
-                    <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                    <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
                         <p>
                             Listening to <span style="color: limegreen;">${activity.name}</span> 
                             <br> Song: ${activity.details || " "}
@@ -272,7 +272,7 @@ async function pageUpdate() {
 
                 addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${(activity.details || activity.assets.large_text || " ")}
@@ -293,7 +293,7 @@ async function pageUpdate() {
 
                 addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 <span style="color: rgb(225, 200, 255);">${activity.name}</span> 
                                 <br> ${(activity.details || activity.assets.large_text || " ")}
