@@ -1,7 +1,8 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    WebSocket = require('ws')
+    WebSocket = require('ws'),
+    minify = require('minify-html')
 
 var app = express()
 
@@ -387,7 +388,7 @@ lanyard.addEventListener("message", (res) => {
 })
 
 app.get('/', (req, res) => {
-    res.send(pageUpdate())
+    res.send(minify.minify(pageUpdate()))
 })
 
 app.use((req, res, next) => { 
