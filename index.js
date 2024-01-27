@@ -367,6 +367,7 @@ async function pageUpdate() {
     html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000) + ' ago')
     html = html.replace("{LAST_LANYARD}", gameTimeFormatter((Date.now() - lastLanyardUpdate) / 1000) + ' ago')
     html = html.replace("{QUOTE_COUNT}", randomQuotes.length)
+    html = html.replace("{CACHED_IMAGES}", fs.readdirSync(path.join(staticpath, 'cached')).length)
 
     html = html.replace("{GENERATION_TIME}", Math.ceil(Date.now() - genStart).toString() + 'ms')
 
