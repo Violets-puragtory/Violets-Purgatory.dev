@@ -159,7 +159,7 @@ function pageUpdate() {
             }
             
             if (!debounce && activity.type != 4) {
-                addedHTML += `<h1><hr>What I'm up to:</h1><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
+                addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
             }
             function get_img() {
