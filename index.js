@@ -65,6 +65,9 @@ function gameTimeFormatter(seconds) {
 }
 
 function pageUpdate() {
+
+    var genStart = Date.now()
+    
     var statuses = {
         "online": {
             "text": "Online",
@@ -347,6 +350,8 @@ function pageUpdate() {
     html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000) + ' ago')
     html = html.replace("{LAST_LANYARD}", gameTimeFormatter((Date.now() - lastLanyardUpdate) / 1000) + ' ago')
     html = html.replace("{QUOTE_COUNT}", randomQuotes.length)
+
+    html = html.replace("{GENERATION_TIME}", (Date.now() - genStart).toString() + 'ms')
 
     //fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
     return html
