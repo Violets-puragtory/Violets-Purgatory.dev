@@ -21,6 +21,9 @@ var activityImages = config.activityImages
 
 var highlight = config.highlightedWords
 
+var uptime = Date.now()
+var lastLanyardUpdate = Date.now()
+
 var thumbCount = 0
 
 function getThumbor() {
@@ -151,7 +154,7 @@ function pageUpdate() {
             }
             
             if (!debounce && activity.type != 4) {
-                addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
+                addedHTML += `<h1><hr>What I'm up to:</h1><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
             }
             function get_img() {
@@ -341,6 +344,10 @@ function pageUpdate() {
         html = html.replace("{OPPOSITE_BRANCH}", "Beta")
     }
 
+    html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000) + ' ago')
+    html = html.replace("{LAST_LANYARD}", gameTimeFormatter((Date.now() - lastLanyardUpdate) / 1000) + ' ago')
+    html = html.replace("{QUOTE_COUNT}", randomQuotes.length)
+
     //fs.writeFileSync(path.join(__dirname, 'static/index.html'), html)
     return html
 }
@@ -370,6 +377,7 @@ lanyard.addEventListener("message", (res) => {
         }))
     } else if (data.op == 0) {
         lanyardData = data.d
+        lastLanyardUpdate = Date.now()
     }
 })
 
