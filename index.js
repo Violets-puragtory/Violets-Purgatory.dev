@@ -15,6 +15,8 @@ const resourcePath = path.join(__dirname, 'resources')
 const mainpage = resourcePath + '/mainPage.html'
 var lanyardData = undefined
 
+console.log(__dirname)
+
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
 var thumborInstances = config.thumborInstances
