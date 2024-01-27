@@ -68,8 +68,7 @@ function get_img_url(activity) {
         if (activity.name in activityImages) {
             return decodeURIComponent(activityImages[activity.name])
         } else {
-            return ''
-            // This was supposed to be temporary but it kinda stuck honestly lol (It's an ultrakill icon)
+            return null
         }
     }
 }
@@ -200,15 +199,19 @@ async function pageUpdate() {
 
 
             function get_img(activity) {
-                var fn = sha256(get_img_url(activity))
-                var fp = path.join(staticpath, 'cached', fn)
-
-                if (!fs.existsSync(fp)) {
+                if (get_img_url(activity)) {
+                    var fn = sha256(get_img_url(activity))
+                    var fp = path.join(staticpath, 'cached', fn)
+    
+                    if (!fs.existsSync(fp)) {
+                        return 'imgs/notFound.png'
+                    } else if (fs.statSync(fp).size < 1000) {
+                        fs.rmSync(fp)
+                    }
+                } else {
                     return 'imgs/notFound.png'
-                } else if (fs.statSync(fp).size < 1000) {
-                    fs.rmSync(fp)
                 }
-                
+
                 return '/cached/' + fn
             }
 
@@ -402,13 +405,14 @@ lanyard.addEventListener("message", (res) => {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
 
-            var fn = sha256(get_img_url(activity))
-            var fp = path.join(__dirname, 'static/cached', fn)
 
-            if (!fs.existsSync(fp)) {
-                var wrst = fs.createWriteStream(fp)
 
-                if (get_img_url(activity)) {
+            if (get_img_url(activity)) {
+                var fn = sha256(get_img_url(activity))
+                var fp = path.join(__dirname, 'static/cached', fn)
+                if (!fs.existsSync(fp)) {
+                    var wrst = fs.createWriteStream(fp)
+
                     fetch(`${get_img_url(activity)}`)
                         .then((response) => response.body)
                         .then((body) => {
