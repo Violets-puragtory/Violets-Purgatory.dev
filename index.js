@@ -2,7 +2,8 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    minify = require('minify-html')
+    minify = require('minify-html'),
+    sha256 = require('sha256')
 
 var app = express()
 
@@ -37,7 +38,41 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
+if (!fs.existsSync(path.join(staticpath, 'cached'))) {
+    fs.mkdirSync(path.join(staticpath, 'cached'))
+}
+
 var randomQuotes = config.quotes
+
+function get_img_url(activity) {
+
+    if ("assets" in activity) {
+        var image = undefined
+        if ("large_image" in activity.assets) {
+            image = activity.assets.large_image
+        } else if ("small_image" in activity.assets) {
+            image = activity.assets.small_image
+        }
+        if (image) {
+            if (image.includes("https/")) {
+                return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
+            } else if (image.includes("spotify")) {
+                return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
+            } else {
+                return decodeURIComponent(`https://cdn.discordapp.com/app-assets/${activity.application_id}/${image}.png`)
+            }
+        }
+    }
+
+    if (!image) {
+        if (activity.name in activityImages) {
+            return decodeURIComponent(activityImages[activity.name])
+        } else {
+            return decodeURIComponent(`https://cdn.discordapp.com/app-assets/680748054038577165/680775885317472448.png`)
+            // This was supposed to be temporary but it kinda stuck honestly lol (It's an ultrakill icon)
+        }
+    }
+}
 
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
@@ -48,7 +83,7 @@ function timeFormatter(seconds) {
     } else {
         return `${minutes}:${seconds % 60}`
     }
-    
+
 }
 
 function gameTimeFormatter(seconds) {
@@ -60,15 +95,15 @@ function gameTimeFormatter(seconds) {
     } else if (minutes < 60) {
         return `${minutes} Minutes`
     }
-    
+
     return `${hours} hours and ${minutes % 60} minutes`
-    
+
 }
 
-function pageUpdate() {
+async function pageUpdate() {
 
     var genStart = Date.now()
-    
+
     var statuses = {
         "online": {
             "text": "Online",
@@ -118,7 +153,7 @@ function pageUpdate() {
                 addedHTML += `<em><span style="color: lightgray; white-space: pre-wrap">"`
                 // addedHTML += (status.state || "")
                 var splitStatus = status.state.split(' ')
-                
+
                 for (let index = 0; index < splitStatus.length; index++) {
                     const text = splitStatus[index];
                     if (highlight[text]) {
@@ -157,40 +192,19 @@ function pageUpdate() {
             if (found) {
                 continue
             }
-            
+
             if (!debounce && activity.type != 4) {
                 addedHTML += `<h2><hr>What I'm up to:</h2><div class="container-fluid row" style="margin: 0; padding: 0; display: flex;">`
                 debounce = true
             }
+
+
             function get_img() {
+                var fn = sha256(get_img_url(activity))
 
-                if ("assets" in activity) {
-                    var image = undefined
-                    if ("large_image" in activity.assets) {
-                        image = activity.assets.large_image
-                    } else if ("small_image" in activity.assets) {
-                        image = activity.assets.small_image
-                    }
-                    if (image) {
-                        if (image.includes("https/")) {
-                            return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
-                        } else if (image.includes("spotify")) {
-                            return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
-                        } else {
-                            return decodeURIComponent(`https://cdn.discordapp.com/app-assets/${activity.application_id}/${image}.png`)
-                        }
-                    }
-                }
-
-                if (!image) {
-                    if (activity.name in activityImages) {
-                        return decodeURIComponent(activityImages[activity.name])
-                    } else {
-                        return decodeURIComponent(`https://cdn.discordapp.com/app-assets/680748054038577165/680775885317472448.png`)
-                        // This was supposed to be temporary but it kinda stuck honestly lol (It's an ultrakill icon)
-                    }
-                }
+                return '/cached/' + fn
             }
+
             function songStats() {
                 var html = ``
 
@@ -210,7 +224,7 @@ function pageUpdate() {
                 var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
                 addedHTML += `
                 <div class="chip activity col-md-6 testing">
-                    <img src="${getThumbor()}/256x256/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                    <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                         <p>
                             Listening to <span style="color: limegreen;">${activity.name}</span> 
                             <br> Song: ${activity.details || " "}
@@ -240,17 +254,18 @@ function pageUpdate() {
                 </style>
                 `
             } else if (activity.type == 0) {
-                    var time = activity.created_at
-                    if (activity.timestamps) {
-                        time = activity.timestamps.start
-                    }
-                    if (!activity.assets) {
-                        activity.assets = {"large_text": " ", "small_text": " "}
-                    }
+                var time = activity.created_at
+                if (activity.timestamps) {
+                    time = activity.timestamps.start
+                }
+                if (!activity.assets) {
+                    activity.assets = { "large_text": " ", "small_text": " " }
+                }
 
-                    addedHTML += `
+
+                addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${getThumbor()}/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
@@ -262,16 +277,16 @@ function pageUpdate() {
                 `
             } else if (activity.type != 4) {
                 var time = activity.created_at
-                    if (activity.timestamps) {
-                        time = activity.timestamps.start
-                    }
-                    if (!activity.assets) {
-                        activity.assets = {"large_text": " ", "small_text": " "}
-                    }
+                if (activity.timestamps) {
+                    time = activity.timestamps.start
+                }
+                if (!activity.assets) {
+                    activity.assets = { "large_text": " ", "small_text": " " }
+                }
 
-                    addedHTML += `
+                addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${getThumbor()}/${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 <span style="color: rgb(225, 200, 255);">${activity.name}</span> 
                                 <br> ${activity.details || activity.assets.large_text || " "}
@@ -320,7 +335,7 @@ function pageUpdate() {
     html = html.replace("{THUMBOR}", getThumbor())
 
     var quote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)]
-    
+
     var splitQuote = quote.split(' ')
 
     var finalQuote = ''
@@ -359,6 +374,7 @@ function pageUpdate() {
     return html
 }
 
+
 // Lanyard Stuffs
 
 var lanyard = new WebSocket('wss://api.lanyard.rest/socket')
@@ -385,17 +401,41 @@ lanyard.addEventListener("message", (res) => {
     } else if (data.op == 0) {
         lanyardData = data.d
         lastLanyardUpdate = Date.now()
+
+        for (let index = 0; index < lanyardData.activities.length; index++) {
+            const activity = lanyardData.activities[index];
+
+            var fn = sha256(get_img_url(activity))
+            var fp = path.join(__dirname, 'static/cached', fn)
+
+            if (!fs.existsSync(fp)) {
+                var wrst = fs.createWriteStream(fp)
+
+                fetch(`${getThumbor()}/256x256/${get_img_url(activity)}`)
+                    .then((response) => response.body)
+                    .then((body) => {
+                        const stream = new WritableStream({
+                            write(chunk) {
+                                wrst.write(chunk)
+                            }
+                        })
+
+                        body.pipeTo(stream)
+                    })
+            }
+        }
     }
 })
 
-app.get('/', (req, res) => {
-    res.send(minify.minify(pageUpdate()))
+app.get('/', async (req, res) => {
+    var html = await (pageUpdate())
+    res.send(minify.minify(html))
 })
 
-app.use((req, res, next) => { 
+app.use((req, res, next) => {
     res.status(404).send(`
         <link rel="stylesheet" href="/style.css">
         <h1>404</h1>
         <p>Uh oh... I think your lost? There's nothing here :P</p>
-        `) 
+        `)
 })
