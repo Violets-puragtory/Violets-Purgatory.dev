@@ -53,7 +53,8 @@
         "You know... I was a Roblox Developer Once...",
         "I used to love Star Glitcher games",
         "Git rebase my beloved...",
-        "I'm gonna buy univerter.dev someday!"
+        "I'm gonna buy univerter.dev someday!",
+        "These birds are Pissing me off... I'm the original     Starwalker"
     ],
 
     "thumborInstances": [
@@ -61,5 +62,10 @@
         "https://enormous-book-production.up.railway.app/",
         "https://unusual-back-production.up.railway.app/",
         "https://axiomatic-hair-production.up.railway.app/"
-    ]
+    ],
+    "highlightedWords": {
+        "birds": "yellow",
+        "Pissing": "yellow",
+        "Starwalker": "yellow"
+    }
 }

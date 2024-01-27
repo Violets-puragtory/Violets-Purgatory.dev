@@ -19,6 +19,8 @@ var thumborInstances = config.thumborInstances
 
 var activityImages = config.activityImages
 
+var highlight = config.highlightedWords
+
 var thumbCount = 0
 
 function getThumbor() {
@@ -106,8 +108,19 @@ function pageUpdate() {
                 }
             }
             if (status.state) {
-                addedHTML += `<em><span style="color: lightgray">"`
-                addedHTML += (status.state || "")
+                addedHTML += `<em><span style="color: lightgray; white-space: pre-wrap">"`
+                // addedHTML += (status.state || "")
+                var splitStatus = status.state.split(' ')
+                
+                for (let index = 0; index < splitStatus.length; index++) {
+                    const text = splitStatus[index];
+                    if (highlight[text]) {
+                        addedHTML += `<span style="color: ${highlight[text]}">${text}</span>`
+                    } else {
+                        addedHTML += text
+                    }
+                    addedHTML += ' '
+                }
                 addedHTML += `"</span>`
             }
             addedHTML += ` - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
@@ -300,6 +313,22 @@ function pageUpdate() {
 
     var quote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)]
     
+    var splitQuote = quote.split(' ')
+
+    var finalQuote = ''
+
+    for (let index = 0; index < splitQuote.length; index++) {
+        const text = splitQuote[index];
+        if (highlight[text]) {
+            finalQuote += `<span style="color: ${highlight[text]}">${text}</span>`
+        } else {
+            finalQuote += text
+        }
+        finalQuote += ' '
+    }
+
+    quote = finalQuote.trim()
+
     quote = quote.replace("{QUOTE_COUNT}", randomQuotes.length)
 
     html = html.replace("{RANDOM_QUOTE}", quote)
