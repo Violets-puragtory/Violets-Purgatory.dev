@@ -205,10 +205,10 @@ async function pageUpdate() {
 
                 if (!fs.existsSync(fp)) {
                     return 'imgs/notFound.png'
-                } else if (fs.readFileSync(fp).length < 1) {
+                } else if (fs.statSync(fp).size < 1000) {
                     fs.rmSync(fp)
                 }
-
+                
                 return '/cached/' + fn
             }
 
@@ -275,8 +275,8 @@ async function pageUpdate() {
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                                <br> ${activity.details || activity.assets.large_text || " "}
-                                <br> ${activity.state || activity.assets.small_text || " "}
+                                <br> ${(activity.details || activity.assets.large_text || " ")}
+                                <br> ${(activity.state || activity.assets.small_text || " ")}
                                 <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
                             </p>
 
@@ -296,8 +296,8 @@ async function pageUpdate() {
                             <img src="${get_img()}" title="${activity.assets.large_text || activity.assets.small_text}">
                             <p>
                                 <span style="color: rgb(225, 200, 255);">${activity.name}</span> 
-                                <br> ${activity.details || activity.assets.large_text || " "}
-                                <br> ${activity.state || activity.assets.small_text || " "}
+                                <br> ${(activity.details || activity.assets.large_text || " ")}
+                                <br> ${(activity.state || activity.assets.small_text || " ")}
                                 <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
                             </p>
 
@@ -320,13 +320,6 @@ async function pageUpdate() {
 
     html = html.replace("{SOCIALS}", addedHTML)
 
-    addedHTML = ""
-
-    // var faqHTML = fs.readFileSync(path.join(__dirname, 'static/faq/index.html')).toString()
-    // addedHTML += faqHTML.substring(faqHTML.indexOf("<h1>"), faqHTML.indexOf("</body>"))
-
-    html = html.replace("{FAQ}", ``)
-
     var now = new Date()
 
     currentMonth = now.getMonth() + 1
@@ -336,10 +329,6 @@ async function pageUpdate() {
     } else {
         html = html.replace("{SEASONAL_EFFECT}", "")
     }
-
-    html = '<!-- The following code is dynamically generated, I apologize for any formatting errors. Please view the "resources/mainPage.html" on the codeberg repository for something more readable. -->\n' + html
-
-    html = html.replace("{THUMBOR}", getThumbor())
 
     var quote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)]
 
