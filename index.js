@@ -128,6 +128,7 @@ function pageUpdate() {
                     }
                     addedHTML += ' '
                 }
+                addedHTML.trimEnd()
                 addedHTML += `"</span>`
             }
             addedHTML += ` - ${lanyardData.discord_user.display_name} ${new Date(Date.now()).getFullYear()}</em></p>`
