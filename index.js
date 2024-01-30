@@ -269,7 +269,6 @@ async function pageUpdate() {
                 }
 
                 function smch() {
-                    console.log(activity.name, get_img_url(activity, "small_image"))
                     if (get_img_url(activity, "small_image")) { 
                         return `<img class="smallimg" src="${get_img(activity, "small_image")}" title="${activity.assets.small_text}">`
                     }
