@@ -107,6 +107,16 @@ a {
     object-fit: cover;
 }
 
+.activity > .smallimg {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    bottom: 0px;
+    border-top-right-radius: 15px;
+    /* border-right: 2px gray solid;
+    border-top: 2px gray solid; */
+}
+
 a:hover {
     color: white;
     transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
