@@ -44,15 +44,11 @@ if (!fs.existsSync(path.join(staticpath, 'cached'))) {
 
 var randomQuotes = config.quotes
 
-function get_img_url(activity) {
+function get_img_url(activity, size="large_image") {
 
     if ("assets" in activity) {
-        var image = undefined
-        if ("large_image" in activity.assets) {
-            image = activity.assets.large_image
-        } else if ("small_image" in activity.assets) {
-            image = activity.assets.small_image
-        }
+        var image = activity.assets[size]
+
         if (image) {
             if (image.includes("https/")) {
                 return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
@@ -198,9 +194,9 @@ async function pageUpdate() {
             }
 
 
-            function get_img(activity) {
-                if (get_img_url(activity)) {
-                    var fn = sha256(get_img_url(activity))
+            function get_img(activity, size="large_image") {
+                if (get_img_url(activity, size)) {
+                    var fn = sha256(get_img_url(activity, size))
                     var fp = path.join(staticpath, 'cached', fn)
     
                     if (!fs.existsSync(fp)) {
@@ -272,10 +268,18 @@ async function pageUpdate() {
                     activity.assets = { "large_text": " ", "small_text": " " }
                 }
 
+                function smch() {
+                    if (get_img_url(activity, "small_image")) { 
+                        return `<img class="smallimg" src="${get_img(activity, "small_image")}" title="${activity.assets.small_text}">`
+                    }
+                    return ""
+                }
+
 
                 addedHTML += `
                     <div class="chip activity col-md-6 testing">
-                            <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            <img src="${get_img(activity)}" title="${activity.assets.large_text}">
+                            ${smch()}
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
                                 <br> ${(activity.details || activity.assets.large_text || " ")}
@@ -405,8 +409,6 @@ lanyard.addEventListener("message", (res) => {
         for (let index = 0; index < lanyardData.activities.length; index++) {
             const activity = lanyardData.activities[index];
 
-
-
             if (get_img_url(activity)) {
                 var fn = sha256(get_img_url(activity))
                 var fp = path.join(__dirname, 'static/cached', fn)
@@ -426,7 +428,27 @@ lanyard.addEventListener("message", (res) => {
                         })
                 }
             }
+            if (get_img_url(activity, "small_image")) {
+                var fn = sha256(get_img_url(activity, "small_image"))
+                var fp = path.join(__dirname, 'static/cached', fn)
+                if (!fs.existsSync(fp)) {
+                    var wrst = fs.createWriteStream(fp)
+
+                    fetch(`${get_img_url(activity, "small_image")}`)
+                        .then((response) => response.body)
+                        .then((body) => {
+                            const stream = new WritableStream({
+                                write(chunk) {
+                                    wrst.write(chunk)
+                                }
+                            })
+
+                            body.pipeTo(stream)
+                        })
+                }
+            }
         }
+        
     }
 })
 
