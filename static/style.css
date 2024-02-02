@@ -318,6 +318,11 @@ hr {
     position: relative;
 }
 
+.note {
+    font-size: 0.95rem;
+    color: lightgray;
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;
