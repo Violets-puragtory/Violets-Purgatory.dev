@@ -16,14 +16,6 @@
     src: url('./fonts/rubik-v28-latin-regular.woff2') format('woff2');
 }
 
-@font-face {
-    font-display: swap;
-    font-family: 'Rubik';
-    font-style: normal;
-    font-weight: 500;
-    src: url('./fonts/rubik-v28-latin-500.woff2') format('woff2');
-}
-
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
