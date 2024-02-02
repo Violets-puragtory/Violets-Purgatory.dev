@@ -1,5 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
+/* rubik-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/rubik-v28-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* rubik-500 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 500;
+    src: url('./fonts/rubik-v28-latin-500.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+@import url('./bootstrap.css');
 
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
@@ -80,7 +101,8 @@ a {
     transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.chip, .chip > * {
+.chip,
+.chip>* {
     text-decoration: none;
 }
 
@@ -114,7 +136,7 @@ a {
     object-fit: cover;
 }
 
-.activity > .smallimg {
+.activity>.smallimg {
     width: 64px;
     height: 64px;
     position: absolute;
@@ -125,7 +147,7 @@ a {
     transform: scale(0.8);
 }
 
-.activity > .smallimg:hover {
+.activity>.smallimg:hover {
     border: 2px white solid;
     transform: scale(1);
 
@@ -207,7 +229,7 @@ hr {
     z-index: 3;
 }
 
-.project-inner > div > img {
+.project-inner>div>img {
     object-fit: cover;
     border: 2px white solid;
     width: 80%;
@@ -216,7 +238,7 @@ hr {
     border-radius: 10px;
 }
 
-.project > p {
+.project>p {
     display: inline-block;
 }
 
@@ -307,7 +329,7 @@ hr {
     margin-right: 1.9%;
 }
 
-.lengthBar > span {
+.lengthBar>span {
     margin: 0;
     padding: 0;
     width: 100%;
