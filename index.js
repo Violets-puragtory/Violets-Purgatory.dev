@@ -326,7 +326,6 @@ async function pageUpdate() {
     // socialsHTML = socialsHTML.substring(0, socialsHTML.lastIndexOf("</div>"))
     addedHTML += "<h2><hr>Socials</h2>"
     addedHTML += socialsHTML.substring(socialsHTML.indexOf("<div"), socialsHTML.lastIndexOf("</div>") + 6)
-    console.log(addedHTML)
 
     html = html.replace("{SOCIALS}", addedHTML)
 
