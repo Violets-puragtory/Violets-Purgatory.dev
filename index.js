@@ -86,7 +86,7 @@ function gameTimeFormatter(seconds) {
     var minutes = Math.ceil(seconds / 60)
     var hours = Math.floor(minutes / 60)
     if (seconds <= 60) {
-        return 'Under a minute'
+        return 'about ' + seconds + ' seconds'
     } else if (minutes < 60) {
         return `${minutes} Minutes`
     }
@@ -367,7 +367,7 @@ async function pageUpdate() {
         html = html.replace("{OPPOSITE_BRANCH}", "Beta")
     }
 
-    html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000) + ' ago')
+    html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000))
     html = html.replace("{LAST_LANYARD}", gameTimeFormatter((Date.now() - lastLanyardUpdate) / 1000) + ' ago')
     html = html.replace("{QUOTE_COUNT}", randomQuotes.length)
     html = html.replace("{CACHED_IMAGES}", fs.readdirSync(path.join(staticpath, 'cached')).length)
