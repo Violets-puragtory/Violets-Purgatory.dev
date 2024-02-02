@@ -13,7 +13,15 @@ h1 {
     font-size: 2.5rem;
 }
 
-h2,
+h2 {
+    font-size: 2rem;
+    color: rgb(225, 215, 255)
+}
+
+h3 {
+    font-size: 1.65rem
+}
+
 h3,
 li {
     color: white;

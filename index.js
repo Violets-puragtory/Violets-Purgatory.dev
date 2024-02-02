@@ -323,7 +323,8 @@ async function pageUpdate() {
     addedHTML = ""
 
     var socialsHTML = fs.readFileSync(path.join(__dirname, 'static/socials/index.html')).toString()
-    addedHTML += socialsHTML.substring(socialsHTML.indexOf("<h1>"), socialsHTML.indexOf("</body>"))
+    addedHTML += "<h2><hr>Socials</h2>"
+    addedHTML += socialsHTML.substring(socialsHTML.indexOf("</h1>") + 5, socialsHTML.indexOf("</body>"))
 
     html = html.replace("{SOCIALS}", addedHTML)
 
