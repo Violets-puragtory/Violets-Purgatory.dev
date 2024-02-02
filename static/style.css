@@ -73,7 +73,7 @@ a {
     font-size: 1.3rem;
     border: 2px gray solid;
     border-radius: 6px;
-    background-color: black;
+    background-color: rgb(15, 0, 30);
     padding: 8px;
     margin: 3px;
     display: inline-block;
@@ -86,7 +86,7 @@ a {
 }
 
 .chip:hover {
-    background-color: rgb(20, 10, 30);
+    background-color: rgb(65, 28, 101);
     transform: scale(1);
     /* font-size: 1.35rem; */
     border-color: white;
