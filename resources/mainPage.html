@@ -12,8 +12,8 @@
     <meta name="darkreader-lock">
 
     <meta content="Welcome to Violet's Purgatory" property="og:title" />
-    <meta content="I'm Violet, a web and game developer. On my site i'm hosting various services, so please check out the site for more info!!!" property="og:description" />
-    <meta content="https://api.lanyard.rest/534132311781015564.png" property="og:image" />
+    <meta content="Hi, I'm Violet, a 15 year old web developer with strong ambitions. You can find more info on my site!" property="og:description" />
+    <meta content="https://api.violets-purgatory.dev/v1/pfp" property="og:image" />
     <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
 
     <!-- To any who dare read this code! I stole the code above off of stack overflow :P-->
@@ -58,8 +58,14 @@
         </noscript>
         <p>Check out the source code on <a href="https://codeberg.org/Bingus_Violet/Violets-Purgatory">Codeberg</a></p>
         {LANYARD_FULL}
-        
-        <h2><hr>Stats:</h2>
+
+        <h2><hr>Announcement!</h2>
+        <p>I'm getting a hand-me-down server, so I might end up hosting fedi and matrix on it! <br> (Note that they will probably both be single user instances so this does not affect you :P)</p>
+        <p class="note">Also this isn't dynamic this is literally just something I throw in the source code but maybe one day it will be...</p>
+
+        {SOCIALS}
+
+        <h2><hr>Silly Stats:</h2>
         <p>Just some funny stats for the site :3</p>
         <ul>
             <li>Uptime: {UPTIME}</li>
@@ -68,8 +74,6 @@
             <li>Images Cached: {CACHED_IMAGES}</li>
             <li>Page Generation Time: {GENERATION_TIME}</li>
         </ul>
-
-        {SOCIALS}
 
         {SEASONAL_EFFECT}
     </div>
