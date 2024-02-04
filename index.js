@@ -45,6 +45,8 @@ if (!fs.existsSync(path.join(staticpath, 'cached'))) {
 
 var randomQuotes = config.quotes
 
+var commitCount = "300+"
+
 function get_img_url(activity, size = "large_image") {
 
     if ("assets" in activity) {
@@ -225,7 +227,7 @@ async function pageUpdate() {
                 var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
                 addedHTML += `
                 <div class="chip activity col-md-6 testing">
-                    <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
+                    <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text || activity.state || ""}">
                         <p>
                             Listening to <span style="color: limegreen;">${activity.name}</span> 
                             <br> Song: ${activity.details || " "}
@@ -364,6 +366,8 @@ async function pageUpdate() {
         html = html.replace("{OPPOSITE_BRANCH}", "Beta")
     }
 
+    html = html.replace("{COMMIT_COUNT}", commitCount)
+
     html = html.replace("{UPTIME}", gameTimeFormatter((Date.now() - uptime) / 1000))
     html = html.replace("{LAST_LANYARD}", gameTimeFormatter((Date.now() - lastLanyardUpdate) / 1000) + ' ago')
     html = html.replace("{QUOTE_COUNT}", randomQuotes.length)
@@ -450,3 +454,12 @@ app.use((req, res, next) => {
         <p>Uh oh... I think your lost? There's nothing here :P</p>
         `)
 })
+
+async function updateCommits() {
+    var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
+    var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
+    commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
+    commitCount = commits
+}
+
+updateCommits()
