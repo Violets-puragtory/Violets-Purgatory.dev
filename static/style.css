@@ -114,7 +114,7 @@ a {
     bottom: 0px;
     left: 74px;
     border-radius: 50px;
-    border: 2px gray solid;
+    /* border: 2px gray solid; */
     transform: scale(0.8);
 }
 
