@@ -134,6 +134,7 @@ a {
     left: 74px;
     border-radius: 50px;
     background: black;
+    padding: 5px;
     /* border: 2px gray solid; */
     transform: scale(0.8);
 }

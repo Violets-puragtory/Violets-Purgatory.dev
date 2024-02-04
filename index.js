@@ -2,8 +2,7 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    minify = require('minify-html'),
-    sha256 = require('sha256')
+    minify = require('minify-html')
 
 var app = express()
 
@@ -38,13 +37,15 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
+var cachedImages = {}
+
 if (!fs.existsSync(path.join(staticpath, 'cached'))) {
     fs.mkdirSync(path.join(staticpath, 'cached'))
 }
 
 var randomQuotes = config.quotes
 
-function get_img_url(activity, size="large_image") {
+function get_img_url(activity, size = "large_image") {
 
     if ("assets" in activity) {
         var image = activity.assets[size]
@@ -113,8 +114,8 @@ async function pageUpdate() {
             "color": "rgb(255, 255, 75)"
         },
         "offline": {
-            "text": "Offline",
-            "color": "rgb(125, 125, 125)"
+            "text": "",
+            "color": "rgb(255, 255, 255)"
         }
     }
 
@@ -194,16 +195,10 @@ async function pageUpdate() {
             }
 
 
-            function get_img(activity, size="large_image") {
-                if (get_img_url(activity, size)) {
-                    var fn = sha256(get_img_url(activity, size))
+            function get_img(activity, size = "large_image") {
+                if (cachedImages[get_img_url(activity, size)]) {
+                    var fn = cachedImages[get_img_url(activity, size)]
                     var fp = path.join(staticpath, 'cached', fn)
-    
-                    if (!fs.existsSync(fp)) {
-                        return 'imgs/notFound.png'
-                    } else if (fs.statSync(fp).size < 1000) {
-                        fs.rmSync(fp)
-                    }
                 } else {
                     return 'imgs/notFound.png'
                 }
@@ -269,7 +264,7 @@ async function pageUpdate() {
                 }
 
                 function smch() {
-                    if (get_img_url(activity, "small_image")) { 
+                    if (get_img_url(activity, "small_image")) {
                         return `<img class="smallimg" src="${get_img(activity, "small_image")}" title="${activity.assets.small_text}">`
                     }
                     return ""
@@ -394,7 +389,7 @@ function beat(dur) {
     }, dur);
 }
 
-lanyard.addEventListener("message", (res) => {
+lanyard.addEventListener("message", async (res) => {
     var data = JSON.parse(res.data)
     if (data.op == 1) {
         beat(data.d.heartbeat_interval)
@@ -412,45 +407,34 @@ lanyard.addEventListener("message", (res) => {
             const activity = lanyardData.activities[index];
 
             if (get_img_url(activity)) {
-                var fn = sha256(get_img_url(activity))
+                var url = get_img_url(activity)
+                var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
                 var fp = path.join(__dirname, 'static/cached', fn)
-                if (!fs.existsSync(fp)) {
-                    var wrst = fs.createWriteStream(fp)
 
-                    fetch(`${get_img_url(activity)}`)
-                        .then((response) => response.body)
-                        .then((body) => {
-                            const stream = new WritableStream({
-                                write(chunk) {
-                                    wrst.write(chunk)
-                                }
-                            })
+                if (!cachedImages[url]) {
+                    const response = await (await fetch(url)).arrayBuffer()
+                    
+                    fs.writeFileSync(fp, Buffer.from(response))
 
-                            body.pipeTo(stream)
-                        })
+                    cachedImages[url] = fn
                 }
             }
+
             if (get_img_url(activity, "small_image")) {
-                var fn = sha256(get_img_url(activity, "small_image"))
+                var url = get_img_url(activity, "small_image")
+                var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
                 var fp = path.join(__dirname, 'static/cached', fn)
-                if (!fs.existsSync(fp)) {
-                    var wrst = fs.createWriteStream(fp)
 
-                    fetch(`${get_img_url(activity, "small_image")}`)
-                        .then((response) => response.body)
-                        .then((body) => {
-                            const stream = new WritableStream({
-                                write(chunk) {
-                                    wrst.write(chunk)
-                                }
-                            })
+                if (!cachedImages[url]) {
+                    const response = await (await fetch(url)).arrayBuffer()
+                    
+                    fs.writeFileSync(fp, Buffer.from(response))
 
-                            body.pipeTo(stream)
-                        })
+                    cachedImages[url] = fn
                 }
             }
         }
-        
+
     }
 })
 
