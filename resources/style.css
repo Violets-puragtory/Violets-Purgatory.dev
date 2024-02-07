@@ -33,7 +33,7 @@ li {
     color: white;
 }
 
-ul {
+ul, ol {
     display: inline-block
 }
 
