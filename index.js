@@ -447,6 +447,14 @@ app.get('/', async (req, res) => {
     res.send(minify.minify(html))
 })
 
+app.get('/style.css', async (req, res) => {
+    var cssPath = path.join(resourcePath, 'style.css')
+    var css = fs.readFileSync(cssPath).toString()
+    css = minify.minify(css)
+    res.send(css)
+    console.log(css)
+})
+
 app.use((req, res, next) => {
     res.status(404).send(`
         <link rel="stylesheet" href="/style.css">
