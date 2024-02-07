@@ -31,7 +31,6 @@ function getThumbor() {
     thumbCount += 1
     return thumborInstances[thumbCount % thumborInstances.length] + "unsafe"
 }
-app.use(express.static(staticpath))
 
 app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
@@ -444,16 +443,10 @@ lanyard.addEventListener("message", async (res) => {
 
 app.get('/', async (req, res) => {
     var html = await (pageUpdate())
-    res.send(minify.minify(html))
+    res.send(minify.minify(html).toString('utf-8'))
 })
 
-app.get('/style.css', async (req, res) => {
-    var cssPath = path.join(resourcePath, 'style.css')
-    var css = fs.readFileSync(cssPath).toString()
-    css = minify.minify(css)
-    res.send(css)
-    console.log(css)
-})
+app.use(express.static(staticpath))
 
 app.use((req, res, next) => {
     res.status(404).send(`
@@ -462,6 +455,15 @@ app.use((req, res, next) => {
         <p>Uh oh... I think your lost? There's nothing here :P</p>
         `)
 })
+
+function updateCSS() {
+    var css = fs.readFileSync(path.join(resourcePath, 'style.css')).toString()
+
+    css = minify.minify(css)
+    fs.writeFileSync(path.join(staticpath, 'style.css'), css) // Will add more in the future
+}
+
+updateCSS()
 
 async function updateCommits() {
     var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
