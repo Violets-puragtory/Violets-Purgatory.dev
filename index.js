@@ -24,6 +24,7 @@ var highlight = config.highlightedWords
 
 var uptime = Date.now()
 var lastLanyardUpdate = Date.now()
+var lastPong = Date.now()
 
 var thumbCount = 0
 
@@ -381,65 +382,70 @@ async function pageUpdate() {
 
 // Lanyard Stuffs
 
-var lanyard = new WebSocket('wss://api.lanyard.rest/socket')
+function socketeer() {
+    var lanyard = new WebSocket('https://api.violets-purgatory.dev')
+    function ping(dur) {
+        lanyard.send(JSON.stringify({
+            op: 3
+        }))
+        setTimeout(() => {
+            ping(dur)
+            if (Date.now() - lastPong > 120000) {
+                console.log("FUCK!")
+                lanyard.close()
+                socketeer()
+            }
+        }, dur);
+    }
 
-function beat(dur) {
-    lanyard.send(JSON.stringify({
-        op: 3
-    }))
-    setTimeout(() => {
-        beat(dur)
-    }, dur);
+    lanyard.addEventListener("message", async (res) => {
+        var data = JSON.parse(res.data)
+        if (data.op == 1) {
+            ping(30000)
+            lastPong = Date.now()
+        } else if (data.op == 3) {
+            lastPong = Date.now()
+        } else if (data.op == 0) {
+            lanyardData = data.d
+            lastLanyardUpdate = Date.now()
+
+            for (let index = 0; index < lanyardData.activities.length; index++) {
+                const activity = lanyardData.activities[index];
+
+                if (get_img_url(activity)) {
+                    var url = get_img_url(activity)
+                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
+                    var fp = path.join(__dirname, 'static/cached', fn)
+
+                    if (!cachedImages[url]) {
+                        const response = await (await fetch(url)).arrayBuffer()
+
+                        fs.writeFileSync(fp, Buffer.from(response))
+
+                        cachedImages[url] = fn
+                    }
+                }
+
+                if (get_img_url(activity, "small_image")) {
+                    var url = get_img_url(activity, "small_image")
+                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
+                    var fp = path.join(__dirname, 'static/cached', fn)
+
+                    if (!cachedImages[url]) {
+                        const response = await (await fetch(url)).arrayBuffer()
+
+                        fs.writeFileSync(fp, Buffer.from(response))
+
+                        cachedImages[url] = fn
+                    }
+                }
+            }
+
+        }
+    })
 }
 
-lanyard.addEventListener("message", async (res) => {
-    var data = JSON.parse(res.data)
-    if (data.op == 1) {
-        beat(data.d.heartbeat_interval)
-        lanyard.send(JSON.stringify({
-            op: 2,
-            d: {
-                subscribe_to_id: "534132311781015564"
-            }
-        }))
-    } else if (data.op == 0) {
-        lanyardData = data.d
-        lastLanyardUpdate = Date.now()
-
-        for (let index = 0; index < lanyardData.activities.length; index++) {
-            const activity = lanyardData.activities[index];
-
-            if (get_img_url(activity)) {
-                var url = get_img_url(activity)
-                var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
-                var fp = path.join(__dirname, 'static/cached', fn)
-
-                if (!cachedImages[url]) {
-                    const response = await (await fetch(url)).arrayBuffer()
-                    
-                    fs.writeFileSync(fp, Buffer.from(response))
-
-                    cachedImages[url] = fn
-                }
-            }
-
-            if (get_img_url(activity, "small_image")) {
-                var url = get_img_url(activity, "small_image")
-                var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
-                var fp = path.join(__dirname, 'static/cached', fn)
-
-                if (!cachedImages[url]) {
-                    const response = await (await fetch(url)).arrayBuffer()
-                    
-                    fs.writeFileSync(fp, Buffer.from(response))
-
-                    cachedImages[url] = fn
-                }
-            }
-        }
-
-    }
-})
+socketeer()
 
 app.get('/', async (req, res) => {
     var html = await (pageUpdate())
