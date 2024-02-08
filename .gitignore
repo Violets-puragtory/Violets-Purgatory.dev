@@ -131,6 +131,4 @@ dist
 .pnp.*
 
 # Violet's Purgatory
-static/index.html
 static/cached
-static/style.css
