@@ -27,7 +27,7 @@ main {
     margin: auto;
 }
 
-body>h1 {
+.animatedTitle {
     animation: mainText 3s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
     max-width: 75%;
