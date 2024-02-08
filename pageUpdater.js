@@ -2,7 +2,9 @@ const path = require('path'),
     fs = require('fs')
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+
 var highlightedWords = config.highlightedWords
+var quotes = config.quotes
 
 var commitCount = "300+"
 
@@ -52,6 +54,10 @@ function converter(html) {
     html = html.replaceAll("{BG_EFFECT}", makeStars())
 
     html = html.replaceAll("{COMMIT_COUNT}", commitCount)
+
+    html = html.replaceAll("{RANDOM_QUOTE}", quotes[Math.floor(Math.random() * quotes.length)])
+
+    html = html.replaceAll("{QUOTE_COUNT}", quotes.length)
 
     return html
 }

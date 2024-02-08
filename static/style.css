@@ -17,6 +17,8 @@
 body {
     background-color: black;
     overflow-x: hidden;
+    
+    padding: 25px;
 
     animation: hideContent 2.5s;
 }
@@ -65,7 +67,7 @@ hr {
 
 @keyframes mainText {
     0% {
-        transform: translateY(calc(50vh - 2rem)) scale(1.5);
+        transform: translateY(calc(50vh - 6rem)) scale(1.5);
         opacity: 0;
         height: 4rem;
     }
@@ -73,7 +75,7 @@ hr {
     50% {
         opacity: 1;
         height: 4rem;
-        transform: translateY(calc(50vh - 2rem)) scale(1);
+        transform: translateY(calc(50vh - 6rem)) scale(1.25);
     }
 
     100% {
@@ -83,10 +85,6 @@ hr {
 
 @keyframes fadeDelay {
     0% {
-        opacity: 0;
-    }
-
-    33% {
         opacity: 0;
     }
 
