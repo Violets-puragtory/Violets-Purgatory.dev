@@ -182,15 +182,6 @@ app.use((req, res, next) => {
         `)
 })
 
-function updateCSS() {
-    var css = fs.readFileSync(path.join(resourcePath, 'style.css')).toString()
-
-    css = minify.minify(css)
-    fs.writeFileSync(path.join(staticpath, 'style.css'), css) // Will add more in the future
-}
-
-updateCSS()
-
 async function updateCommits() {
     var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
     var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
