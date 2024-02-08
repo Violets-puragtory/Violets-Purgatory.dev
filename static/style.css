@@ -9,7 +9,7 @@
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
-    font-weight: 200;
+    font-weight: 400;
     text-align: center;
     color: white;
 }
@@ -22,35 +22,54 @@ body {
 main {
     opacity: 1;
     animation: fadeDelay 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
 }
 
 body>h1 {
     animation: mainText 3s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
     max-width: 75%;
+    /* outline: 1px white solid; */
 }
 
-.star {
+hr {
+    border: 2px rgba(100, 0, 150, 0.5) solid;
+    margin: 20px;
+}
+
+.rainDrop {
     position: fixed;
     z-index: -2;
     visibility: hidden;
-    font-size: 0.35rem;
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(white, rgb(255, 255, 255, 0.25) 10%, transparent 50%);
+    width: 4px;
+    height: 120px;
+    background: rgba(0, 0, 150, 0.5);
+}
+
+.mainTitle {
+    font-size: 2.75rem;
+    color: rgb(215, 80, 255);
+    display: block;
+}
+
+.note {
+    color: gray;
+    font-size: 0.9rem;
 }
 
 @keyframes mainText {
     0% {
-        transform: translateY(50vh) scale(1.5);
+        transform: translateY(calc(50vh - 2rem)) scale(1.5);
         opacity: 0;
-        height: 0px;
+        height: 4rem;
     }
 
     50% {
         opacity: 1;
-        height: 0px;
-        transform: translateY(50vh) scale(1);
+        height: 4rem;
+        transform: translateY(calc(50vh - 2rem)) scale(1);
     }
 
     100% {

@@ -7,20 +7,20 @@ var highlightedWords = config.highlightedWords
 function makeStars() {
     var html = ""
 
-    for (let index = 0; index < 15; index++) {
-        html += `<div class="star"></div>`
+    for (let index = 0; index < 35; index++) {
+        html += `<div class="rainDrop"></div>`
     }
     html += "<style>"
-    for (let index = 0; index < 15; index++) {
+    for (let index = 0; index < 35; index++) {
         html += `
-        .star:nth-of-type(${index + 1}) {
-            animation: starAnim${index} ${15 + (Math.random() * 15)}s linear;
+        .rainDrop:nth-of-type(${index + 1}) {
+            animation: rainAnim${index} 1s linear;
             animation-iteration-count: infinite;
-            animation-delay: ${-Math.random() * 15}s;
+            animation-delay: ${Math.random() * 15}s;
         }
         `
         var rando = Math.random() * 100
-        html += `@keyframes starAnim${index} {
+        html += `@keyframes rainAnim${index} {
             0% {
                 top: -10vh;
                 right: ${rando}vw;
@@ -29,7 +29,7 @@ function makeStars() {
     
             100% {
                 top: 110vh;
-                right: calc(${rando}vw + ${5 - (Math.random() * 10)}vw);
+                right: calc(${rando}vw);
             }
         }`
         
