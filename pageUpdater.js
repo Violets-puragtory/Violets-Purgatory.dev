@@ -1,5 +1,5 @@
 const path = require('path'),
-fs = require('fs')
+    fs = require('fs')
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 var highlightedWords = config.highlightedWords
@@ -34,7 +34,7 @@ function makeStars() {
                 right: calc(${rando}vw);
             }
         }`
-        
+
     }
     html += "</style>"
 
@@ -56,22 +56,31 @@ function converter(html) {
     return html
 }
 
-module.exports = { middleWare: function(req, res, next) {
-    
-    var filePath = req.baseUrl + req.path
-    if (filePath.trim() == "/") {
-        filePath = "/index.html"
+module.exports = {
+    middleWare: function (req, res, next) {
+
+        var filePath = req.baseUrl + req.path
+        if (filePath.trim() == "/") {
+            filePath = "/index.html"
+        }
+        filePath = path.join(__dirname, 'static', filePath || 'index.html')
+        if (fs.existsSync(filePath)) {
+            var data = fs.readFileSync(filePath).toString()
+            if (req.path.includes("style.css")) {
+                res.setHeader("Content-Type", "text/css")
+                res.send(data)
+            } else {
+                data = converter(data)
+                res.send(data)
+            }
+        } else {
+            res.status(404).send(`
+        <link rel="stylesheet" href="/style.css">
+        <h1>404</h1>
+        <p>Uh oh... I think your lost? There's nothing here :P</p>
+        `)
+        }
     }
-    filePath = path.join(__dirname, 'static', filePath || 'index.html') 
-    var data = fs.readFileSync(filePath).toString()
-    if (req.path.includes("style.css")) {
-        res.setHeader("Content-Type", "text/css")
-        res.send(data)
-    } else {
-        data = converter(data)
-        res.send(data)
-    }
-}
 }
 
 async function updateCommits() {

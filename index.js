@@ -167,17 +167,3 @@ function socketeer() {
 }
 
 socketeer()
-
-// app.get('/index.html', async (req, res) => {
-//     console.log(req.params[0])
-//     var html = await (pageUpdate(req.params[0]))
-//     res.send(minify.minify(html))
-// })
-
-app.use((req, res, next) => {
-    res.status(404).send(`
-        <link rel="stylesheet" href="/style.css">
-        <h1>404</h1>
-        <p>Uh oh... I think your lost? There's nothing here :P</p>
-        `)
-})
