@@ -17,6 +17,8 @@
 body {
     background-color: black;
     overflow-x: hidden;
+
+    animation: hideContent 2.5s;
 }
 
 main {
@@ -96,5 +98,17 @@ hr {
     100% {
         opacity: 1;
         transform: none;
+    }
+}
+
+@keyframes hideContent {
+    0% {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+    100% {
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
 }
