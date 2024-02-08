@@ -181,12 +181,3 @@ app.use((req, res, next) => {
         <p>Uh oh... I think your lost? There's nothing here :P</p>
         `)
 })
-
-async function updateCommits() {
-    var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
-    var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
-    commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
-    commitCount = commits
-}
-
-updateCommits()

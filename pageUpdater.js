@@ -4,6 +4,8 @@ fs = require('fs')
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 var highlightedWords = config.highlightedWords
 
+var commitCount = "300+"
+
 function makeStars() {
     var html = ""
 
@@ -49,6 +51,8 @@ function converter(html) {
 
     html = html.replaceAll("{BG_EFFECT}", makeStars())
 
+    html = html.replaceAll("{COMMIT_COUNT}", commitCount)
+
     return html
 }
 
@@ -69,3 +73,12 @@ module.exports = { middleWare: function(req, res, next) {
     }
 }
 }
+
+async function updateCommits() {
+    var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
+    var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
+    commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
+    commitCount = commits
+}
+
+updateCommits()
