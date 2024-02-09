@@ -7,7 +7,6 @@
         "Remember the 14th commandment: Thou shalt always clean thy plate and not waste anything, whether thy stomach is full, or not.",
         "Remember son, dying is gay!",
         "Your friendly neighborhood queer",
-        "Boykisser",
         "I hate javascript!!!",
         "Don't fuck with this senator!",
         "Crazy? I was crazy once!",
@@ -41,7 +40,11 @@
         "PROUD OWNER OF: <a href='https://univerter.dev'>univerter.dev</a>!",
         "These birds are Pissing me off... I'm the original &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starwalker"
     ],
-
+    "titles": [
+        "Boykisser",
+        "World's Worst Developer",
+        "Least optimized optimizer"
+    ],
     "thumborInstances": [
         "https://thumbor-production-0e82.up.railway.app/",
         "https://enormous-book-production.up.railway.app/",
@@ -53,6 +56,8 @@
         "Pissing": "yellow",
         "Starwalker": "yellow",
         "word highlighting": "yellow",
-        "replaceAll": "limegreen"
+        "replaceAll": "limegreen",
+        "Godot Engine": "#64B5F6",
+        "javascript": "yellow"
     }
 }

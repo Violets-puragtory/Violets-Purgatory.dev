@@ -5,6 +5,7 @@ var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
 var highlightedWords = config.highlightedWords
 var quotes = config.quotes
+var titles = config.titles
 
 var commitCount = "300+"
 
@@ -58,6 +59,8 @@ function converter(html) {
     html = html.replaceAll("{RANDOM_QUOTE}", quotes[Math.floor(Math.random() * quotes.length)])
 
     html = html.replaceAll("{QUOTE_COUNT}", quotes.length)
+
+    html = html.replaceAll("{RANDOM_TITLE}", titles[Math.floor(Math.random() * titles.length)])
 
     return html
 }
