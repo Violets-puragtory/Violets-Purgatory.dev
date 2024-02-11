@@ -9,6 +9,7 @@
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
+    margin: 0;
     font-weight: 400;
     text-align: center;
     color: white;
@@ -17,6 +18,13 @@
 body {
     background-color: black;
     overflow-x: hidden;
+
+    background-color: rgb(15, 4, 45);
+    background: linear-gradient(rgb(20, 4, 55), black);
+
+    background-attachment: local;
+
+    min-height: 100vh;
 
     padding: 25px;
 
@@ -30,6 +38,44 @@ main {
     max-width: 1000px;
     margin: auto;
 }
+
+a {
+    color: rgb(175, 225, 255);
+    display: inline-block;
+    transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip {
+    position: relative;
+    z-index: 3;
+    font-size: 1.3rem;
+    border: 2px gray solid;
+    border-radius: 6px;
+    background-color: black;
+    padding: 8px;
+    margin: 3px;
+    display: inline-block;
+    transform: scale(0.95);
+    transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip,
+.chip>* {
+    text-decoration: none;
+}
+
+.chip:hover {
+    background-color: rgb(10, 0, 25);
+    transform: scale(1);
+    /* font-size: 1.35rem; */
+    border-color: white;
+    transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip:hover > .smallimg {
+    background-color: rgb(10, 0, 25);
+}
+
 
 .animatedTitle {
     animation: mainText 3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -45,32 +91,35 @@ hr {
 
 p {
     font-size: 1.25rem;
+    margin: 5px;
 }
 
 #card {
-    background-color: rgb(75, 0, 125);
-    border: 2px lightgray solid;
-    border-radius: 15px;
-    max-width: 600px;
-    margin: auto;
-}
-
-div.sides {
-    display: inline-block;
-    width: max(20%, 175px);
-    padding: 0;
-    margin: auto;
-    vertical-align: middle;
+    background-color: rgb(15, 5, 80);
+    padding: 15px;
+    border: 2px white solid;
+    margin: 20px auto;
+    width: 95%;
+    max-width: 800px;
+    z-index: 3;
+    position: relative;
 }
 
 .pfp {
-    width: 125px;
-    height: 125px;
-    border: 2px white solid;
+    border-radius: 15px;
+    border: darkgray 4px solid;
+    width: 60%;
+    aspect-ratio: 1/1;
+    transform: scale(0.9);
     border-radius: 50%;
-
-    margin: 25px;
 }
+
+img {
+    width: 100%;
+    max-width: 135px;
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 
 h2 {
     font-size: 1.8rem;

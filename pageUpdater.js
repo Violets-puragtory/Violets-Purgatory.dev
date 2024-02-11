@@ -45,13 +45,6 @@ function makeStars() {
 }
 
 function converter(html) {
-    var highTable = Object.keys(highlightedWords)
-    for (let index = 0; index < highTable.length; index++) {
-        var term = highTable[index];
-        var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
-        html = html.replaceAll(term, replacement)
-    }
-
     html = html.replaceAll("{BG_EFFECT}", makeStars())
 
     html = html.replaceAll("{COMMIT_COUNT}", commitCount)
@@ -61,6 +54,13 @@ function converter(html) {
     html = html.replaceAll("{QUOTE_COUNT}", quotes.length)
 
     html = html.replaceAll("{RANDOM_TITLE}", titles[Math.floor(Math.random() * titles.length)])
+
+    var highTable = Object.keys(highlightedWords)
+    for (let index = 0; index < highTable.length; index++) {
+        var term = highTable[index];
+        var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
+        html = html.replaceAll(term, replacement)
+    }
 
     return html
 }
