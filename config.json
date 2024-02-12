@@ -75,6 +75,7 @@
         "word highlighting": "yellow",
         "replaceAll": "limegreen",
         "Godot Engine": "#64B5F6",
-        "javascript": "yellow"
+        "javascript": "yellow",
+        "NodeJS": "limegreen"
     }
 }

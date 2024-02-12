@@ -50,6 +50,27 @@ a {
     transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+h3 {
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+    
+    .grid-child {
+        margin: auto;
+        align-content: center;
+        /* border: 2px white solid; */
+    }
+}
+
+
+
 .chip {
     position: relative;
     z-index: 3;
@@ -77,7 +98,7 @@ a {
     transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.chip:hover > .smallimg {
+.chip:hover>.smallimg {
     background-color: rgb(10, 0, 25);
 }
 
