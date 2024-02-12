@@ -87,9 +87,9 @@ module.exports = {
             }
         } else {
             res.status(404).send(`
-        <link rel="stylesheet" href="/style.css">
-        <h1>404</h1>
-        <p>Uh oh... I think your lost? There's nothing here :P</p>
+            <link rel="stylesheet" href="/style.css">
+            <h1>404</h1>
+            <p>Uh oh... I think your lost? There's nothing here :P</p>
         `)
         }
     }
@@ -113,7 +113,6 @@ var activityImages = config.activityImages
 var cachedImages = {}
 
 function get_img_url(activity, size = "large_image") {
-
     if ("assets" in activity) {
         var image = activity.assets[size]
 
