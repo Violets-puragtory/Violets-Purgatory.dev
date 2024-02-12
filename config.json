@@ -2,7 +2,24 @@
     "activityImages": {
         "ULTRAKILL": "https://fs.violets-purgatory.dev/ULTRAKILL/etc/DiscordIcon.webp"
     },
-
+    "discStatuses": {
+        "online": {
+            "text": "Online",
+            "color": "rgb(100, 255, 100)"
+        },
+        "dnd": {
+            "text": "DND",
+            "color": "rgb(255, 100, 100)"
+        },
+        "idle": {
+            "text": "Idle",
+            "color": "rgb(255, 255, 75)"
+        },
+        "offline": {
+            "text": "",
+            "color": "rgb(175, 175, 200)"
+        }
+    },
     "quotes": [
         "Remember the 14th commandment: Thou shalt always clean thy plate and not waste anything, whether thy stomach is full, or not.",
         "Remember son, dying is gay!",
