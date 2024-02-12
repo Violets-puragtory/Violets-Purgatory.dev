@@ -45,25 +45,45 @@ function converter(html) {
         html = html.replaceAll(term, replacement)
     }
 
+    while (html.includes("{PATH_")) {
+        var pagePath = html.substring(html.indexOf("{PATH_"))
+        pagePath = pagePath.substring(6, pagePath.indexOf('}'))
+        
+        var stringIndex = `{PATH_${pagePath}}`
+        pagePath = pagePath.toLowerCase()
+
+        var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
+        pageHTML = pageHTML.substring(pageHTML.indexOf('<body>') + 6, pageHTML.indexOf('</body>'))
+        html = html.replace(stringIndex, pageHTML)
+    }
+
     return html
 }
 
 module.exports = {
     middleWare: function (req, res, next) {
 
-        var filePath = req.baseUrl + req.path
-        if (filePath.trim() == "/") {
-            filePath = "/index.html"
+        var filePath = (req.baseUrl + req.path).trim()
+
+        if (filePath.includes(".html") || filePath.includes(".css")) {
+            
+        } else {
+            if (filePath.charAt(filePath.length - 1) != '/') {
+                res.redirect(filePath + '/')
+                return
+            }
+            filePath = path.join(filePath, '/index.html')
         }
+
         filePath = path.join(__dirname, 'static', filePath || 'index.html')
         if (fs.existsSync(filePath)) {
             var data = fs.readFileSync(filePath).toString()
-            if (req.path.includes("style.css")) {
+            if (req.path.includes(".css")) {
                 res.setHeader("Content-Type", "text/css")
                 res.send(data)
             } else {
                 data = converter(data)
-                res.send(data)
+                res.send(minify.minify(data))
             }
         } else {
             res.status(404).send(`

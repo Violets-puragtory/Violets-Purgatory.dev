@@ -1,0 +1,90 @@
+/* 
+    This is the CSS file for the root page. Only put changes in here
+    intended for the main page of the site!
+*/
+
+.mainTitle {
+    font-size: 2.75rem;
+    color: rgb(215, 80, 255);
+    display: block;
+    padding-top: 5px;
+    line-height: 2.2rem;
+}
+
+#card {
+    background-color: rgb(15, 5, 80);
+    padding: 15px;
+    border: 2px white solid;
+    margin: 20px auto;
+    width: 95%;
+    max-width: 800px;
+    z-index: 3;
+    position: relative;
+}
+
+.animatedTitle {
+    animation: mainText 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin: auto;
+    max-width: 75%;
+    /* outline: 1px white solid; */
+}
+
+.animatedMain {
+    opacity: 1;
+    animation: fadeDelay 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.pfp {
+    border-radius: 15px;
+    border: darkgray 4px solid;
+    width: 60%;
+    aspect-ratio: 1/1;
+    transform: scale(0.9);
+    border-radius: 50%;
+}
+
+@keyframes mainText {
+    0% {
+        transform: translateY(calc(50vh - 6rem)) scale(1.5);
+        opacity: 0;
+        height: 4rem;
+    }
+
+    50% {
+        opacity: 1;
+        height: 4rem;
+        transform: translateY(calc(50vh - 6rem)) scale(1.25);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeDelay {
+    0% {
+        opacity: 0;
+    }
+
+    66% {
+        opacity: 0;
+        transform: translateY(25vh)
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes hideContent {
+    0% {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+    100% {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+}
