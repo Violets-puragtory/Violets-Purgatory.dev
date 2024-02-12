@@ -28,7 +28,8 @@ function converter(html) {
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "DISCORD_STATUS": 
         `<span style="color: ${statusData.color};">${statusData.text}</span>` + 
-        `<style>.pfp { border-color: ${statusData.color} }</style>`
+        `<style>.pfp { border-color: ${statusData.color} }</style>`,
+        "UPTIME": uptime
     }
 
     var rpTable = Object.keys(replacers)
