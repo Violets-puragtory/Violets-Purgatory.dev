@@ -23,7 +23,7 @@
 }
 
 main:nth-of-type(1) {
-    width: 90%;
+    width: 95%;
     max-width: 1000px;
     margin: auto;
 }
@@ -55,11 +55,11 @@ h3 {
     padding: 10px;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 450px) {
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
+        grid-gap: 10px;
     }
     
     .grid-child {
