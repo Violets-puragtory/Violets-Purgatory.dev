@@ -55,7 +55,7 @@ h3 {
     padding: 10px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
