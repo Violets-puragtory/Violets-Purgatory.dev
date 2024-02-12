@@ -147,7 +147,6 @@ function socketeer() {
         setTimeout(() => {
             ping(dur)
             if (Date.now() - lastPong > 120000) {
-                console.log("FUCK!")
                 lanyard.close()
                 socketeer()
             }
