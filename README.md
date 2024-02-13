@@ -13,9 +13,15 @@ Violet's Purgatory is hosted on Railway right now, but there are plans to move t
 
 We also have an API, which can be located at https://api.violets-purgatory.dev, which is currently very under developed, but will continue to have updates for features I see fit.
 
-## To-do
-- [ ] Stop using Lanyard Web Socket Directly and proxy it through the API (Alternatively, self host the Lanyard API)
-- [ ] Cut the main CSS file into multiple so that only the nessacary CSS is loaded (Reduces traffic and loading times)
+## To-do   
+- [ ] Add more content to the socials page
+    - [ ] Pull latest youtube video & display it on the Socials page
+
+Completed:
+
+
+- [x] Stop using Lanyard Web Socket Directly and proxy it through the API (Alternatively, self host the Lanyard API)
+- [x] Cut the main CSS file into multiple so that only the nessacary CSS is loaded (Reduces traffic and loading times)
 - [x] Add image caching instead of using image proxies (keeps the security benefit and decreases loading times)
 - [x] Add code to automatically minify the HTML
 - [x] Add random quotes
