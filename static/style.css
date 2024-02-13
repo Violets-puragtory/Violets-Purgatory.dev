@@ -61,6 +61,8 @@ body {
 
     min-height: 100vh;
 
+    padding: 5vh 0;
+
     animation: hideContent 2.5s;
 }
 
