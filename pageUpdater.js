@@ -39,13 +39,6 @@ function converter(html) {
         html = html.replaceAll(`{${text}}`, replacers[text])
     }
 
-    var highTable = Object.keys(highlightedWords)
-    for (let index = 0; index < highTable.length; index++) {
-        var term = highTable[index];
-        var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
-        html = html.replaceAll(term, replacement)
-    }
-
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
         pagePath = pagePath.substring(6, pagePath.indexOf('}'))
@@ -58,6 +51,16 @@ function converter(html) {
         html = html.replace(stringIndex, pageHTML)
     }
 
+    var bodyHTML = html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"))
+    var highTable = Object.keys(highlightedWords)
+    for (let index = 0; index < highTable.length; index++) {
+        var term = highTable[index];
+        var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
+        bodyHTML = bodyHTML.replaceAll(term, replacement)
+    }
+
+    html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
+
     return html
 }
 
@@ -66,7 +69,7 @@ module.exports = {
 
         var filePath = (req.baseUrl + req.path).trim()
 
-        if (filePath.includes(".html") || filePath.includes(".css")) {
+        if (filePath.includes(".")) {
             
         } else {
             if (filePath.charAt(filePath.length - 1) != '/') {

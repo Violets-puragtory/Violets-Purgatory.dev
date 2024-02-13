@@ -76,6 +76,7 @@
         "replaceAll": "limegreen",
         "Godot Engine": "#64B5F6",
         "javascript": "yellow",
-        "NodeJS": "limegreen"
+        "NodeJS": "limegreen",
+        "Violet": "rgb(200, 150, 255)"
     }
 }
