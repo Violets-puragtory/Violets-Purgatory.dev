@@ -59,7 +59,7 @@ function converter(html) {
         
         bodyHTML = bodyHTML.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
         bodyHTML = bodyHTML.replaceAll(term, replacement)
-        bodyHTML = bodyHTML.replaceAll("TEMPORARY_REPLACE", `{${term}}`)
+        bodyHTML = bodyHTML.replaceAll("TEMPORARY_REPLACE", `${term}`)
     }
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
