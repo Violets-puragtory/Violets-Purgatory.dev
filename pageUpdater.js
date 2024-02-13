@@ -56,7 +56,10 @@ function converter(html) {
     for (let index = 0; index < highTable.length; index++) {
         var term = highTable[index];
         var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
+        
+        bodyHTML = bodyHTML.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
         bodyHTML = bodyHTML.replaceAll(term, replacement)
+        bodyHTML = bodyHTML.replaceAll("TEMPORARY_REPLACE", `{${term}}`)
     }
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
