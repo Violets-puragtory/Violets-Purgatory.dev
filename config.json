@@ -74,16 +74,19 @@
         "word highlighting": "yellow",
         "replaceAll": "limegreen",
         "Godot Engine": "#64B5F6",
-        "javascript": "yellow",
+        "Javascript": "yellow",
         "NodeJS": "limegreen",
+        "Violet's": "rgb(200, 150, 255)",
         "Violet": "rgb(200, 150, 255)",
+        "Purgatory": "rgb(200, 150, 255)",
         "Youtube": "rgb(255, 0, 0)",
         "Fedi": "rgb(175, 125, 200)",
         "Matrix": "limegreen",
         "Codeberg": "rgb(0, 255, 255)",
         "Docker": "blue",
-        "Github": "white",
+        "Github": "gray",
         "Steam": "lightgray",
-        "Univerter": "rgb(200, 175, 255)"
+        "Univerter": "rgb(200, 175, 255)",
+        "Ko-fi": "rgb(255, 150, 150)"
     }
 }
