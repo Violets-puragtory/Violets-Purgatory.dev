@@ -47,7 +47,7 @@ function converter(html) {
         pagePath = pagePath.toLowerCase()
 
         var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
-        pageHTML = pageHTML.substring(pageHTML.indexOf('<body>') + 6, pageHTML.indexOf('</body>'))
+        pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
         html = html.replace(stringIndex, pageHTML)
     }
 
