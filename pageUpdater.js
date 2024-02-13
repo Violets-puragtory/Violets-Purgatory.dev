@@ -87,11 +87,10 @@ module.exports = {
             var data = fs.readFileSync(filePath).toString()
             if (req.path.includes(".css")) {
                 res.setHeader("Content-Type", "text/css")
-                res.send(minify.minify(data))
             } else {
                 data = converter(data)
-                res.send(minify.minify(data))
             }
+            res.send(minify.minify(data))
         } else {
             res.status(404).send(`
             <link rel="stylesheet" href="/style.css">
