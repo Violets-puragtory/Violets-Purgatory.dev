@@ -4,10 +4,10 @@
 */
 
 .mainTitle {
-    font-size: 2.75rem;
+    font-size: calc(2rem + 2vw);
     display: block;
     padding-top: 5px;
-    line-height: 2.2rem;
+    line-height: calc(2.2rem + 2vw);
 }
 
 #card {
