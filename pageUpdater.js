@@ -29,7 +29,8 @@ function converter(html) {
         "DISCORD_STATUS": 
         `<span style="color: ${statusData.color};">${statusData.text}</span>` + 
         `<style>.pfp { border-color: ${statusData.color} }</style>`,
-        "UPTIME": uptime
+        "UPTIME": uptime,
+        "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`
     }
 
     var rpTable = Object.keys(replacers)
@@ -87,9 +88,10 @@ module.exports = {
             var data = fs.readFileSync(filePath).toString()
             if (req.path.includes(".css")) {
                 res.setHeader("Content-Type", "text/css")
-            } else {
+            } else if (!req.path.includes(".woff2")) {
                 data = converter(data)
             }
+
             res.send(minify.minify(data))
         } else {
             res.status(404).send(`

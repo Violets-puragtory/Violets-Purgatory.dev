@@ -22,6 +22,29 @@
     color: white;
 }
 
+#topbar {
+    background-color: rgb(75, 50, 125);
+    width: 100%;
+    padding: 1vh 0px;
+    position: sticky;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    opacity: 0.5;
+    transform: scale(1);
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#topbar:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+#topbar > * {
+    display: inline-block;
+    font-size: 1.5rem;
+}
+
 main:nth-of-type(1) {
     width: 95%;
     max-width: 1000px;
@@ -37,8 +60,6 @@ body {
     background-attachment: local;
 
     min-height: 100vh;
-
-    padding: 25px;
 
     animation: hideContent 2.5s;
 }
