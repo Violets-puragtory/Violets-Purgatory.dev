@@ -69,7 +69,8 @@
 
     66% {
         opacity: 0;
-        transform: translateY(25vh)
+        transform: translateY(25vh);
+        display: none;
     }
 
     100% {
