@@ -1,7 +1,8 @@
 const path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    minify = require('minify-html')
+    minify = require('minify-html'),
+    ytjs = require('youtubei.js')
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
@@ -9,11 +10,23 @@ var highlightedWords = config.highlightedWords
 var quotes = config.quotes
 var titles = config.titles
 
+var mostRecentVideo = undefined
+
 var commitCount = "300+"
 
 var lanyardData = undefined
 
 var uptime = Date.now()
+
+async function getMostRecentVid() {
+    innertube = await ytjs.Innertube.create()
+    var video = await (await (await ytjs.Innertube.create()).getChannel('UChcrBJNJLZucy3TPyGyAY2g'))
+    video = video.current_tab.content.contents[1].contents[0].content.items[0]
+
+    mostRecentVideo = video
+}
+
+getMostRecentVid()
 
 function converter(html) {
     if (lanyardData) {
