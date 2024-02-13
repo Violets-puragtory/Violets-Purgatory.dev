@@ -76,6 +76,14 @@
         "Godot Engine": "#64B5F6",
         "javascript": "yellow",
         "NodeJS": "limegreen",
-        "Violet": "rgb(200, 150, 255)"
+        "Violet": "rgb(200, 150, 255)",
+        "Youtube": "rgb(255, 0, 0)",
+        "Fedi": "rgb(175, 125, 200)",
+        "Matrix": "limegreen",
+        "Codeberg": "rgb(0, 255, 255)",
+        "Docker": "blue",
+        "Github": "white",
+        "Steam": "lightgray",
+        "Univerter": "rgb(200, 175, 255)"
     }
 }

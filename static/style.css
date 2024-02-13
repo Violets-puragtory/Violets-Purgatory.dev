@@ -55,7 +55,7 @@ h3 {
     padding: 10px;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 650px) {
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -89,6 +89,10 @@ h3 {
 .chip>* {
     text-decoration: none;
 }
+
+/* span {
+    text-decoration: none;
+} */
 
 .chip:hover {
     background-color: rgb(10, 0, 25);
