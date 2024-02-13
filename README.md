@@ -15,7 +15,9 @@ We also have an API, which can be located at https://api.violets-purgatory.dev, 
 
 ## To-do   
 - [ ] Add more content to the socials page
-    - [ ] Pull latest youtube video & display it on the Socials page
+    - [ ] Pull latest Youtube video & display it
+    - [ ] Display current Discord Activities
+    - [ ] Display current steam game
 
 Completed:
 
