@@ -11,7 +11,7 @@
 }
 
 #card {
-    background-color: rgb(15, 5, 80);
+    background-color: rgb(75, 25, 100);
     padding: 15px;
     border: 2px white solid;
     margin: 20px auto;
@@ -19,6 +19,7 @@
     max-width: 800px;
     z-index: 3;
     position: relative;
+    border-radius: 12px;
 }
 
 .animatedTitle {
