@@ -1,0 +1,156 @@
+/* 
+    This is the GLOBAL css file. 
+    Any changes made in here, will apply to the ENTIRE site.
+    Only put changes here if you intend to put changes across
+    the whole site!
+*/
+
+@font-face {
+    font-display: swap;
+    font-family: 'Rubik';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/rubik-v28-latin-regular.woff2') format('woff2');
+}
+
+* {
+    font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+}
+
+#topbar {
+    background-color: rgb(75, 50, 125);
+    width: 100%;
+    padding: 1vh 0px;
+    position: sticky;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+    opacity: 0.5;
+    transform: scale(1);
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#topbar:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+#topbar>* {
+    display: inline-block;
+    font-size: 1.5rem;
+}
+
+main:nth-of-type(1) {
+    width: 95%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+body {
+    overflow-x: hidden;
+
+    background-color: rgb(15, 4, 45);
+    background: linear-gradient(rgb(35, 4, 75), black);
+
+    background-attachment: local;
+
+    min-height: 100vh;
+
+    padding: 5vh 0;
+
+    animation: hideContent 2.5s;
+}
+
+a {
+    color: rgb(175, 225, 255);
+    display: inline-block;
+    transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+h3 {
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+@media screen and (min-width: 650px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    .grid-child {
+        margin: auto;
+        align-content: center;
+        /* border: 2px white solid; */
+    }
+}
+
+.chip {
+    position: relative;
+    z-index: 3;
+    font-size: 1.3rem;
+    border: 2px gray solid;
+    border-radius: 6px;
+    background-color: black;
+    padding: 8px;
+    margin: 3px;
+    display: inline-block;
+    transform: scale(0.95);
+    transition: transform 1.25s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip,
+.chip>* {
+    text-decoration: none;
+}
+
+/* span {
+    text-decoration: none;
+} */
+
+.chip:hover {
+    background-color: rgb(10, 0, 25);
+    transform: scale(1);
+    /* font-size: 1.35rem; */
+    border-color: white;
+    transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.chip:hover>.smallimg {
+    background-color: rgb(10, 0, 25);
+}
+
+hr {
+    color: white;
+    border: white solid;
+    opacity: 0.25;
+    border-width: 2px;
+    margin: 15px 10%;
+    /* background-color: none; */
+}
+
+p {
+    font-size: 1.25rem;
+    margin: 5px;
+}
+
+img {
+    width: 100%;
+    max-width: 135px;
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+.note {
+    color: darkgray;
+    font-size: 1rem;
+}

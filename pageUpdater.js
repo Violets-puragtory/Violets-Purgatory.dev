@@ -88,7 +88,6 @@ module.exports = {
 
         if (filePath.includes("cached") || filePath.includes("imgs")) {
             filePath = path.join(__dirname, 'static', filePath)
-            console.log(filePath)
             res.send(fs.readFileSync(filePath))
 
             return

@@ -1,8 +1,7 @@
-/* 
-    This is the GLOBAL css file. 
-    Any changes made in here, will apply to the ENTIRE site.
-    Only put changes here if you intend to put changes across
-    the whole site!
+/*
+DO NOT MODIFY IF YOU ARE TRYING TO CHANGE THINGS ON THE SITE!!!
+This exists for compatibility with services on Violet's purgatory
+Soon, this will be removed, and replaced with a CDN or something...
 */
 
 @font-face {
@@ -16,79 +15,66 @@
 * {
     font-family: 'Rubik', Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
-    margin: 0;
-    font-weight: 400;
     text-align: center;
+}
+
+h1 {
+    color: rgb(225, 215, 255);
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    color: rgb(225, 215, 255)
+}
+
+h3 {
+    font-size: 1.65rem
+}
+
+h3,
+li {
     color: white;
 }
 
-#topbar {
-    background-color: rgb(75, 50, 125);
-    width: 100%;
-    padding: 1vh 0px;
-    position: sticky;
-    left: 0px;
-    top: 0px;
-    z-index: 10;
-    opacity: 0.5;
-    transform: scale(1);
-    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+ul, ol {
+    display: inline-block
 }
 
-#topbar:hover {
-    opacity: 1;
-    transform: scale(1.05);
+li {
+    font-size: 1.2rem;
+    text-align: left;
 }
 
-#topbar>* {
-    display: inline-block;
-    font-size: 1.5rem;
-}
-
-main:nth-of-type(1) {
-    width: 95%;
-    max-width: 1000px;
+body,
+html {
+    overflow-x: hidden;
     margin: auto;
+    background-color: rgb(15, 4, 45);
+    background: linear-gradient(rgb(20, 4, 55), black);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-attachment: local;
 }
 
 body {
-    overflow-x: hidden;
+    padding: 2.5%;
+}
 
-    background-color: rgb(15, 4, 45);
-    background: linear-gradient(rgb(35, 4, 75), black);
-
-    background-attachment: local;
-
-    min-height: 100vh;
-
-    padding: 5vh 0;
-
-    animation: hideContent 2.5s;
+.fadediv {
+    animation-name: fade-in;
+    animation-duration: .75s;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin: auto;
+    max-width: 1000px;
 }
 
 a {
     color: rgb(175, 225, 255);
     display: inline-block;
     transition: 1.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-h3 {
-    font-size: 1.5rem;
-    padding: 10px;
-}
-
-@media screen and (min-width: 650px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
-    }
-
-    .grid-child {
-        margin: auto;
-        align-content: center;
-        /* border: 2px white solid; */
-    }
 }
 
 .chip {
@@ -110,10 +96,6 @@ h3 {
     text-decoration: none;
 }
 
-/* span {
-    text-decoration: none;
-} */
-
 .chip:hover {
     background-color: rgb(10, 0, 25);
     transform: scale(1);
@@ -122,35 +104,248 @@ h3 {
     transition: transform 0.75s cubic-bezier(0.075, 0.82, 0.165, 1), background-color 3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.chip:hover>.smallimg {
+.chip:hover > .smallimg {
     background-color: rgb(10, 0, 25);
 }
 
-hr {
+.activity {
+    border-width: 3px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    position: relative;
+    z-index: 3;
+}
+
+.activity>p {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.activity>img {
+    width: 128px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.activity>.smallimg {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    bottom: 0px;
+    left: 72px;
+    border-radius: 50px;
+    background: black;
+    padding: 5px;
+    /* border: 2px gray solid; */
+    transform: scale(0.9);
+}
+
+.activity>.smallimg:hover {
+    transform: scale(1);
+}
+
+a:hover {
     color: white;
-    border: white solid;
-    opacity: 0.25;
-    border-width: 2px;
-    margin: 15px 10%;
-    /* background-color: none; */
+    transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 p {
-    font-size: 1.25rem;
-    margin: 5px;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0;
+    margin: 10px;
 }
 
-img {
+img:not(.project-inner > div > img) {
     width: 100%;
     max-width: 135px;
     transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-h2 {
-    font-size: 1.8rem;
+.pfp {
+    border-radius: 15px;
+    border: darkgray 4px solid;
+    width: 60%;
+    aspect-ratio: 1/1;
+    transform: scale(0.9);
+    border-radius: 50%;
+}
+
+.pfp:hover {
+    transform: scale(1);
+    border-color: rgb(255, 200, 255);
+    object-fit: cover;
+}
+
+.emoji {
+    width: 32px;
+    border-radius: 10%;
+    /* border: 1px gray solid; */
+}
+
+hr {
+    color: white;
+    opacity: 0.25;
+    border-width: 2px;
+    margin: 15px 10%;
+}
+
+#card {
+    background-color: rgb(15, 5, 80);
+    padding: 15px;
+    border: 2px white solid;
+    margin: 20px auto;
+    width: 95%;
+    max-width: 800px;
+    z-index: 3;
+    position: relative;
+}
+
+.me {
+    border-color: limegreen;
+}
+
+.project {
+    background-color: rgba(35, 35, 35, 0.8);
+    padding: 15px;
+    border: 2px gray solid;
+    margin: 20px 0px;
+    border-radius: 15px;
+}
+
+.project-inner {
+    overflow: hidden;
+    padding: 0;
+    margin: auto;
+    z-index: 3;
+}
+
+.project-inner>div>img {
+    object-fit: cover;
+    border: 2px white solid;
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.project>p {
+    display: inline-block;
+}
+
+/* I am so sorry about this code,,, */
+
+.love::before {
+    content: "<3 ";
+    color: rgb(255, 100, 150);
+}
+
+.like::before {
+    content: ":) ";
+    color: limegreen;
+}
+
+.silly::before {
+    content: ":P ";
+    color: aqua;
+}
+
+.fine::before {
+    content: ":/ ";
+    color: yellow;
+}
+
+.hate::before {
+    content: ">:( ";
+    color: red;
+}
+
+.love {
+    border-color: rgb(255, 100, 150);
+}
+
+.like {
+    border-color: limegreen;
+}
+
+.silly {
+    border-color: aqua;
+}
+
+.fine {
+    border-color: yellow;
+}
+
+.hate {
+    border-color: red;
+}
+
+.up {
+    border-color: limegreen;
+}
+
+.mid {
+    border-color: yellow;
+}
+
+.down {
+    border-color: red;
+}
+
+.post {
+    background-color: rgba(85, 50, 150, 0.3);
+    border: 2px gray solid;
+    display: inline-block;
+    /* border-radius: 15px; */
+    padding: 10px;
+    margin: 8px;
+}
+
+.minipfp {
+    width: 70px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 2px lightgray solid;
+    border-radius: 5px;
+}
+
+.lengthBar {
+    background-color: rgb(50, 40, 60);
+    display: inline-block;
+    width: 80%;
+    height: 10px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-right: 1.9%;
+}
+
+.lengthBar>span {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(200, 200, 230);
+    height: 20px;
+    display: block;
+    position: relative;
 }
 
 .note {
-    color: darkgray;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    color: lightgray;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(50vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }
