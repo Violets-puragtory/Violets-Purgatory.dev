@@ -1,4 +1,9 @@
-const path = require("path")
+const path = require("path"),
+fs = require("fs")
+
+var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+
+var activityImages = config.activityImages
 
 function get_img_url(activity, size = "large_image") {
 
@@ -190,6 +195,7 @@ module.exports = {
                 }
             }
         }
+        addedHTML = addedHTML.replaceAll("Violet", "{Violet}")
         return addedHTML + "</div>"
     }
 }
