@@ -40,7 +40,7 @@
     transform: scale(1.05);
 }
 
-#topbar > * {
+#topbar>* {
     display: inline-block;
     font-size: 1.5rem;
 }
@@ -83,15 +83,13 @@ h3 {
         grid-template-columns: 1fr 1fr;
         grid-gap: 10px;
     }
-    
+
     .grid-child {
         margin: auto;
         align-content: center;
         /* border: 2px white solid; */
     }
 }
-
-
 
 .chip {
     position: relative;
@@ -129,8 +127,12 @@ h3 {
 }
 
 hr {
-    border: 2px gray solid;
-    margin: 20px;
+    color: white;
+    border: white solid;
+    opacity: 0.25;
+    border-width: 2px;
+    margin: 15px 10%;
+    /* background-color: none; */
 }
 
 p {

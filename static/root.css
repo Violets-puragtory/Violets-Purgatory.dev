@@ -11,8 +11,8 @@
 }
 
 #card {
-    background-color: rgb(75, 25, 100);
-    padding: 15px;
+    background-color: rgb(25, 5, 80);
+    padding: 15px 5px;
     border: 2px white solid;
     margin: 20px auto;
     width: 95%;
@@ -42,6 +42,90 @@
     transform: scale(0.9);
     border-radius: 50%;
 }
+
+.activity {
+    border-width: 3px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    position: relative;
+    z-index: 3;
+}
+
+.activity>p {
+    width: 100%;
+    overflow-wrap: break-word;
+    padding: 5px;
+    justify-content: center;
+}
+
+.activity>img {
+    width: 128px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.activity>.smallimg {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    bottom: 0px;
+    left: 72px;
+    border-radius: 50px;
+    background: black;
+    padding: 5px;
+    /* border: 2px gray solid; */
+    transform: scale(0.9);
+}
+
+.activity>.smallimg:hover {
+    transform: scale(1);
+}
+
+img:not(.project-inner > div > img) {
+    width: 100%;
+    max-width: 135px;
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@media screen and (min-width: 750px) {
+    .activity-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    .activity {
+        margin: auto;
+        width: 100%;
+        align-content: center;
+        /* border: 2px white solid; */
+    }
+}
+
+.lengthBar {
+    background-color: rgb(50, 40, 60);
+    display: inline-block;
+    width: 80%;
+    height: 10px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-right: 1.9%;
+}
+
+.lengthBar>span {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(200, 200, 230);
+    height: 20px;
+    display: block;
+    position: relative;
+}
+
 
 @keyframes mainText {
     0% {

@@ -75,6 +75,8 @@
         "Github": "gray",
         "Steam": "lightgray",
         "Univerter": "rgb(200, 175, 255)",
-        "Ko-fi": "rgb(255, 150, 150)"
+        "Ko-fi": "rgb(255, 150, 150)",
+        "Revolt": "rgb(255, 50, 50)",
+        "Discord": "rgb(150, 150, 255)"
     }
 }

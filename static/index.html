@@ -25,7 +25,7 @@
     <main class="animatedMain">
         <p>{RANDOM_QUOTE}</p>
         <div id="card">
-            <h2>Violet</h2>
+            <h2>{Violet}</h2>
             <div style="display: flex; justify-content: center; align-items: center;">
                 <img src="https://api.violets-purgatory.dev/v1/pfp" class="pfp">
                 <div>
@@ -34,23 +34,19 @@
                     <p>{DISCORD_STATUS}</p>
                 </div>
             </div>
-            <a class="chip" href="https://https://ko-fi.com/bingus_violet">Donate (Ko-fi)</a>
-            <div>
-                <p style="padding: 10px;">Hi! I'm Violet, a 15 year old web and game developer. <br> I aspire to make fast and Javascript free websites! I'm currently learning the Godot Engine, and have been becoming quite fluent in NodeJS.</p>
+            <hr>
+           <div>
+                <p style="padding: 10px;">Hi! I'm Violet, a 15 year old web and game developer. <br> I aspire to make fast and Javascript free websites! I'm currently learning the Godot Engine, but most of my time recently has been spent learning NodeJS.</p>
                     <a class="chip" href="https://beta.violets-purgatory.dev">Beta site</a>
                     <a class="chip" href="https://blog.violets-purgatory.dev">Blog</a>
                     <a class="chip" href="https://fs.violets-purgatory.dev">Clipdump</a>
+                    {CUSTOM_STATUS}
             </div>
         </div>
+        {ACTIVITIES}
 
-        <div style="padding-bottom: 20px;">
-            <h3>Main Projects</h3>
-            <a class="chip" href="https://univerter.dev">Univerter</a>
-            <a class="chip" href="https://codeberg.org/bingus_violet/steamrpc">{Steam}RPC</a>
-        
-        </div>
-
-        <h2>Socials</h2>
+        <hr>
+        <h1>Socials</h1>
         {PATH_SOCIALS}
     </main>
 </body>

@@ -1,7 +1,8 @@
 const path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    minify = require('minify-html')
+    minify = require('minify-html'),
+    activityToHTML = require("./overcomplicatedStatuses.js")
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
@@ -16,30 +17,6 @@ var lanyardData = undefined
 var uptime = Date.now()
 
 function converter(html) {
-    if (lanyardData) {
-        var statusData = config.discStatuses[lanyardData.discord_status]
-    } else {
-        var statusData = config.discStatuses.offline
-    }
-    var replacers = {
-        "COMMIT_COUNT": commitCount,
-        "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
-        "QUOTE_COUNT": quotes.length,
-        "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
-        "DISCORD_STATUS": 
-        `<span style="color: ${statusData.color};">${statusData.text}</span>` + 
-        `<style>.pfp { border-color: ${statusData.color} }</style>`,
-        "UPTIME": uptime,
-        "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`
-    }
-
-    var rpTable = Object.keys(replacers)
-
-    for (let index = 0; index < rpTable.length; index++) {
-        const text = rpTable[index];
-        html = html.replaceAll(`{${text}}`, replacers[text])
-    }
-
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
         pagePath = pagePath.substring(6, pagePath.indexOf('}'))
@@ -50,6 +27,42 @@ function converter(html) {
         var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
         pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
         html = html.replace(stringIndex, pageHTML)
+    }
+
+    var statusText = ""
+    
+    if (lanyardData) {
+        var statusData = config.discStatuses[lanyardData.discord_status]
+        var username = lanyardData.discord_user.username
+
+        if (lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
+            var statusText = `<hr><p>${lanyardData.activities[0].state}</p>`
+        }
+    } else {
+        var statusData = config.discStatuses.offline
+        var username = "bingus_violet"
+    }
+
+    var replacers = {
+        "COMMIT_COUNT": commitCount,
+        "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
+        "QUOTE_COUNT": quotes.length,
+        "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
+        "DISCORD_STATUS": 
+        `<span style="color: ${statusData.color};">${statusData.text}</span>` + 
+        `<style>.pfp { border-color: ${statusData.color} }</style>`,
+        "UPTIME": uptime,
+        "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
+        "DISCORD_USER": username,
+        "CUSTOM_STATUS": statusText,
+        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData, cachedImages)
+    }
+
+    var rpTable = Object.keys(replacers)
+
+    for (let index = 0; index < rpTable.length; index++) {
+        const text = rpTable[index];
+        html = html.replaceAll(`{${text}}`, replacers[text])
     }
 
     var bodyHTML = html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"))
@@ -72,6 +85,14 @@ module.exports = {
     middleWare: function (req, res, next) {
 
         var filePath = (req.baseUrl + req.path).trim()
+
+        if (filePath.includes("cached") || filePath.includes("imgs")) {
+            filePath = path.join(__dirname, 'static', filePath)
+            console.log(filePath)
+            res.send(fs.readFileSync(filePath))
+
+            return
+        }
 
         if (filePath.includes(".")) {
             
