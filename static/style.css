@@ -4,6 +4,8 @@ This exists for compatibility with services on Violet's purgatory
 Soon, this will be removed, and replaced with a CDN or something...
 */
 
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css");
+
 @font-face {
     font-display: swap;
     font-family: 'Rubik';
