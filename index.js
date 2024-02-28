@@ -10,18 +10,18 @@ const PORT = process.env.PORT || 8080
 
 const staticpath = path.join(__dirname, 'static')
 
-var mostRecentVideo = undefined
+// var mostRecentVideo = undefined
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
-var thumborInstances = config.thumborInstances
+// var thumborInstances = config.thumborInstances
 
-var thumbCount = 0
+// var thumbCount = 0
 
-function getThumbor() {
-    thumbCount += 1
-    return thumborInstances[thumbCount % thumborInstances.length] + "unsafe"
-}
+// function getThumbor() {
+//     thumbCount += 1
+//     return thumborInstances[thumbCount % thumborInstances.length] + "unsafe"
+// }
 
 // async function getMostRecentVid() {
 //     innertube = await ytjs.Innertube.create()
@@ -39,7 +39,7 @@ app.listen(PORT, () => {
 })
 
 var cachePath = path.join(staticpath, 'cached')
-var imgPath = path.join(staticpath, 'imgs')
+// var imgPath = path.join(staticpath, 'imgs')
 
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
