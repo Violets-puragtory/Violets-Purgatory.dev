@@ -1,8 +1,8 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    pageUpdater = require('./pageUpdater.js'),
-    ytjs = require("youtubei.js")
+    pageUpdater = require('./pageUpdater.js')
+    // ytjs = require("youtubei.js")
 
 var app = express()
 
