@@ -154,3 +154,8 @@ h2 {
     color: darkgray;
     font-size: 1rem;
 }
+
+.striked {
+    text-decoration: line-through;
+    text-decoration-color: white;
+}
