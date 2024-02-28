@@ -23,7 +23,7 @@
 }
 
 .animatedTitle {
-    animation: mainText 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation: mainText 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
     max-width: 75%;
     /* outline: 1px white solid; */
@@ -31,7 +31,7 @@
 
 .animatedMain {
     opacity: 1;
-    animation: fadeDelay 3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation: fadeDelay 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .pfp {
