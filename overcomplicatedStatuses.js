@@ -195,7 +195,6 @@ module.exports = {
                 }
             }
         }
-        addedHTML = addedHTML.replaceAll("Violet", "{Violet}")
         return addedHTML + "</div>"
     }
 }

@@ -2,7 +2,7 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     pageUpdater = require('./pageUpdater.js')
-    // ytjs = require("youtubei.js")
+// ytjs = require("youtubei.js")
 
 var app = express()
 
@@ -39,7 +39,17 @@ app.listen(PORT, () => {
 })
 
 var cachePath = path.join(staticpath, 'cached')
+var gamePath = path.join(__dirname, "games")
 // var imgPath = path.join(staticpath, 'imgs')
+
+app.use(function (req, res, next) {
+    res.header("Cross-Origin-Embedder-Policy", "require-corp");
+    res.header("Cross-Origin-Opener-Policy", "same-origin");
+    next();
+});
+
+
+app.use("/games", express.static(gamePath))
 
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
