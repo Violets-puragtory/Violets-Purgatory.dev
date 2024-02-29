@@ -54,8 +54,7 @@ function converter(html) {
         "UPTIME": uptime,
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "DISCORD_USER": username,
-        "CUSTOM_STATUS": statusText,
-        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData, cachedImages)
+        "CUSTOM_STATUS": statusText
     }
 
     var rpTable = Object.keys(replacers)
@@ -75,6 +74,8 @@ function converter(html) {
         bodyHTML = bodyHTML.replaceAll(term, replacement)
         bodyHTML = bodyHTML.replaceAll("TEMPORARY_REPLACE", `${term}`)
     }
+
+    bodyHTML = bodyHTML.replaceAll("{ACTIVITIES}", activityToHTML.activitiesToHTML(lanyardData, cachedImages))
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
 
