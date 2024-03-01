@@ -42,7 +42,7 @@ var cachePath = path.join(staticpath, 'cached')
 var gamePath = path.join(__dirname, "games")
 // var imgPath = path.join(staticpath, 'imgs')
 
-app.use(function (req, res, next) {
+app.use("/games", function (req, res, next) {
     res.setHeader("Cross-Origin-Embedder-Policy", "require-corp")
     res.setHeader("Cross-Origin-Opener-Policy", "same-origin")
     next()
