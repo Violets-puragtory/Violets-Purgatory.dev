@@ -52,11 +52,14 @@
     display: flex;
     position: relative;
     z-index: 3;
+    /* max-height: 200px; */
 }
 
 .activity>p {
     width: 100%;
-    overflow-wrap: break-word;
+    max-height: 100%;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
     padding: 5px;
     align-self: center;
 }
@@ -67,12 +70,16 @@
     object-fit: cover;
 }
 
+.activity>img:not(.smallimg) {
+    min-width: 128px;
+}
+
 .activity>.smallimg {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     position: absolute;
     bottom: 0px;
-    left: 72px;
+    left: 0px;
     border-radius: 50px;
     background: black;
     padding: 5px;
@@ -84,13 +91,13 @@
     transform: scale(1);
 }
 
-img:not(.project-inner > div > img) {
+img:not(.project-inner > div > img):not(.activity>img) {
     width: 100%;
     max-width: 135px;
     transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 850px) {
     .activity-container {
         display: flex;
         flex-wrap: wrap;
