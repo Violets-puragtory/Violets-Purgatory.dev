@@ -86,7 +86,7 @@ function converter(html, query) {
 
     var weather = weathers[time.getDate() % weathers.length]
 
-    if (weather == "rain") {
+    if (weather == "rain" || "rain" in query || "hardRain" in query) {
         html = html.replaceAll("{WEATHER_MODIFIER}", weatherGenerator.makeRain("hardRain" in query))
 
         html = html.replaceAll("{WEATHER_TEXT}", `The rain is so pretty... <a href="?hardRain">I wish I saw it more...</a>`)
