@@ -40,6 +40,7 @@ app.listen(PORT, () => {
 
 var cachePath = path.join(staticpath, 'cached')
 var gamePath = path.join(__dirname, "games")
+var fontPath = path.join(staticpath, "fonts")
 // var imgPath = path.join(staticpath, 'imgs')
 
 app.use("/games", function (req, res, next) {
@@ -50,6 +51,8 @@ app.use("/games", function (req, res, next) {
 
 
 app.use("/games", express.static(gamePath))
+
+app.use("/fonts", express.static(fontPath))
 
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
