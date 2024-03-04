@@ -2,7 +2,8 @@ const path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
     minify = require('minify-html'),
-    activityToHTML = require("./overcomplicatedStatuses.js")
+    activityToHTML = require("./overcomplicatedStatuses.js"),
+    weatherGenerator = require("./weatherGenerator")
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
@@ -16,7 +17,7 @@ var lanyardData = undefined
 
 var uptime = Date.now()
 
-function converter(html) {
+function converter(html, query) {
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
         pagePath = pagePath.substring(6, pagePath.indexOf('}'))
@@ -42,6 +43,8 @@ function converter(html) {
         var statusData = config.discStatuses.offline
         var username = "bingus_violet"
     }
+
+    var time = new Date(Date.now())
 
     var replacers = {
         "COMMIT_COUNT": commitCount,
@@ -79,6 +82,19 @@ function converter(html) {
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
 
+    var weathers = ["rain", "none", "none", "none", "none", "none"]
+
+    var weather = weathers[time.getDate() % weathers.length]
+
+    if (weather == "rain") {
+        html = html.replaceAll("{WEATHER_MODIFIER}", weatherGenerator.makeRain("hardRain" in query))
+
+        html = html.replaceAll("{WEATHER_TEXT}", `The rain is so pretty... <a href="?hardRain">I wish I saw it more...</a>`)
+    } else {
+        html = html.replaceAll("{WEATHER_MODIFIER}", "")
+        html = html.replaceAll("{WEATHER_TEXT}", "")
+    }
+
     return html
 }
 
@@ -110,7 +126,7 @@ module.exports = {
             if (req.path.includes(".css")) {
                 res.setHeader("Content-Type", "text/css")
             } else if (!req.path.includes(".woff2")) {
-                data = converter(data)
+                data = converter(data, req.query)
             }
 
             res.send(minify.minify(data))

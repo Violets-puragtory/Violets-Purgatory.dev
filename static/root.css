@@ -11,7 +11,8 @@
 }
 
 #card {
-    background-color: rgb(25, 5, 80);
+    background-color: rgba(25, 5, 80, 0.5);
+    backdrop-filter: blur(10px);
     padding: 15px;
     border: 2px white solid;
     margin: 20px auto;
@@ -26,6 +27,7 @@
     animation: mainText 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
     max-width: 75%;
+    padding-top: 30px;
     /* outline: 1px white solid; */
 }
 
