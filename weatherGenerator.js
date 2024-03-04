@@ -21,9 +21,9 @@ module.exports = {
 
         .rainContainer {
             height: 100vh;
-            width: 100vw;
+            width: 80vw;
             top: 0px;
-            left: 0px;
+            left: 10vw;
             position: absolute;
             overflow: hidden;
         }
@@ -75,13 +75,13 @@ module.exports = {
                 html += `
             ${index * iterationReducer}0% {
                 top: 110vh;
-                right: ${randos[index]}vw;
+                right: ${randos[index]}%;
                 visibility: hidden;
             }
     
             ${index * iterationReducer}0.1% {
                 top: -10vh;
-                right: ${randos[index + 1]}vw;
+                right: ${randos[index + 1]}%;
                 visibility: hidden;
             }
             ${index * iterationReducer}0.2% {
@@ -90,8 +90,11 @@ module.exports = {
             `
             }
             // console.log(html)
+            
+            html += `90.3% { visibility: hidden; }`
 
             html += `}`
+            console.log(html)
 
         }
         html += "</style>"
