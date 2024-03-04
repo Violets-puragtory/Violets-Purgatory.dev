@@ -8,6 +8,10 @@ module.exports = {
         html +=
             `
     <style>
+        #card {
+            background-color: rgba(45, 5, 120, 0.2);
+            backdrop-filter: blur(5px);
+        }
         .rainStuff {
             position: sticky;
             top: 0;
@@ -28,7 +32,7 @@ module.exports = {
             position: absolute;
             width: 5px;
             backdrop-filter: blur(5px);
-            background-color: rgba(0, 0, 255, 0.1);
+            background-color: rgba(0, 0, 255, 0.2);
             height: 10vh;
             visibility: hidden;
         }
@@ -57,12 +61,12 @@ module.exports = {
             .rainDrop:nth-of-type(${index + 1}) {
                 animation: rainAnim${index} ${(Math.random() * 0.3) + (5 - iterationReducer)}s linear;
                 animation-iteration-count: infinite;
-                animation-delay: ${Math.random()}s;
+                animation-delay: ${Math.round(Math.random() * 100) / 100}s;
             }
             `
             var randos = []
             for (let index = 0; index < 11; index++) {
-                randos.push(Math.random() * 100)
+                randos.push(Math.round(Math.random() * 100))
             }
 
             html += `@keyframes rainAnim${index} {    `
