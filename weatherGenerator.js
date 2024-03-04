@@ -39,7 +39,7 @@ module.exports = {
     </style>
     `
 
-        var amount = 12
+        var amount = 10
 
         var iterationReducer = 3
 
