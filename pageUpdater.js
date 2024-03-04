@@ -10,7 +10,7 @@ var highlightedWords = config.highlightedWords
 var quotes = config.quotes
 var titles = config.titles
 
-var commitCount = "300+"
+var commitCount = "400+"
 
 var lanyardData = undefined
 
