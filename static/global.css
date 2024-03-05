@@ -105,10 +105,10 @@ h3 {
 
 a.chip {
     text-decoration: none;
-    background-image: linear-gradient(rgb(175, 225, 255), rgb(175, 225, 255));
+    /* background-image: linear-gradient(rgb(175, 225, 255), rgb(175, 225, 255));
     background-size: calc(100% - 15px) 2px;
     background-position: 50% 87.5%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 }
 
 .chip:hover {
