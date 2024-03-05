@@ -94,7 +94,6 @@ module.exports = {
             html += `90.3% { visibility: hidden; }`
 
             html += `}`
-            console.log(html)
 
         }
         html += "</style>"
