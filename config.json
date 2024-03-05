@@ -70,6 +70,7 @@
         "Youtube": "rgb(255, 0, 0)",
         "Fedi": "rgb(175, 125, 200)",
         "Matrix": "limegreen",
+        "Element": "rgb(100, 255, 200)",
         "Codeberg": "rgb(0, 255, 255)",
         "Docker": "blue",
         "Github": "gray",
