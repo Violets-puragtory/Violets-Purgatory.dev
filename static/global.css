@@ -135,6 +135,8 @@ hr {
 p {
     font-size: 1.25rem;
     margin: 5px;
+    line-height: 2rem;
+    text-wrap: pretty;
 }
 
 img {
