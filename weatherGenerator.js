@@ -9,7 +9,7 @@ module.exports = {
             `
     <style>
         #card {
-            background-color: rgba(45, 5, 120, 0.2);
+            background-color: rgba(200, 0, 255, 0.2);
             backdrop-filter: blur(5px);
         }
         .rainStuff {

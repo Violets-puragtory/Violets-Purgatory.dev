@@ -135,6 +135,20 @@ img:not(.project-inner > div > img):not(.activity>img) {
     position: relative;
 }
 
+body {
+    animation: heightIncrease 3s;
+    min-height: 100vh;
+}
+
+@keyframes heightIncrease {
+    0% {
+        overflow: hidden;
+        min-height: 200vh;
+    }
+    100% {
+        min-height: 300vh;
+    }
+}
 
 @keyframes mainText {
     0% {

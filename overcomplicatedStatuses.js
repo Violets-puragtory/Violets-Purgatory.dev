@@ -93,7 +93,7 @@ module.exports = {
                         return 'imgs/notFound.png'
                     }
 
-                    return '/cached/' + fn
+                    return './cached/' + fn
                 }
 
                 function songStats() {
