@@ -43,7 +43,7 @@ app.get("/disc", (req, res) => {
         setTimeout(() => {
             loop()
             res.write("")
-        }, 5000);
+        }, 1000);
     }
     loop()
 })
