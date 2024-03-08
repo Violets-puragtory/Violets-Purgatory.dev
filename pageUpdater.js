@@ -99,6 +99,10 @@ function converter(html, query) {
 }
 
 module.exports = {
+    getActivities: function () {
+        return activityToHTML.activitiesToHTML(lanyardData, cachedImages)
+    },
+
     middleWare: function (req, res, next) {
 
         var filePath = (req.baseUrl + req.path).trim()

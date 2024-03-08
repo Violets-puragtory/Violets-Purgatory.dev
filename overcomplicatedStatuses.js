@@ -80,7 +80,7 @@ module.exports = {
                 }
 
                 if (!debounce && activity.type != 4) {
-                    addedHTML += `<h2><hr>What I'm up to:</h2><div class="activity-container">`
+                    addedHTML += `<h2><hr>What I'm up to:</h2><p><a href="/disc">Check it out in real time! (buggy & unoptimized)</a></p><div class="activity-container">`
                     debounce = true
                 }
 
@@ -93,7 +93,7 @@ module.exports = {
                         return 'imgs/notFound.png'
                     }
 
-                    return './cached/' + fn
+                    return '/cached/' + fn
                 }
 
                 function songStats() {
