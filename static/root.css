@@ -20,6 +20,8 @@
     z-index: 3;
     position: relative;
     border-radius: 12px;
+
+    box-shadow: outset rgb(35, 20, 60) 0px 0px 20px;
 }
 
 .animatedTitle {
@@ -133,21 +135,6 @@ img:not(.project-inner > div > img):not(.activity>img) {
     height: 20px;
     display: block;
     position: relative;
-}
-
-body {
-    animation: heightIncrease 3s;
-    min-height: 100vh;
-}
-
-@keyframes heightIncrease {
-    0% {
-        overflow: hidden;
-        min-height: 200vh;
-    }
-    100% {
-        min-height: 300vh;
-    }
 }
 
 @keyframes mainText {
