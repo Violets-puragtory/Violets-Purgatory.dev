@@ -22,8 +22,6 @@ app.use("/fonts", express.static(fontPath))
 app.use("/cached", express.static(cachePath))
 
 app.get("/disc", (req, res) => {
-    var looping = true
-
     res.setHeader("X-Accel-Buffering", "no")
     res.write(fs.readFileSync(path.join(__dirname, "resources/disc.html")))
 
@@ -41,8 +39,10 @@ app.get("/disc", (req, res) => {
             res.write(`<style>#loop${iterations - 1} {display: none;}</style>`)    
         }
         setTimeout(() => {
-            loop()
-            res.write("")
+            if (!res.closed) {
+                loop()
+                res.write("")
+            }
         }, 1000);
     }
     loop()
