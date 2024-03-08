@@ -41,7 +41,7 @@ app.get("/disc", (req, res) => {
         setTimeout(() => {
             if (!res.closed) {
                 loop()
-                res.write("")
+                res.write(" ")
             }
         }, 1000);
     }
