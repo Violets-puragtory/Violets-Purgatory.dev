@@ -63,18 +63,20 @@
     max-height: 100%;
     overflow-wrap: anywhere;
     text-overflow: ellipsis;
-    padding: 5px;
+    padding: 3px;
+    line-height: 1.5rem;
     align-self: center;
 }
 
 .activity>img {
-    width: 128px;
+    width: 40%;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
 
 .activity>img:not(.smallimg) {
-    min-width: 128px;
+    min-width: 150px;
+    max-width: 150px;
 }
 
 .activity>.smallimg {
@@ -96,7 +98,7 @@
 
 img:not(.project-inner > div > img):not(.activity>img) {
     width: 100%;
-    max-width: 135px;
+    max-width: 168px;
     transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
