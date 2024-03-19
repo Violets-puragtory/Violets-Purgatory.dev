@@ -82,7 +82,7 @@ function converter(html, query) {
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
 
-    var weathers = ["none"]
+    var weathers = ["rain"]
 
     var weather = weathers[time.getDate() % weathers.length]
 
