@@ -215,9 +215,12 @@ function socketeer() {
 
     lanyard.addEventListener("message", async (res) => {
         var data = JSON.parse(res.data)
+        // console.log(data.op)
         if (data.op == 1) {
             console.log("Connected to Discord Websocket!")
             ping(30000)
+            lastPong = Date.now()
+        } else if (data.op == 3) {
             lastPong = Date.now()
         } else if (data.op == 0) {
             lanyardData = data.d
