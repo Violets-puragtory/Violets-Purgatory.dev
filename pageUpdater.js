@@ -156,7 +156,7 @@ updateCommits()
 // Lanyard Stuffs
 
 var lastLanyardUpdate = Date.now()
-var lastPong = Date.now()
+var lastPong = 0
 
 var activityImages = config.activityImages
 var cachedImages = {}
@@ -188,6 +188,18 @@ function get_img_url(activity, size = "large_image") {
 
 function socketeer() {
     var lanyard = new WebSocket('https://api.violets-purgatory.dev')
+
+    lanyard.on("error", (error) =>{
+        console.log(error)
+    })
+
+    lanyard.on("close", () => {
+        console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
+        setTimeout(() => {
+            socketeer()
+        }, 3000);
+    })
+
     function ping(dur) {
         lanyard.send(JSON.stringify({
             op: 3
@@ -196,7 +208,7 @@ function socketeer() {
             ping(dur)
             if (Date.now() - lastPong > 120000) {
                 lanyard.close()
-                socketeer()
+                console.log("Max duration since last pong exceeded- Closing socket.")
             }
         }, dur);
     }
@@ -204,9 +216,8 @@ function socketeer() {
     lanyard.addEventListener("message", async (res) => {
         var data = JSON.parse(res.data)
         if (data.op == 1) {
+            console.log("Connected to Discord Websocket!")
             ping(30000)
-            lastPong = Date.now()
-        } else if (data.op == 3) {
             lastPong = Date.now()
         } else if (data.op == 0) {
             lanyardData = data.d

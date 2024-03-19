@@ -32,3 +32,11 @@ if (!fs.existsSync(cachePath)) {
 }
 
 app.use(pageUpdater.middleWare)
+
+process.on('uncaughtException', (err, origin) => {
+    fs.writeSync(
+      process.stderr.fd,
+      `Caught exception: ${err}\n` +
+      `Exception origin: ${origin}`,
+    );
+  });  
