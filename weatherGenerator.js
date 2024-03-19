@@ -5,44 +5,6 @@ module.exports = {
 
         html += `<div class="rainStuff"><div class="rainContainer">`
 
-        html +=
-            `
-    <style>
-        #card {
-            background-color: rgba(50, 0, 90, 0.5);
-            backdrop-filter: blur(5px);
-        }
-        .rainStuff {
-            position: sticky;
-            top: 0;
-            height: 0;
-            z-index: -5;
-        }
-
-        .rainContainer {
-            height: 100vh;
-            width: 80vw;
-            top: 0px;
-            left: 10vw;
-            position: absolute;
-            overflow: hidden;
-        }
-
-        .rainDrop {
-            position: absolute;
-            width: 5px;
-            backdrop-filter: blur(5px);
-            background-color: rgba(0, 0, 255, 0.2);
-            height: 10vh;
-            visibility: hidden;
-        }
-
-        body {
-            background: linear-gradient(rgb(10, 10, 75), black);
-        }
-    </style>
-    `
-
         var amount = 10
 
         var iterationReducer = 3
