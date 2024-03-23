@@ -1,6 +1,7 @@
 {
     "activityImages": {
-        "ULTRAKILL": "https://cdn.violets-purgatory.dev/fallbackImages/ULTRAKILL.webp"
+        "ULTRAKILL": "https://fs.violets-purgatory.dev/SiteActivityImages/ULTRAKILL.jpg",
+        "Phasmophobia": "https://fs.violets-purgatory.dev/SiteActivityImages/Phasmophobia.png"
     },
     "discStatuses": {
         "online": {
