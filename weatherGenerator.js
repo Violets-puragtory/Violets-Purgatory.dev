@@ -43,13 +43,12 @@ module.exports = {
     </style>
     `
 
-        var amount = 10
+        var amount = 7
 
-        var iterationReducer = 3
+        var iterationReducer = 1
 
         if (hardRain) {
             amount = 100
-            iterationReducer = 1
         }
 
         for (let index = 0; index < amount; index++) {
