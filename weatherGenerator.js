@@ -45,7 +45,7 @@ module.exports = {
 
         var amount = 7
 
-        var iterationReducer = 1
+        var iterationReducer = 3
 
         if (hardRain) {
             amount = 100
