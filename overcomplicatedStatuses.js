@@ -14,6 +14,9 @@ function get_img_url(activity, size = "large_image") {
                 return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
             } else if (image.includes("spotify")) {
                 return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
+            } else {
+                console.log(decodeURIComponent('https://cdn.discordapp.com/app-assets/' + activity.application_id + "/" + image + ".png"))
+                return decodeURIComponent('https://cdn.discordapp.com/app-assets/' + activity.application_id + "/" + image + ".png")
             }
         } 
     }
