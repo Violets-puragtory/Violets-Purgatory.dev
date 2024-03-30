@@ -40,10 +40,15 @@
 .pfp {
     border-radius: 15px;
     border: darkgray 4px solid;
+    float: right;
     width: 60%;
     aspect-ratio: 1/1;
     transform: scale(0.9);
     border-radius: 50%;
+}
+
+.CLAlign {
+    display: inline-block;
 }
 
 .activity {
