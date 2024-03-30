@@ -5,6 +5,10 @@
     the whole site!
 */
 
+:root {
+    color-scheme: dark;
+}
+
 @font-face {
     font-display: swap;
     font-family: 'Rubik';
