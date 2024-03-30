@@ -127,13 +127,20 @@ module.exports = {
         filePath = path.join(__dirname, 'static', filePath || 'index.html')
         if (fs.existsSync(filePath)) {
             var data = fs.readFileSync(filePath).toString()
-            if (req.path.includes(".css")) {
-                res.setHeader("Content-Type", "text/css")
-            } else if (!req.path.includes(".woff2")) {
+            
+            res.contentType(path.basename(filePath))
+
+            // if (req.path.includes(".css")) {
+            //    res.setHeader("Content-Type", "text/css")
+            // } else if (!req.path.includes(".woff2")) {
+            //     data = converter(data, req.query)
+            // }
+
+            if (filePath.includes(".html")) {
                 data = converter(data, req.query)
             }
 
-            res.send(minify.minify(data))
+            res.send(data)
         } else {
             res.status(404).send(`
             <link rel="stylesheet" href="/style.css">
