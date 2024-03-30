@@ -59,9 +59,11 @@ body {
 
     background-attachment: local;
 
-    min-height: 100vh;
-
     animation: hideContent 2.5s;
+}
+
+body, html {
+    min-height: 100%;
 }
 
 a {
