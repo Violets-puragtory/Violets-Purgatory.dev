@@ -31,6 +31,10 @@ if (!fs.existsSync(cachePath)) {
     }
 }
 
+app.get("/discHTML", (req, res) => {
+    res.send(pageUpdater.getActivities())
+})
+
 app.use(pageUpdater.middleWare)
 
 process.on('uncaughtException', (err, origin) => {
