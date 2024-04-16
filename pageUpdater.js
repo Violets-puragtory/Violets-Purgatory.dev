@@ -17,6 +17,10 @@ var lanyardData = undefined
 
 var uptime = Date.now()
 
+function firstToUpper(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 function converter(html, query) {
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
@@ -46,7 +50,17 @@ function converter(html, query) {
 
     var time = new Date(Date.now())
 
+    var bnchName = "Beta"
+    var bnchSub = "beta."
+
+    if (process.env.BRANCH == "dev") {
+        bnchName = "Stable"
+        bnchSub = ""
+    }
+
     var replacers = {
+        "BRANCH_NAME": bnchName,
+        "BRANCH_SUB": bnchSub,
         "COMMIT_COUNT": commitCount,
         "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
         "QUOTE_COUNT": quotes.length,
