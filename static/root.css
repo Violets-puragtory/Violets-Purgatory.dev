@@ -24,7 +24,7 @@
     box-shadow: outset rgb(35, 20, 60) 0px 0px 20px;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 415px) {
     .linkContainer {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
