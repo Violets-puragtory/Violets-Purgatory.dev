@@ -24,6 +24,15 @@
     box-shadow: outset rgb(35, 20, 60) 0px 0px 20px;
 }
 
+@media screen and (min-width: 400px) {
+    .linkContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 500px;
+        margin: auto;
+    }
+}
+
 .animatedTitle {
     animation: mainText 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
