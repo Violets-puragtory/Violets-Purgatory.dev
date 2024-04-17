@@ -71,7 +71,8 @@ function converter(html, query) {
         "UPTIME": uptime,
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "DISCORD_USER": username,
-        "CUSTOM_STATUS": statusText
+        "CUSTOM_STATUS": statusText,
+        "LATEST_YOUTUBE": "filler"
     }
 
     var rpTable = Object.keys(replacers)

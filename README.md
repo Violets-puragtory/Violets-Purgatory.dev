@@ -25,6 +25,11 @@ On the main page, you can find `{PATH_SOCIALS}`. This effectively "embeds" the s
 For an easy to digest example, look at the socials section on the main page of [Violet's Purgatory](https://violets-purgatory.dev). Afterwards, look at the [*socials page*](https://violets-purgatory.dev/socials). You will notice they're the same, because in the code for the main page, I put {PATH_SOCIALS} which got the page at /socials.
 
 # To-do
-- [ ] Add more content to the socials page & make it more easily findable on the site
+## Socials:
+- [ ] Make it more easily findable on the site
+- [ ] Add more content 
     - [ ] Pull latest Youtube video & display it
     - [x] Display current Discord Activities
+
+## Activities
+- [ ] Compress images to reduce space used and network usage (Probably using thumbor to prevent needing MORE packages TwT)

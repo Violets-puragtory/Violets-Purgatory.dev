@@ -87,7 +87,7 @@ module.exports = {
                         var fn = cachedImages[get_img_url(activity, size)]
                         var fp = path.join(__dirname, 'static/cached', fn)
                     } else {
-                        return 'imgs/notFound.png'
+                        return '/imgs/notFound.png'
                     }
 
                     return '/cached/' + fn
