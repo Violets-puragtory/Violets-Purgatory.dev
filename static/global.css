@@ -168,3 +168,55 @@ h2 {
     text-decoration: line-through;
     text-decoration-color: white;
 }
+
+
+
+.activity {
+    border-width: 3px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+    display: flex;
+    position: relative;
+    z-index: 3;
+    /* max-height: 200px; */
+}
+
+.activity>p {
+    width: 100%;
+    max-height: 100%;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+    padding: 3px;
+    line-height: 1.5rem;
+    align-self: center;
+}
+
+.activity>img {
+    width: 40%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.activity>img:not(.smallimg) {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.activity>.smallimg {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    border-radius: 50px;
+    background: black;
+    padding: 5px;
+    /* border: 2px gray solid; */
+    transform: scale(0.9);
+}
+
+.activity>.smallimg:hover {
+    transform: scale(1);
+}

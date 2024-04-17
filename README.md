@@ -27,5 +27,4 @@ For an easy to digest example, look at the socials section on the main page of [
 # To-do
 - [ ] Add more content to the socials page & make it more easily findable on the site
     - [ ] Pull latest Youtube video & display it
-    - [ ] Display current Discord Activities
-    - [ ] Display current steam game
+    - [x] Display current Discord Activities
