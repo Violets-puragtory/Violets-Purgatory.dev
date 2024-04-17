@@ -170,7 +170,10 @@ async function updateCommits() {
     var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
     var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
     commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
-    commitCount = commits
+    commitCount = commits.toString()
+    if (process.env.BRANCH == "dev") {
+        commitCount += " | Beta site!"
+    }
 }
 
 updateCommits()
