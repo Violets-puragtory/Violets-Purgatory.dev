@@ -2,12 +2,30 @@ var catsOnMars = new Audio("/snds/cats on mars.mp3")
 var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
 catsOnMars.loop = true
 
+var spins = 1
+
+function notif(text) {
+    document.body.innerHTML = "apple"
+}
+
+function secondLoop() {
+    if (!catsOnMars.paused) {
+        spins += 0.5
+            document.querySelector(".spinnyCount").innerHTML = `You have spun Violet ${Math.floor(spins)} times!`
+    }
+
+    setTimeout(() => {
+        secondLoop()
+    }, 1000);
+}
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 
 window.onload = function () {
     window.scrollTo(0, 0);
+    secondLoop()
 
     var pfp = document.querySelector(".pfp")
 
