@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <link rel="stylesheet" type="text/css" href="../subpage.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Violet's Purgatory</title>
+
+    <meta name="darkreader-lock">
+
+    <meta content="Socials - Violet's Purgatory" property="og:title" />
+    <meta content="This page lists all the social media I use :3" property="og:description" />
+    <meta content="https://api.violets-purgatory.dev/v1/pfp" property="og:image" />
+    <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
+</head>
+
+<body>
+    {WEATHER_MODIFIER}
+
+    <h1>FAQ (and more!)</h1>
+    <div class="mainDiv">
+        <hr>
+        <p>This page is divided in 2 sections:</p>
+        <ol>
+            <li>The basic Questions & Answers</li>
+            <li>Neat fun facts about the site</li>
+        </ol>
+        <p></p>
+        <hr>
+        <h2>Questions & Answers<hr></h2>
+        <main>
+            <h3>Why are so many words colored?</h3>
+            <p>I like the way it looks to have certain words be highlighted, makes it look fancier and easier to read (imo). So, when I remade this site, I went ahead and added an <em>Automatic Word Highlighting System!</em> This allows me have words automatically highlighted, on the server side, without having to do it in the code manually. E.G.</p>
+            <p>Godot Engine, Javascript, NodeJS, Starwalker, Violet's Purgatory, Violet, Purgatory, and more :)</p>
+            <h3>I thought the site doesn't use Javascript? So why is it there?</h3>
+            <p>Originally, all my sites were completely Javascript free. As of late, though, I decided to add Javascript to this one. Javascript will <b><em>NEVER</em></b> be a requirement on this site. Javascript will ONLY be used where nessacary, and I will do everything possible to make the experience indistinguishable.</p>
+            <p>For example, things such as the song duration bar on my activities are pure HTML, using some mathy NodeJS-generated CSS animations! The only thing the site uses Javascript for right now, is setting the scroll to the top of the page on reload, and real time updating discord activities.</p>    
+        </main>
+        <h3>Why are there 4 CSS files?</h3>
+        <p>Originally the idea was that I could organize the site with:</p>
+        <ol>
+            <li>CSS for the main page</li>
+            <li>CSS for the subsites</li>
+            <li>Global CSS</li>
+        </ol>
+        <p>Slowly, though, they're slowly all merging into one CSS file, so I can't be sure it'll stay this way for long.</p>
+        <p>As for the "unused" style.css, though, that exists for compatibility reasons- many of my older sites just grabbed CSS from the site for their css. This has been <b>mostly</b> fixed, but the FileShare still does, so it'll stay until I finally give the FileShare its own CSS.</p>
+    </div>
+</body>
+
+</html>

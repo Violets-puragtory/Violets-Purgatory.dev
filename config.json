@@ -73,6 +73,8 @@
         "Ko-fi": "rgb(255, 150, 150)",
         "Revolt": "rgb(255, 50, 50)",
         "Discord": "rgb(150, 150, 255)",
-        "SearXNG": "rgb(100, 100, 255)"
+        "SearXNG": "rgb(100, 100, 255)",
+        "Highlighting": "yellow",
+        "highlighted": "yellow"
     }
 }

@@ -152,7 +152,6 @@ p {
 img {
     width: 100%;
     /* max-width: 135px; */
-    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 h2 {
@@ -219,4 +218,13 @@ h2 {
 
 .activity>.smallimg:hover {
     transform: scale(1);
+}
+
+ul, ol {
+    display: inline-block
+}
+
+li {
+    font-size: 1.2rem;
+    text-align: left;
 }
