@@ -4,6 +4,9 @@
 <head>
     <link rel="stylesheet" type="text/css" href="./global.css">
     <link rel="stylesheet" type="text/css" href="./root.css">
+    <noscript>
+        <link rel="stylesheet" href="./noScript.css">
+    </noscript>
 
     <script src="./main.js"></script>
 
@@ -22,14 +25,15 @@
 
 <body>
     {WEATHER_MODIFIER}
-    <h1 class="animatedTitle">Welcome to <span class="mainTitle">Violet's Purgatory</span><span class="note">Commit {COMMIT_COUNT}</span><br></h1>
+    <h1 class="animatedTitle">Welcome to <span class="mainTitle">Violet's Purgatory</span><span class="note">Commit {COMMIT_COUNT}</span></h1>
     <main class="animatedMain">
+        <p>Make sure to check out this project on <a href="https://codeberg.org/bingus_violet/violets-purgatory">Codeberg</a>!</p>
         <hr>
         <div id="card">
             <h2>{Violet}</h2>
             <div style="display: flex; justify-content: center; align-items: center;">
                 <div style="width: 50%;">
-                    <img src="https://api.violets-purgatory.dev/v1/pfp" class="pfp">
+                    <img draggable="false" src="https://api.violets-purgatory.dev/v1/pfp" class="pfp">
                 </div>
                 <div style="width: 50%;">
                     <div style="float: left;">
@@ -57,7 +61,6 @@
             </div>
         </div>
         <p>{RANDOM_QUOTE}</p>
-        <p>Make sure to check out this project on <a href="https://codeberg.org/bingus_violet/violets-purgatory">Codeberg</a>!</p>
         
         <div id="activityHTML">
             {ACTIVITIES}

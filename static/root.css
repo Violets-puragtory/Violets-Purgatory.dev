@@ -54,12 +54,10 @@
     transform: scale(0.9);
     border-radius: 50%;
     rotate: 0deg;
-}
 
-.pfp:active {
-    rotate: 7200deg;
-    transform: scale(1.1);
-    transition: all 5s cubic-bezier(0.445, 0.05, 0.55, 0.95) !important;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 .CLAlign {

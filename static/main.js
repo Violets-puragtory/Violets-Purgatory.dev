@@ -1,9 +1,36 @@
+var catsOnMars = new Audio("/snds/cats on mars.mp3")
+var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
+catsOnMars.loop = true
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
 
 window.onload = function () {
     window.scrollTo(0, 0);
+
+    var pfp = document.querySelector(".pfp")
+
+    pfp.addEventListener("mousedown", () => {
+        catsOnMars.play()
+
+        pfp.style.animationName = "spinny"
+
+        pfp.style.scale = "1.2"
+    })
+
+    document.body.onmouseup = () => {
+        if (catsOnMars.currentTime != 0) {
+            catsOnMars.currentTime = 0
+            catsOnMars.pause()
+
+            whipLash.currentTime = 0
+            whipLash.play()
+    
+            pfp.style.animationName = "unset"
+            pfp.style.scale = "1"
+        }
+    }
 }
 
 function socketeer() {
@@ -44,7 +71,7 @@ function socketeer() {
         }
 
         var discStatusHTML = await (await fetch("/discHTML")).text();
-    
+
         var activityDiv = document.querySelector("#activityHTML")
         activityDiv.innerHTML = discStatusHTML
     })

@@ -22,6 +22,7 @@ var assetPath = path.join(__dirname, "assets")
 app.use("/fonts", express.static(fontPath))
 app.use("/cached", express.static(cachePath))
 app.use("/imgs", express.static(path.join(assetPath, "Images")))
+app.use("/snds", express.static(path.join(assetPath, "Sounds")))
 
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
