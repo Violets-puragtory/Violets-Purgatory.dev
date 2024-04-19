@@ -9,9 +9,10 @@ function notif(text) {
 }
 
 function secondLoop() {
+    var pfp = document.querySelector(".pfp")
     if (!catsOnMars.paused) {
         spins += 0.5
-            document.querySelector(".spinnyCount").innerHTML = `You have spun Violet ${Math.floor(spins)} times!`
+        document.querySelector(".spinnyCount").innerHTML = `You have spun Violet ${Math.floor(spins)} times!` +  pfp.style.animationDuration
     }
 
     setTimeout(() => {
