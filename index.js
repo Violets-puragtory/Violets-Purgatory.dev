@@ -15,11 +15,13 @@ app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
 
-var cachePath = path.join(staticpath, 'cached')
+var cachePath = path.join(__dirname, 'cached')
 var fontPath = path.join(staticpath, "fonts")
+var assetPath = path.join(__dirname, "assets")
 
 app.use("/fonts", express.static(fontPath))
 app.use("/cached", express.static(cachePath))
+app.use("/imgs", express.static(path.join(assetPath, "Images")))
 
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)

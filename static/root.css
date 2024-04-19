@@ -54,12 +54,12 @@
     transform: scale(0.9);
     border-radius: 50%;
     rotate: 0deg;
-    transition: rotate 2s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .pfp:active {
-    rotate: 1440deg;
-    transition: rotate 5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    rotate: 7200deg;
+    transform: scale(1.1);
+    transition: all 5s cubic-bezier(0.445, 0.05, 0.55, 0.95) !important;
 }
 
 .CLAlign {
@@ -69,7 +69,7 @@
 img:not(.project-inner > div > img):not(.activity>img) {
     width: 100%;
     max-width: 168px;
-    /* transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1); */
+    transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @media screen and (min-width: 850px) {

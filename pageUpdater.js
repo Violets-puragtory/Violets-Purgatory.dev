@@ -122,16 +122,7 @@ module.exports = {
 
         var filePath = (req.baseUrl + req.path).trim()
 
-        if (filePath.includes("cached") || filePath.includes("imgs")) {
-            filePath = path.join(__dirname, 'static', filePath)
-            res.send(fs.readFileSync(filePath))
-
-            return
-        }
-
-        if (filePath.includes(".")) {
-            
-        } else {
+        if (!filePath.includes(".")) {
             if (filePath.charAt(filePath.length - 1) != '/') {
                 res.redirect(filePath + '/')
                 return
@@ -256,7 +247,7 @@ function socketeer() {
                 if (get_img_url(activity)) {
                     var url = get_img_url(activity)
                     var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
-                    var fp = path.join(__dirname, 'static/cached', fn)
+                    var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
                         const response = await (await fetch(url)).arrayBuffer()
@@ -270,7 +261,7 @@ function socketeer() {
                 if (get_img_url(activity, "small_image")) {
                     var url = get_img_url(activity, "small_image")
                     var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
-                    var fp = path.join(__dirname, 'static/cached', fn)
+                    var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
                         const response = await (await fetch(url)).arrayBuffer()
