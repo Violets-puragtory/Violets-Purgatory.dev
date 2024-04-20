@@ -148,7 +148,9 @@ module.exports = {
                 data = converter(data, req.query)
             }
 
-            data = minify.minify(data)
+            if (!filePath.includes(".js")) {
+                data = minify.minify(data)
+            }
 
             res.send(data)
         } else {
