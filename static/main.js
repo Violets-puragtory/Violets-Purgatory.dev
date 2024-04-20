@@ -56,16 +56,21 @@ window.onload = function () {
             pfp.style.scale = "1"
         }
     }
+    socketeer()
 }
 
 var lastPong = Date.now()
 
 function socketeer() {
-    var sock = new WebSocket('wss://beta.violets-purgatory.dev')
+    var sock = new WebSocket('wss://api.violets-purgatory.dev')
 
     sock.onmessage = (event) => {
         console.log(event.data)
     }
-}
 
-socketeer()
+    sock.addEventListener("open", () => {
+        console.log("AAAA")
+
+        
+    })
+}
