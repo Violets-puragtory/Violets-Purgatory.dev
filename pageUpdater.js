@@ -117,7 +117,7 @@ function converter(html, query) {
 
 module.exports = {
     getActivities: function () {
-        return activityToHTML.activitiesToHTML(lanyardData, cachedImages)
+        return minify.minify(activityToHTML.activitiesToHTML(lanyardData, cachedImages))
     },
 
     middleWare: function (req, res, next) {
@@ -218,7 +218,7 @@ function socketeer() {
         console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
         setTimeout(() => {
             socketeer()
-        }, 3000);
+        }, 30000);
     })
 
     function ping(dur) {
