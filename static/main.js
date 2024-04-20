@@ -66,6 +66,19 @@ window.onload = function () {
 
 var lastPong = Date.now()
 
+function ping(dur) {
+    sock.send(JSON.stringify({
+        op: 3
+    }))
+    setTimeout(() => {
+        ping(dur)
+        if (Date.now() - lastPong > 120000) {
+            sock.close()
+            console.log("Max duration since last pong exceeded- Closing socket.")
+        }
+    }, dur);
+}
+
 function socketeer() {
     sock = new WebSocket('wss://api.violets-purgatory.dev')
 
@@ -84,20 +97,6 @@ function socketeer() {
         }, 30000);
     })
 
-    function ping(dur) {
-        sock.send(JSON.stringify({
-            op: 3
-        }))
-        setTimeout(() => {
-            ping(dur)
-            if (Date.now() - lastPong > 120000) {
-                sock.close()
-                console.log("Max duration since last pong exceeded- Closing socket.")
-            }
-        }, dur);
-    }
-
-
     sock.addEventListener("message", async(data) => {
         data = data.data
         data = JSON.parse(data)
@@ -107,6 +106,8 @@ function socketeer() {
         } else if (data.op == 0) {
             var discFetch = await (await fetch("/discHTML")).text()
             document.querySelector("#activityHTML").innerHTML = discFetch
+        }else if (data.op == 3) {
+            lastPong = Date.now()
         } else {
             console.log(data)
         }
