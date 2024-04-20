@@ -61,6 +61,10 @@ html {
     background-attachment: local;
 }
 
+html {
+    background-color: black;
+}
+
 body {
     padding: 2.5%;
 }

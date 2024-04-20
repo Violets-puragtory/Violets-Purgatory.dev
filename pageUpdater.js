@@ -146,6 +146,8 @@ module.exports = {
                 data = converter(data, req.query)
             }
 
+            data = minify.minify(data)
+
             res.send(data)
         } else {
             res.status(404).send(`

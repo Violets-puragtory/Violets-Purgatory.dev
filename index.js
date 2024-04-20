@@ -16,10 +16,9 @@ app.listen(PORT, () => {
 })
 
 var cachePath = path.join(__dirname, 'cached')
-var fontPath = path.join(staticpath, "fonts")
 var assetPath = path.join(__dirname, "assets")
 
-app.use("/fonts", express.static(fontPath))
+app.use("/fonts", express.static(path.join(assetPath, "fonts")))
 app.use("/cached", express.static(cachePath))
 app.use("/imgs", express.static(path.join(assetPath, "Images")))
 app.use("/snds", express.static(path.join(assetPath, "Sounds")))
