@@ -255,7 +255,6 @@ function socketeer() {
 
                     if (!cachedImages[url]) {
                         const response = await (await fetch(thumborURL + "128x128/" + url)).arrayBuffer()
-                        console.log(thumborURL + url)
                         fs.writeFileSync(fp, Buffer.from(response))
 
                         cachedImages[url] = fn
