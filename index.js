@@ -42,6 +42,7 @@ app.use(pageUpdater.middleWare)
 
 var sockets = []
 
+
 wsServer = WebSocket.Server;
 
 let server = require('http').createServer()
@@ -54,6 +55,7 @@ wsServer = new wsServer({
 server.on('request', app)
 
 wsServer.on("connection", function connection(socket) {
+    console.log("BALLS")
     socket.on('message', function message(data) {
         data = JSON.parse(data)
         if (data.op == 3) {
@@ -72,8 +74,8 @@ wsServer.on("connection", function connection(socket) {
     socket.send(`{ "op": 1 }`)
 
     sockets.push({ socket, lastPing: Date.now() })
-
 })
+
 
 
 process.on('uncaughtException', (err, origin) => {

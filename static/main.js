@@ -58,14 +58,16 @@ window.onload = function () {
     }
 }
 
-function socketeer() {
-    var lanyard = new WebSocket('wss://beta.violets-purgatory.dev')
+var lastPong = Date.now()
 
-    lanyard.onerror = (error) => {
+function socketeer() {
+    var sock = new WebSocket('wss://beta.violets-purgatory.dev')
+
+    sock.onerror = (error) => {
         console.log(error)
     }
 
-    lanyard.onclose = () => {
+    sock.onclose = () => {
         console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
         setTimeout(() => {
             socketeer()
@@ -73,19 +75,19 @@ function socketeer() {
     }
 
     function ping(dur) {
-        lanyard.send(JSON.stringify({
+        sock.send(JSON.stringify({
             op: 3
         }))
         setTimeout(() => {
             ping(dur)
             if (Date.now() - lastPong > 120000) {
-                lanyard.close()
+                sock.close()
                 console.log("Max duration since last pong exceeded- Closing socket.")
             }
         }, dur);
     }
 
-    lanyard.addEventListener("message", async (res) => {
+    sock.addEventListener("message", async (res) => {
         var data = JSON.parse(res.data)
         if (data.op == 1) {
             console.log("Connected to Discord Websocket!")
