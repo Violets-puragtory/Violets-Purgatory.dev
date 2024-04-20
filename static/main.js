@@ -3,6 +3,7 @@ var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
 catsOnMars.loop = true
 
 var spins = 1
+var globalSpins = 0
 
 var spinWaiting = false
 
@@ -12,8 +13,12 @@ function spinLoop() {
         spinWaiting = false
         var pfp = document.querySelector(".pfp")
         if (!catsOnMars.paused) {
+            if (spins > 1) {
+                document.querySelector(".spinnyCount").style.display = "block"
+                document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1); 
+                document.querySelector(".globalSpins").innerHTML = Math.ceil(spins - 1) + globalSpins; 
+            }
             spins += 0.5
-            document.querySelector(".spinnyCount").innerHTML = `Violet has spun ${Math.floor(spins)} times!` +  pfp.style.animationDuration
             spinLoop()
         }
     }, 1000);
@@ -36,7 +41,7 @@ window.onload = function () {
 
         pfp.style.animationName = "spinny"
 
-        pfp.style.scale = "1.2"
+        pfp.style.scale = "1.1"
     })
 
     document.body.onmouseup = () => {
@@ -54,7 +59,7 @@ window.onload = function () {
 }
 
 function socketeer() {
-    var lanyard = new WebSocket('wss://api.violets-purgatory.dev')
+    var lanyard = new WebSocket('wss://beta.violets-purgatory.dev')
 
     lanyard.onerror = (error) => {
         console.log(error)

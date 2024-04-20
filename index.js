@@ -1,7 +1,8 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    pageUpdater = require('./pageUpdater.js')
+    pageUpdater = require('./pageUpdater.js'),
+    WebSocket = require("ws")
 
 var app = express()
 
@@ -38,6 +39,42 @@ app.get("/discHTML", (req, res) => {
 })
 
 app.use(pageUpdater.middleWare)
+
+var sockets = []
+
+wsServer = WebSocket.Server;
+
+let server = require('http').createServer()
+
+wsServer = new wsServer({
+    server: server,
+    perMessageDeflate: false
+})
+
+server.on('request', app)
+
+wsServer.on("connection", function connection(socket) {
+    socket.on('message', function message(data) {
+        data = JSON.parse(data)
+        if (data.op == 3) {
+            for (let index = 0; index < sockets.length; index++) {
+                const socketData = sockets[index];
+                if (socketData.socket == socket) {
+                    sockets[index].lastPing = Date.now()
+                }
+            }
+
+            socket.send(`{"op": 3}`)
+        }
+    })
+
+    socket.send(JSON.stringify(lanyardData))
+    socket.send(`{ "op": 1 }`)
+
+    sockets.push({ socket, lastPing: Date.now() })
+
+})
+
 
 process.on('uncaughtException', (err, origin) => {
     fs.writeSync(
