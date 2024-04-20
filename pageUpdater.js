@@ -254,7 +254,7 @@ function socketeer() {
                     var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
-                        const response = await (await fetch(thumborURL + "128x128/" + url)).arrayBuffer()
+                        const response = await (await fetch(thumborURL + "200x200/" + url)).arrayBuffer()
                         fs.writeFileSync(fp, Buffer.from(response))
 
                         cachedImages[url] = fn
