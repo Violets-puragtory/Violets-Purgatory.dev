@@ -21,6 +21,8 @@ function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+var thumborURL = "https://thumbor.violets-purgatory.dev/unsafe/"
+
 function converter(html, query) {
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
@@ -252,8 +254,8 @@ function socketeer() {
                     var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
-                        const response = await (await fetch(url)).arrayBuffer()
-
+                        const response = await (await fetch(thumborURL + "128x128/" + url)).arrayBuffer()
+                        console.log(thumborURL + url)
                         fs.writeFileSync(fp, Buffer.from(response))
 
                         cachedImages[url] = fn
@@ -266,7 +268,7 @@ function socketeer() {
                     var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
-                        const response = await (await fetch(url)).arrayBuffer()
+                        const response = await (await fetch(thumborURL + "64x64/" + url)).arrayBuffer()
 
                         fs.writeFileSync(fp, Buffer.from(response))
 
