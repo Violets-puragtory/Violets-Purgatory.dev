@@ -56,27 +56,8 @@ server.on('request', app)
 
 wsServer.on("connection", function connection(socket) {
     console.log("BALLS")
-    socket.on('message', function message(data) {
-        data = JSON.parse(data)
-        if (data.op == 3) {
-            for (let index = 0; index < sockets.length; index++) {
-                const socketData = sockets[index];
-                if (socketData.socket == socket) {
-                    sockets[index].lastPing = Date.now()
-                }
-            }
-
-            socket.send(`{"op": 3}`)
-        }
-    })
-
-    socket.send(JSON.stringify(lanyardData))
-    socket.send(`{ "op": 1 }`)
-
-    sockets.push({ socket, lastPing: Date.now() })
+    socket.send("FUCK")
 })
-
-
 
 process.on('uncaughtException', (err, origin) => {
     fs.writeSync(

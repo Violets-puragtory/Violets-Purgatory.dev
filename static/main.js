@@ -63,45 +63,9 @@ var lastPong = Date.now()
 function socketeer() {
     var sock = new WebSocket('wss://beta.violets-purgatory.dev')
 
-    sock.onerror = (error) => {
-        console.log(error)
+    sock.onmessage = (event) => {
+        console.log(event.data)
     }
-
-    sock.onclose = () => {
-        console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
-        setTimeout(() => {
-            socketeer()
-        }, 3000);
-    }
-
-    function ping(dur) {
-        sock.send(JSON.stringify({
-            op: 3
-        }))
-        setTimeout(() => {
-            ping(dur)
-            if (Date.now() - lastPong > 120000) {
-                sock.close()
-                console.log("Max duration since last pong exceeded- Closing socket.")
-            }
-        }, dur);
-    }
-
-    sock.addEventListener("message", async (res) => {
-        var data = JSON.parse(res.data)
-        if (data.op == 1) {
-            console.log("Connected to Discord Websocket!")
-            ping(30000)
-            lastPong = Date.now()
-        } else if (data.op == 3) {
-            lastPong = Date.now()
-        }
-
-        var discStatusHTML = await (await fetch("/discHTML")).text();
-
-        var activityDiv = document.querySelector("#activityHTML")
-        activityDiv.innerHTML = discStatusHTML
-    })
 }
 
 socketeer()
