@@ -4,19 +4,18 @@ catsOnMars.loop = true
 
 var spins = 1
 
-function notif(text) {
-    document.body.innerHTML = "apple"
-}
+var spinWaiting = false
 
-function secondLoop() {
-    var pfp = document.querySelector(".pfp")
-    if (!catsOnMars.paused) {
-        spins += 0.5
-        document.querySelector(".spinnyCount").innerHTML = `You have spun Violet ${Math.floor(spins)} times!` +  pfp.style.animationDuration
-    }
-
+function spinLoop() {
+    spinWaiting = true
     setTimeout(() => {
-        secondLoop()
+        spinWaiting = false
+        var pfp = document.querySelector(".pfp")
+        if (!catsOnMars.paused) {
+            spins += 0.5
+            document.querySelector(".spinnyCount").innerHTML = `Violet has spun ${Math.floor(spins)} times!` +  pfp.style.animationDuration
+            spinLoop()
+        }
     }, 1000);
 }
 
@@ -26,11 +25,13 @@ window.onbeforeunload = function () {
 
 window.onload = function () {
     window.scrollTo(0, 0);
-    secondLoop()
 
     var pfp = document.querySelector(".pfp")
 
     pfp.addEventListener("mousedown", () => {
+        if (!spinWaiting) {
+            spinLoop();
+        }
         catsOnMars.play()
 
         pfp.style.animationName = "spinny"
