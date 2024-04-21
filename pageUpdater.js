@@ -169,7 +169,7 @@ module.exports = {
 async function updateCommits() {
     var siteResponse = await (await fetch(`https://github.com/Violets-puragtory/Violets-Purgatory.dev/tree/${process.env.BRANCH || "origin"}`)).text()
     var commits = siteResponse.substring(0, siteResponse.indexOf("Commits"))
-    console.log(commits)
+
     // commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
     // ^ this works for Forgejo (codeberg)
     
