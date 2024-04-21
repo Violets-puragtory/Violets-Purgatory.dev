@@ -167,9 +167,15 @@ module.exports = {
 }
 
 async function updateCommits() {
-    var codebergResponse = await (await fetch(`https://codeberg.org/Bingus_Violet/Violets-Purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
-    var commits = codebergResponse.substring(0, codebergResponse.indexOf("Commits"))
-    commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
+    var siteResponse = await (await fetch(`https://github.com/Violets-puragtory/Violets-Purgatory.dev/tree/${process.env.BRANCH || "origin"}`)).text()
+    var commits = siteResponse.substring(0, siteResponse.indexOf("Commits"))
+    console.log(commits)
+    // commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
+    // ^ this works for Forgejo (codeberg)
+    
+    commits = commits.substring(commits.lastIndexOf(">") + 1)
+    // ^ This works for Github (fuck you Github)
+
     commitCount = commits.toString()
     if (process.env.BRANCH == "dev") {
         commitCount += " | Beta site!"
