@@ -11,6 +11,8 @@ var highlightedWords = config.highlightedWords
 var quotes = config.quotes
 var titles = config.titles
 
+var globalSpins = 0
+
 var commitCount = "400+"
 
 var lanyardData = undefined
@@ -74,7 +76,8 @@ function converter(html, query) {
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "DISCORD_USER": username,
         "CUSTOM_STATUS": statusText,
-        "LATEST_YOUTUBE": "filler"
+        "LATEST_YOUTUBE": "filler",
+        "SPINCOUNT": globalSpins
     }
 
     var rpTable = Object.keys(replacers)
@@ -278,6 +281,8 @@ function socketeer() {
                 }
             }
 
+        } else if (data.op == 4) {
+            globalSpins = data.spins
         }
     })
 }

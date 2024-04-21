@@ -40,25 +40,6 @@ app.get("/discHTML", (req, res) => {
 
 app.use(pageUpdater.middleWare)
 
-var sockets = []
-
-
-wsServer = WebSocket.Server;
-
-let server = require('http').createServer()
-
-wsServer = new wsServer({
-    server: server,
-    perMessageDeflate: false
-})
-
-server.on('request', app)
-
-wsServer.on("connection", function connection(socket) {
-    console.log("BALLS")
-    socket.send("FUCK")
-})
-
 process.on('uncaughtException', (err, origin) => {
     fs.writeSync(
       process.stderr.fd,
