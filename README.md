@@ -2,7 +2,7 @@
 
 Violet's Purgatory is a website filled to the brim with whatever I feel like adding! Currently, the stable version can be found at https://violets-purgatory.dev and the beta (based on the dev branch) can be found at https://beta.violets-purgatory.dev
 
-We also have an API, which can be located at https://api.violets-purgatory.dev, which is currently very under developed, but will continue to have updates for features I see fit.
+We also have an API, which can be located at https://api.violets-purgatory.dev, which is currently under developed, but will continue to have updates for features I see fit.
 
 # How it works
 
