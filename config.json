@@ -76,6 +76,7 @@
         "SearXNG": "rgb(100, 100, 255)",
         "Highlighting": "yellow",
         "highlighted": "yellow",
-        "Forgejo": "orange"
+        "Forgejo": "orange",
+        "HTML": "orange"
     }
 }

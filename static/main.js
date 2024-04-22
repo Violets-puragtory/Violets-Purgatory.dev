@@ -112,7 +112,7 @@ function socketeer() {
             }
         } else if (data.op == 0) {
             var discFetch = await (await fetch("/discHTML")).text()
-            document.querySelector("#activityHTML").innerHTML = discFetch
+            document.querySelector("#activityHtml").innerHTML = discFetch
         }else if (data.op == 3) {
             lastPong = Date.now()
         } else {
