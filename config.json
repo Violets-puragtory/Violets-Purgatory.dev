@@ -77,6 +77,7 @@
         "Highlighting": "yellow",
         "highlighted": "yellow",
         "Forgejo": "orange",
-        "HTML": "orange"
+        "HTML": "orange",
+        "CSS": "rgb(50, 200, 255)"
     }
 }
