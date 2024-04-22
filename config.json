@@ -75,6 +75,7 @@
         "Discord": "rgb(150, 150, 255)",
         "SearXNG": "rgb(100, 100, 255)",
         "Highlighting": "yellow",
-        "highlighted": "yellow"
+        "highlighted": "yellow",
+        "Forgejo": "orange"
     }
 }
