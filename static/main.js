@@ -7,6 +7,8 @@ var sock
 var spins = 1
 var globalSpins = 0
 
+var firsttimeDebounce = true
+
 var spinWaiting = false
 
 function spinLoop() {
@@ -102,7 +104,12 @@ function socketeer() {
         data = JSON.parse(data)
         if (data.op == 4) {
             globalSpins = data.spins
-            document.querySelector(".globalSpins").innerHTML = globalSpins;
+            if (firsttimeDebounce == true) {
+                firsttimeDebounce = false
+                document.querySelector(".globalSpins").innerHTML = globalSpins + 1;
+            } else {
+                document.querySelector(".globalSpins").innerHTML = globalSpins;
+            }
         } else if (data.op == 0) {
             var discFetch = await (await fetch("/discHTML")).text()
             document.querySelector("#activityHTML").innerHTML = discFetch

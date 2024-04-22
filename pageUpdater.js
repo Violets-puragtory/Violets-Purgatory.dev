@@ -77,7 +77,7 @@ function converter(html, query) {
         "DISCORD_USER": username,
         "CUSTOM_STATUS": statusText,
         "LATEST_YOUTUBE": "filler",
-        "SPINCOUNT": globalSpins + 1
+        "SPINCOUNT": globalSpins
     }
 
     var rpTable = Object.keys(replacers)
