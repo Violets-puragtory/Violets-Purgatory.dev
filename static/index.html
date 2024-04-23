@@ -55,7 +55,7 @@
                 <div class="linkContainer">
                     <a class="chip" href="./socials/">Socials</a>
                     <a class="chip" href="https://blog.violets-purgatory.dev">Blog</a>
-                    <a class="chip" href="./stats">Stats</a>
+                    <!-- <a class="chip" href="./stats">Stats</a> -->
                     <a class="chip" href="./faq">Nerd FAQ</a>
                     <a class="chip" href="https://{BRANCH_SUB}violets-purgatory.dev">{BRANCH_NAME} site</a>
                     <a class="chip" href="https://fs.violets-purgatory.dev">FileShare</a>
@@ -80,10 +80,18 @@
         <hr>
         <h1>Socials</h1>
         {PATH_SOCIALS}
-        <p class="note">Please note I am extremely unhinged and gay on Fedi, I don't use Github, and I barely understand Docker.</p>
         <br>
         <!-- <h1>FAQ:</h1>
         {PATH_FAQ} -->
+        
+        <h1><hr>Stats</h1>
+        <br>
+        <ul>
+            <li>Page generation time: {LOAD_TIME}</li>
+            <li>Uptime: {UPTIME}</li>
+            <li>Total reloads: {RELOAD_COUNT}</li>
+        </ul>
+
         <p>{WEATHER_TEXT}</p>
         <br>
     </main>

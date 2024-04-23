@@ -18,6 +18,7 @@ var commitCount = "400+"
 var lanyardData = undefined
 
 var uptime = Date.now()
+var reloads = 0
 
 function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -25,7 +26,23 @@ function firstToUpper(str) {
 
 var thumborURL = "https://thumbor.violets-purgatory.dev/unsafe/"
 
+function timeFormatter(seconds) {
+    seconds = Math.ceil(seconds)
+    var minutes = Math.ceil(seconds / 60)
+    var hours = Math.floor(minutes / 60)
+    if (seconds <= 60) {
+        return 'about ' + seconds + ' seconds'
+    } else if (minutes < 60) {
+        return `${minutes} Minutes`
+    }
+
+    return `${hours} hours and ${minutes % 60} minutes`
+
+}
+
 function converter(html, query) {
+    reloads += 1
+    var startTime = Date.now()
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
         pagePath = pagePath.substring(6, pagePath.indexOf('}'))
@@ -77,7 +94,9 @@ function converter(html, query) {
         "DISCORD_USER": username,
         "CUSTOM_STATUS": statusText,
         "LATEST_YOUTUBE": "filler",
-        "SPINCOUNT": globalSpins
+        "SPINCOUNT": globalSpins,
+        "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
+        "RELOAD_COUNT": reloads
     }
 
     var rpTable = Object.keys(replacers)
@@ -114,6 +133,8 @@ function converter(html, query) {
         html = html.replaceAll("{WEATHER_MODIFIER}", "")
         html = html.replaceAll("{WEATHER_TEXT}", "")
     }
+
+    html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
     return html
 }
