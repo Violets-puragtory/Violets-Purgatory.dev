@@ -96,7 +96,9 @@ function converter(html, query) {
         "LATEST_YOUTUBE": "filler",
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
-        "RELOAD_COUNT": reloads
+        "RELOAD_COUNT": reloads,
+        "WEATHER_MODIFIER": "",
+        "WEATHER_TEXT": ""
     }
 
     var rpTable = Object.keys(replacers)
@@ -108,6 +110,7 @@ function converter(html, query) {
 
     var bodyHTML = html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"))
     var highTable = Object.keys(highlightedWords)
+
     for (let index = 0; index < highTable.length; index++) {
         var term = highTable[index];
         var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
