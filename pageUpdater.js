@@ -2,8 +2,8 @@ const path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
     minify = require('minify-html'),
-    activityToHTML = require("./overcomplicatedStatuses.js"),
-    weatherGenerator = require("./weatherGenerator")
+    activityToHTML = require("./overcomplicatedStatuses.js")
+    // weatherGenerator = require("./weatherGenerator")
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
 
@@ -120,19 +120,6 @@ function converter(html, query) {
     bodyHTML = bodyHTML.replaceAll("{ACTIVITIES}", activityToHTML.activitiesToHTML(lanyardData, cachedImages))
 
     html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
-
-    var weathers = ["none"]
-
-    var weather = weathers[time.getDate() % weathers.length]
-
-    if (weather == "rain" || "rain" in query || "hardRain" in query) {
-        html = html.replaceAll("{WEATHER_MODIFIER}", weatherGenerator.makeRain("hardRain" in query))
-
-        html = html.replaceAll("{WEATHER_TEXT}", `The rain is so pretty... <a href="?hardRain">I wish I saw it more...</a>`)
-    } else {
-        html = html.replaceAll("{WEATHER_MODIFIER}", "")
-        html = html.replaceAll("{WEATHER_TEXT}", "")
-    }
 
     html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
