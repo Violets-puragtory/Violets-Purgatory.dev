@@ -25,6 +25,13 @@ On the main page, you can find `{PATH_SOCIALS}`. This effectively "embeds" the s
 For an easy to digest example, look at the socials section on the main page of [Violet's Purgatory](https://violets-purgatory.dev). Afterwards, look at the [*socials page*](https://violets-purgatory.dev/socials). You will notice they're the same, because in the code for the main page, I put {PATH_SOCIALS} which got the page at /socials.
 
 # To-do
+
+## Highlighter:
+- [ ] Desperately need to rework the highlighting system.
+    - [ ] Make it ignore classes, IDs, inline-CSS attributes, etc
+    - [ ] Only index visible elements for words
+    - [x] Ignore text ouside the body
+
 ## Socials:
 - [ ] Make it more easily findable on the site
 - [ ] Add more content 
