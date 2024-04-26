@@ -25,6 +25,8 @@ function firstToUpper(str) {
 }
 
 var thumborURL = "https://thumbor.violets-purgatory.dev/unsafe/"
+var imgExtension = "png"
+var thumborArgs = `filters:format(${imgExtension})/`
 
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
@@ -272,11 +274,12 @@ function socketeer() {
 
                 if (get_img_url(activity)) {
                     var url = get_img_url(activity)
-                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
+                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
                     var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
-                        const response = await (await fetch(thumborURL + "200x200/" + url)).arrayBuffer()
+                        const response = await (await fetch(thumborURL + "200x200/" + thumborArgs + url)).arrayBuffer()
+                        console.log(url)
                         fs.writeFileSync(fp, Buffer.from(response))
 
                         cachedImages[url] = fn
@@ -285,11 +288,11 @@ function socketeer() {
 
                 if (get_img_url(activity, "small_image")) {
                     var url = get_img_url(activity, "small_image")
-                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString()
+                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
                     var fp = path.join(__dirname, 'cached', fn)
 
                     if (!cachedImages[url]) {
-                        const response = await (await fetch(thumborURL + "64x64/" + url)).arrayBuffer()
+                        const response = await (await fetch(thumborURL + "64x64/" + thumborArgs + url)).arrayBuffer()
 
                         fs.writeFileSync(fp, Buffer.from(response))
 
