@@ -78,6 +78,7 @@
         "highlighted": "yellow",
         "Forgejo": "orange",
         "HTML": "orange",
-        "CSS": "rgb(50, 200, 255)"
+        "CSS": "rgb(50, 200, 255)",
+        "Thumbor": "rgb(225, 225, 255)"
     }
 }
