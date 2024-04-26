@@ -232,3 +232,24 @@ li {
 .noscript {
     display: none;
 }
+
+.lengthBar {
+    background-color: rgb(50, 40, 60);
+    display: inline-block;
+    width: 80%;
+    height: 10px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-right: 1.9%;
+}
+
+.lengthBar>span {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: rgb(200, 200, 230);
+    height: 20px;
+    display: block;
+    position: relative;
+}
