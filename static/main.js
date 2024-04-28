@@ -1,6 +1,8 @@
 var catsOnMars = new Audio("/snds/cats on mars.mp3")
 var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
 catsOnMars.loop = true
+catsOnMars.volume = 0.25
+whipLash.volume = 0.25
 
 var sock
 
