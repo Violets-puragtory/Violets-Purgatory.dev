@@ -13,7 +13,7 @@ var titles = config.titles
 
 var globalSpins = 0
 
-var commitCount = "400+"
+var commitCount = "500+"
 
 var lanyardData = undefined
 
