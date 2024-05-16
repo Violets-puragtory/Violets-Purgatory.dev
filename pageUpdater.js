@@ -82,6 +82,8 @@ function converter(html, query) {
     }
 
     var replacers = {
+        "ALL_KEYWORDS": undefined,
+        "ALL_HIGHLIGHTS": Object.keys(highlightedWords).join(", "),
         "BRANCH_NAME": bnchName,
         "BRANCH_SUB": bnchSub,
         "COMMIT_COUNT": commitCount,
@@ -102,6 +104,8 @@ function converter(html, query) {
         "WEATHER_MODIFIER": "",
         "WEATHER_TEXT": ""
     }
+    
+    replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
 
     var rpTable = Object.keys(replacers)
 

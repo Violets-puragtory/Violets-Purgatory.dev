@@ -244,6 +244,16 @@ li {
     margin-right: 1.9%;
 }
 
+.textBlock {
+    color: rgb(255, 255, 255);
+    white-space: pre-wrap;
+    background-color: rgb(20, 20, 20);
+    border: 2px lightgray solid;
+    padding: 15px;
+    /* font-family: 'Source Code Pro', sans-serif; */
+    text-align: center;
+}
+
 .lengthBar>span {
     margin: 0;
     padding: 0;

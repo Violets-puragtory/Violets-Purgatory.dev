@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../subpage.css">
+    <script src="../main.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Violet's Purgatory</title>
+
+    <meta name="darkreader-lock">
+
+    <meta content="Stats - Violet's Purgatory" property="og:title" />
+    <meta content="This page just does a semi-intensive speed test on the site, and displays related statistics." property="og:description" />
+    <meta content="https://api.violets-purgatory.dev/v1/pfp" property="og:image" />
+    <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
+</head>
+
+<body>
+    {WEATHER_MODIFIER}
+
+    <h1>Stats</h1>
+    <p>This is the <em>full</em> stats page! This page exists for testing the speed of site generation, and contains every keyword on Violet's Purgatory in a hidden div.</p>
+    
+    <div style="display: none">
+        {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS}
+    </div>
+
+    <main>
+        <h1><hr>Stats</h1>
+        <br>
+        <ul>
+            <li>Page generation time: {LOAD_TIME}</li>
+            <li>Uptime: {UPTIME}</li>
+            <li>Total reloads: {RELOAD_COUNT}</li>
+        </ul>
+    </main>
+</div>
+</body>
+
+</html>
