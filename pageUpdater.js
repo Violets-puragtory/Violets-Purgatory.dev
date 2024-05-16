@@ -195,7 +195,7 @@ async function updateCommits() {
 
     commitCount = commits.toString()
     if (process.env.BRANCH == "dev") {
-        commitCount += " | Beta site!"
+        commitCount += " | Beta site"
     }
 }
 
