@@ -4,7 +4,7 @@
   "description": "Violets Purgatory is a personal webapp for",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "bun run index.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,11 @@
     "minify-html": "^0.0.2",
     "ws": "^8.16.0",
     "youtubei.js": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
