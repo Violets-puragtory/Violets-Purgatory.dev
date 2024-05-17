@@ -21,5 +21,11 @@
     "minify-html": "^0.0.2",
     "ws": "^8.16.0",
     "youtubei.js": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
