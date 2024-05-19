@@ -25,6 +25,7 @@ function spinLoop() {
             }
             spins += 0.5
             if (Math.round(spins) == spins && sock && sock.OPEN) {
+                document.querySelector(".pfp").src = "https://api.violets-purgatory.dev/v1/pfp?" + new Date().getTime()
                 sock.send(`{"op": 4}`)
                 console.log("Spin Sent!")
             }
