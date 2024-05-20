@@ -263,3 +263,8 @@ li {
     display: block;
     position: relative;
 }
+
+video {
+    width: 95%;
+    max-height: 90vh;
+}

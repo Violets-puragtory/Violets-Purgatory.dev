@@ -31,8 +31,3 @@ body {
         opacity: 1;
     }
 }
-
-video {
-    width: 95%;
-    max-height: 90vh;
-}
