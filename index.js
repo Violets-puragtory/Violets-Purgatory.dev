@@ -14,6 +14,7 @@ const assetPath = path.join(__dirname, "assets")
 const configPath = path.join(__dirname, 'config')
 
 const configFile = path.join(configPath, "config.json")
+const announcementFile = path.join(configPath, "announcement.html")
 
 if (!fs.existsSync(configPath)) {
     fs.mkdirSync(configPath)
@@ -21,6 +22,10 @@ if (!fs.existsSync(configPath)) {
 
 if (!fs.existsSync(configFile)) {
     fs.writeFileSync(configFile, fs.readFileSync(path.join(assetPath, "defaults/config.json")))
+}
+
+if (!fs.existsSync(announcementFile)) {
+    fs.writeFileSync(announcementFile, ``)
 }
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))

@@ -111,7 +111,8 @@ function converter(html, query) {
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
         "RELOAD_COUNT": reloads,
         "WEATHER_MODIFIER": "",
-        "WEATHER_TEXT": ""
+        "WEATHER_TEXT": "",
+        "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html"))
     }
     
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
