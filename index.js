@@ -9,15 +9,25 @@ var app = express()
 const PORT = process.env.PORT || 8080
 
 const staticpath = path.join(__dirname, 'static')
+const cachePath = path.join(__dirname, 'cached')
+const assetPath = path.join(__dirname, "assets")
+const configPath = path.join(__dirname, 'config')
 
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+const configFile = path.join(configPath, "config.json")
+
+if (!fs.existsSync(configPath)) {
+    fs.mkdirSync(configPath)
+}
+
+if (!fs.existsSync(configFile)) {
+    fs.writeFileSync(configFile, fs.readFileSync(path.join(assetPath, "defaults/config.json")))
+}
+
+var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
 app.listen(PORT, () => {
     console.log("Violet's Purgatory is now listening on port: " + PORT)
 })
-
-var cachePath = path.join(__dirname, 'cached')
-var assetPath = path.join(__dirname, "assets")
 
 app.use("/fonts", express.static(path.join(assetPath, "fonts")))
 app.use("/cached", express.static(cachePath))

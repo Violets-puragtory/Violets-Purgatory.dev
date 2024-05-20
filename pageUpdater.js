@@ -3,13 +3,14 @@ const path = require('path'),
     WebSocket = require('ws'),
     minify = require('minify-html'),
     activityToHTML = require("./overcomplicatedStatuses.js")
+
     // weatherGenerator = require("./weatherGenerator")
 
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
-var highlightedWords = config.highlightedWords
-var quotes = config.quotes
-var titles = config.titles
+var highlightedWords = constants.highlightedWords
+var quotes = constants.quotes
+var titles = constants.titles
 
 var globalSpins = 0
 
@@ -43,6 +44,7 @@ function timeFormatter(seconds) {
 }
 
 function converter(html, query) {
+    var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
     reloads += 1
     var startTime = Date.now()
     while (html.includes("{PATH_")) {
@@ -60,14 +62,14 @@ function converter(html, query) {
     var statusText = ""
     
     if (lanyardData) {
-        var statusData = config.discStatuses[lanyardData.discord_status]
+        var statusData = constants.discStatuses[lanyardData.discord_status]
         var username = lanyardData.discord_user.username
 
         if (lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
             var statusText = `<hr><p>${lanyardData.activities[0].state}</p>`
         }
     } else {
-        var statusData = config.discStatuses.offline
+        var statusData = constants.discStatuses.offline
         var username = "bingus_violet"
     }
 
@@ -97,7 +99,14 @@ function converter(html, query) {
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "DISCORD_USER": username,
         "CUSTOM_STATUS": statusText,
-        "LATEST_YOUTUBE": "filler",
+        "SELECTED_VIDEO": () => {
+            if (config.dailyVideoURL) {
+                return `<h2><hr>Random video!</h2><p>I would call it random <em>daily</em> video but its not at all daily...</p>
+                <br> 
+                <video controls src="${config.dailyVideoURL}"></video>`
+            }
+            return ``
+        },
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
         "RELOAD_COUNT": reloads,
@@ -206,7 +215,7 @@ updateCommits()
 var lastLanyardUpdate = Date.now()
 var lastPong = 0
 
-var activityImages = config.activityImages
+var activityImages = constants.activityImages
 var cachedImages = {}
 
 function get_img_url(activity, size = "large_image") {

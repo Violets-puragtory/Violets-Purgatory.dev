@@ -1,9 +1,9 @@
 const path = require("path"),
 fs = require("fs")
 
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json')))
+var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
-var activityImages = config.activityImages
+var activityImages = constants.activityImages
 
 function get_img_url(activity, size = "large_image") {
     if ("assets" in activity) {
