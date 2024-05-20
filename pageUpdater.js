@@ -112,7 +112,8 @@ function converter(html, query) {
         "RELOAD_COUNT": reloads,
         "WEATHER_MODIFIER": "",
         "WEATHER_TEXT": "",
-        "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html"))
+        "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
+        "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString()
     }
     
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "

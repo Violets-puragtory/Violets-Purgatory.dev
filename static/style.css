@@ -268,3 +268,25 @@ video {
     width: 95%;
     max-height: 90vh;
 }
+
+sup {
+    color: gray;
+}
+
+.noteList {
+    list-style: none;
+}
+
+.noteList > * {
+    counter-increment: noteList;
+    color: gray;
+    font-size: 1rem;
+}
+
+.noteList > li::before {
+    content: "*" counter(noteList) ". ";
+}
+
+em {
+    color: inherit;
+}
