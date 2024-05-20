@@ -267,6 +267,14 @@ li {
 video {
     width: 95%;
     max-height: 90vh;
+    border: 2px rgb(125, 100, 155) solid;
+    border-radius: 15px;
+    transition: all 5s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+video:active {
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-color: rgb(225, 150, 255);
 }
 
 sup {
