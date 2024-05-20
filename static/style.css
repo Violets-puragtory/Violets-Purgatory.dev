@@ -295,6 +295,6 @@ sup {
     content: "*" counter(noteList) ". ";
 }
 
-em {
+em, b, s {
     color: inherit;
 }
