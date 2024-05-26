@@ -44,9 +44,10 @@ function timeFormatter(seconds) {
 }
 
 function converter(html, query) {
+    var startTime = Date.now()
+    
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
     reloads += 1
-    var startTime = Date.now()
     while (html.includes("{PATH_")) {
         var pagePath = html.substring(html.indexOf("{PATH_"))
         pagePath = pagePath.substring(6, pagePath.indexOf('}'))
@@ -73,8 +74,6 @@ function converter(html, query) {
         var username = "bingus_violet"
     }
 
-    var time = new Date(Date.now())
-
     var bnchName = "Beta"
     var bnchSub = "beta."
 
@@ -93,7 +92,7 @@ function converter(html, query) {
         "QUOTE_COUNT": quotes.length,
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "DISCORD_STATUS": 
-        `<span style="color: ${statusData.color};">${statusData.text}</span>` + 
+        `<span style="color: ${statusData.color};" class="statusColor">${statusData.text}</span>` + 
         `<style>.pfp { border-color: ${statusData.color} }</style>`,
         "UPTIME": uptime,
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,

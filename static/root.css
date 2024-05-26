@@ -115,6 +115,10 @@ img:not(.project-inner > div > img):not(.activity>img) {
     }
 }
 
+.statusColor {
+    transition: color 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
 @keyframes fadeDelay {
     0% {
         opacity: 0;

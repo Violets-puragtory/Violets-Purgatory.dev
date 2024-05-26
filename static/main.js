@@ -1,3 +1,24 @@
+const discStatuses = {
+    "online": {
+        "text": "Online",
+        "color": "rgb(100, 255, 100)"
+    },
+    "dnd": {
+        "text": "DND",
+        "color": "rgb(255, 100, 100)"
+    },
+    "idle": {
+        "text": "Idle",
+        "color": "rgb(255, 255, 75)"
+    },
+    "offline": {
+        "text": "",
+        "color": "rgb(175, 175, 200)"
+    }
+}
+
+var pfp
+
 var catsOnMars = new Audio("/snds/cats on mars.mp3")
 var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
 catsOnMars.loop = true
@@ -13,11 +34,14 @@ var firsttimeDebounce = true
 
 var spinWaiting = false
 
+function resetPFP() {
+    pfp.src = "https://api.violets-purgatory.dev/v1/pfp?" + new Date().getTime()
+}
+
 function spinLoop() {
     spinWaiting = true
     setTimeout(() => {
         spinWaiting = false
-        var pfp = document.querySelector(".pfp")
         if (!catsOnMars.paused) {
             if (spins > 1) {
                 document.querySelector(".spinnyCount").style.display = "block"
@@ -25,7 +49,7 @@ function spinLoop() {
             }
             spins += 0.5
             if (Math.round(spins) == spins && sock && sock.OPEN) {
-                document.querySelector(".pfp").src = "https://api.violets-purgatory.dev/v1/pfp?" + new Date().getTime()
+                resetPFP()
                 sock.send(`{"op": 4}`)
                 console.log("Spin Sent!")
             }
@@ -41,7 +65,7 @@ window.onbeforeunload = function () {
 window.onload = function () {
     window.scrollTo(0, 0);
 
-    var pfp = document.querySelector(".pfp")
+    pfp = document.querySelector(".pfp")
 
     pfp.addEventListener("mousedown", () => {
         if (!spinWaiting) {
@@ -102,7 +126,7 @@ function socketeer() {
         }, 30000);
     })
 
-    sock.addEventListener("message", async(data) => {
+    sock.addEventListener("message", async (data) => {
         data = data.data
         data = JSON.parse(data)
         if (data.op == 4) {
@@ -114,6 +138,25 @@ function socketeer() {
                 document.querySelector(".globalSpins").innerHTML = globalSpins;
             }
         } else if (data.op == 0) {
+            var lanyard = data.d
+            var statusInfo = discStatuses[lanyard.discord_status]
+            var lastStatus = document.querySelector(".statusColor")
+
+            if (lastStatus.innerHTML != statusInfo.text) {
+                lastStatus.innerHTML = statusInfo.text
+                lastStatus.style.color = statusInfo.color
+
+                pfp.style.borderColor = lastStatus.style.color
+
+                resetPFP()
+            }
+
+            if (lanyard.activities[0] && lanyard.activities[0].type == 4) {
+                document.querySelector(".customStatus").innerHTML = `<hr><p>${lanyard.activities[0].state}</p>`
+            } else {
+                document.querySelector(".customStatus").innerHTML = ""
+            }
+
             var discFetch = await (await fetch("/discHTML")).text()
             document.querySelector("#activityHtml").innerHTML = discFetch
         } else if (data.op == 3) {
