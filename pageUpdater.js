@@ -87,8 +87,8 @@ function converter(html, query) {
         "ALL_HIGHLIGHTS": Object.keys(highlightedWords).join(", "),
         "BRANCH_NAME": bnchName,
         "BRANCH_SUB": bnchSub,
-        "COMMIT_COUNT": commitCount,
         "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
+        "COMMIT_COUNT": commitCount,
         "QUOTE_COUNT": quotes.length,
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "DISCORD_STATUS": 
