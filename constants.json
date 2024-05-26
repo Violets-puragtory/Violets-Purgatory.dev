@@ -24,7 +24,7 @@
     "quotes": [
         "Remember the 14th commandment: Thou shalt always clean thy plate and not waste anything, whether thy stomach is full, or not.",
         "I hate javascript!!!",
-        "Happy 400 commits!",
+        "Happy {COMMIT_COUNT} commits!",
         "Play Cave Story!",
         "Cave Story+ Sucks!",
         "World's Worst Developer",
