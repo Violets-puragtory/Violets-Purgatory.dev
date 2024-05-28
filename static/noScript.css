@@ -7,3 +7,7 @@
 .noscript {
     display: initial;
 }
+
+.scriptEnabled {
+    display: none;
+}

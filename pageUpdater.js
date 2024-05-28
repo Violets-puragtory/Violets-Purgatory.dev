@@ -1,10 +1,11 @@
 const path = require('path'),
     fs = require('fs'),
     WebSocket = require('ws'),
-    minify = require('minify-html'),
-    activityToHTML = require("./overcomplicatedStatuses.js")
-
-    // weatherGenerator = require("./weatherGenerator")
+    minify = require('@node-minify/core'),
+    uglifyJs = require("@node-minify/uglify-js"),
+    htmlMinifier = require("minify-html"),
+    activityToHTML = require("./overcomplicatedStatuses.js"),
+    randomThemer = require("./randomThemer.js")
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
@@ -109,7 +110,7 @@ function converter(html, query) {
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
         "RELOAD_COUNT": reloads,
-        "WEATHER_MODIFIER": "",
+        "WEATHER_MODIFIER": randomThemer.returnTheme(),
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
         "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString()
@@ -147,10 +148,10 @@ function converter(html, query) {
 
 module.exports = {
     getActivities: function () {
-        return minify.minify(activityToHTML.activitiesToHTML(lanyardData, cachedImages))
+        return htmlMinifier.minify(activityToHTML.activitiesToHTML(lanyardData, cachedImages))
     },
 
-    middleWare: function (req, res, next) {
+    middleWare: async function (req, res, next) {
 
         var filePath = (req.baseUrl + req.path).trim()
 
@@ -176,10 +177,16 @@ module.exports = {
 
             if (filePath.includes(".html")) {
                 data = converter(data, req.query)
+                
             }
 
             if (!filePath.includes(".js")) {
-                data = minify.minify(data)
+                data = htmlMinifier.minify(data)
+            } else {
+                data = await minify({
+                    compressor: uglifyJs,
+                    content: data
+                })
             }
 
             res.send(data)
