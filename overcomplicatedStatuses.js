@@ -125,7 +125,7 @@ module.exports = {
                     <div class="chip activity grid-child">
                         <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text || activity.state || ""}">
                             <p>
-                                Listening to <span style="color: limegreen;">${activity.name}</span> 
+                                Listening to${activity.name}
                                 <br> Song: ${activity.details || " "}
                                 ${songStats()}
                                 <br>

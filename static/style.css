@@ -168,6 +168,11 @@ h2 {
     text-decoration-color: white;
 }
 
+br {
+    display: block;
+    margin: 3px 0;
+}
+
 @media screen and (min-width: 850px) {
     .activity-container {
         display: flex;
