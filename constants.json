@@ -54,13 +54,15 @@
         "Godot Engine": "#64B5F6",
         "Javascript": "yellow",
         "NodeJS": "limegreen",
+        "Violets-Purgatory": "rgb(200, 150, 255)",
         "Violet's": "rgb(200, 150, 255)",
+        "Violets": "rgb(200, 150, 255)",
         "Violet": "rgb(200, 150, 255)",
+        "Purgatory": "rgb(200, 150, 255)",
         "Asahi": "rgb(255, 175, 175)",
         "Lunya": "rgb(255, 175, 175)",
         "bisexual": "rgb(214, 2, 112)",
         "enby": "rgb(252, 244, 52)",
-        "Purgatory": "rgb(200, 150, 255)",
         "Youtube": "rgb(255, 0, 0)",
         "Fedi": "rgb(175, 125, 200)",
         "Matrix": "limegreen",
@@ -79,6 +81,9 @@
         "Forgejo": "orange",
         "HTML": "orange",
         "CSS": "rgb(50, 200, 255)",
-        "Thumbor": "rgb(225, 225, 255)"
+        "Thumbor": "rgb(225, 225, 255)",
+        "Spotify": "limegreen",
+        "Ultrakill": "red",
+        "Code": "rgb(150, 175, 255)"
     }
 }

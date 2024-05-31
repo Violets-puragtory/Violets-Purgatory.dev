@@ -173,7 +173,7 @@ module.exports = {
                             <img src="${get_img(activity)}" title="${activity.assets.large_text}">
                             ${smch()}
                             <p>
-                                Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
+                                Playing ${activity.name} 
                                 ${onlyIfExists("<br>" + (activity.details || activity.assets.large_text), activity.details || activity.assets.large_text)}
                                 ${onlyIfExists("<br>" + (activity.state || activity.assets.small_text), activity.state || activity.assets.small_text)}
                                 <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
