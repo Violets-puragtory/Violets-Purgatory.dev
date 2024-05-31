@@ -148,7 +148,6 @@ module.exports = {
                     </style>
                     `
                 } else if (activity.type == 0 && activity.assets) {
-                    console.log(activity.assets)
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
@@ -178,7 +177,6 @@ module.exports = {
                         </div>
                     `
                 } else if (activity.type != 4 && activity.assets) {
-                    console.log(activity.assets)
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
