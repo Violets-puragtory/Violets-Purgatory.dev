@@ -11,6 +11,14 @@
 
 @font-face {
     font-display: swap;
+    font-family: 'RubikBold';
+    font-style: bold;
+    font-weight: 600;
+    src: url('./fonts/rubik-v28-latin-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
@@ -317,4 +325,12 @@ sup {
 
 em, b, s {
     color: inherit;
+}
+
+b, b > *, .activityTitle, .activityTitle > * {
+    font-family: "RubikBold", Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.activityTitle {
+    text-decoration: underline;
 }
