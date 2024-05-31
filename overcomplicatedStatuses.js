@@ -103,13 +103,17 @@ module.exports = {
                 function songStats() {
                     var html = ``
 
-                    if (activity.assets && activity.assets.large_text != activity.details) {
+                    if (activity.assets && activity.assets.large_text != activity.details && activity.state.length + activity.assets.large_text.length < 100) {
                         html += `
                         <br> Album: ${activity.assets.large_text || " "}
                         <br> Artist: ${activity.state || " "}
                         `
                     } else {
-                        html += `<br> Artist: ${activity.state || " "}`
+                        html += "<br>"
+                        if (activity.state.includes(";")) 
+                            { html += "Artists: " }
+                        else { html += "Artist: " }
+                        html += `${activity.state || " "}`
                     }
 
                     return html
