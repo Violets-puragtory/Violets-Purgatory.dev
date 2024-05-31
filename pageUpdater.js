@@ -5,7 +5,8 @@ const path = require('path'),
     uglifyJs = require("@node-minify/uglify-js"),
     htmlMinifier = require("minify-html"),
     activityToHTML = require("./overcomplicatedStatuses.js"),
-    randomThemer = require("./randomThemer.js")
+    randomThemer = require("./randomThemer.js"),
+    himalaya = require("himalaya")
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
@@ -44,31 +45,22 @@ function timeFormatter(seconds) {
 
 }
 
-function converter(html, query) {
+function converter(html) {
     var startTime = Date.now()
-    
+
+    html = htmlMinifier.minify(html)
+
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
     reloads += 1
-    while (html.includes("{PATH_")) {
-        var pagePath = html.substring(html.indexOf("{PATH_"))
-        pagePath = pagePath.substring(6, pagePath.indexOf('}'))
-        
-        var stringIndex = `{PATH_${pagePath}}`
-        pagePath = pagePath.toLowerCase()
-
-        var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
-        pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
-        html = html.replace(stringIndex, pageHTML)
-    }
 
     var statusText = ""
-    
+
     if (lanyardData) {
         var statusData = constants.discStatuses[lanyardData.discord_status]
         var username = lanyardData.discord_user.username
 
         if (lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
-            var statusText = `<hr><p>${lanyardData.activities[0].state}</p>`
+            var statusText = `<hr/><p>${lanyardData.activities[0].state}</p>`
         }
     } else {
         var statusData = constants.discStatuses.offline
@@ -92,18 +84,18 @@ function converter(html, query) {
         "COMMIT_COUNT": commitCount,
         "QUOTE_COUNT": quotes.length,
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
-        "DISCORD_STATUS": 
-        `<span style="color: ${statusData.color};" class="statusColor">${statusData.text}</span>` + 
-        `<style>.pfp { border-color: ${statusData.color} }</style>`,
+        "DISCORD_STATUS":
+            `<span style="color: ${statusData.color};" class="statusColor">${statusData.text}</span>` +
+            `<style>.pfp { border-color: ${statusData.color} }</style>`,
         "UPTIME": uptime,
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "DISCORD_USER": username,
         "CUSTOM_STATUS": statusText,
         "SELECTED_VIDEO": () => {
             if (config.dailyVideoURL) {
-                return `<h2><hr>Random video!</h2><p>I would call it random <em>daily</em> video but its not at all daily...</p>
-                <br> 
-                <video controls src="${config.dailyVideoURL}"></video>`
+                return `<h2><hr/>Random video!</h2><p>I would call it random <em>daily</em> video but its not at all daily...</p>
+                <br/> 
+                <video controls="true" src="${config.dailyVideoURL}"></video>`
             }
             return ``
         },
@@ -113,33 +105,95 @@ function converter(html, query) {
         "WEATHER_MODIFIER": randomThemer.returnTheme(),
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
-        "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString()
+        "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString(),
+        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData, cachedImages)
     }
-    
+
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
 
-    var rpTable = Object.keys(replacers)
+    var parsedHTML = himalaya.parse(html)
 
-    for (let index = 0; index < rpTable.length; index++) {
-        const text = rpTable[index];
-        html = html.replaceAll(`{${text}}`, replacers[text])
+    function scanParsedHTML(json) {
+        for (var i = 0; i < json.length; i++) {
+            var element = json[i]
+            if (element.type == "element") {
+                if (element.children.length > 0) {
+                    element.children = scanParsedHTML(element.children)
+                }
+            } else if (element.type == "text") {
+
+                while (element.content.includes("{PATH_")) {
+                    var pagePath = element.content.substring(element.content.indexOf("{PATH_"))
+                    pagePath = pagePath.substring(6, pagePath.indexOf('}'))
+
+                    var stringIndex = `{PATH_${pagePath}}`
+                    pagePath = pagePath.toLowerCase()
+
+                    var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
+                    pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
+                    element.content = element.content.replaceAll(stringIndex, pageHTML)
+                }
+
+                var rpTable = Object.keys(replacers)
+
+                for (let index = 0; index < rpTable.length; index++) {
+                    const text = rpTable[index];
+                    element.content = element.content.replaceAll(`{${text}}`, replacers[text])
+                }
+
+                // console.log(element.content, himalaya.parse(element.content))
+
+                json[i] = element
+            }
+        }
+
+        return json
     }
 
-    var bodyHTML = html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"))
-    var highTable = Object.keys(highlightedWords)
+    // var highTable = Object.keys(highlightedWords)
 
-    for (let index = 0; index < highTable.length; index++) {
-        var term = highTable[index];
-        var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
-        
-        bodyHTML = bodyHTML.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
-        bodyHTML = bodyHTML.replaceAll(term, replacement)
-        bodyHTML = bodyHTML.replaceAll("TEMPORARY_REPLACE", `${term}`)
+    // for (let index = 0; index < highTable.length; index++) {
+    //     var term = highTable[index];
+    //     var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
+
+
+    //     element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
+    //     element.content = element.content.replaceAll(term, replacement)
+    //     element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
+    // }
+
+    parsedHTML = scanParsedHTML(parsedHTML)
+
+    parsedHTML = himalaya.parse(himalaya.stringify(parsedHTML))
+
+    function highlighter(json) {
+        for (var i = 0; i < json.length; i++) {
+            var element = json[i]
+            if (element.type == "element") {
+                if (element.children.length > 0) {
+                    element.children = highlighter(element.children)
+                }
+            } else if (element.type == "text") {
+                var highTable = Object.keys(highlightedWords)
+
+                for (let index = 0; index < highTable.length; index++) {
+                    var term = highTable[index];
+                    var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
+            
+            
+                    element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
+                    element.content = element.content.replaceAll(term, replacement)
+                    element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
+                }
+            }
+        }
+
+        return json
     }
 
-    bodyHTML = bodyHTML.replaceAll("{ACTIVITIES}", activityToHTML.activitiesToHTML(lanyardData, cachedImages))
+    parsedHTML = highlighter(parsedHTML)
 
-    html = html.substring(0, html.indexOf("<body>")) + bodyHTML + html.substring(html.indexOf("</body>") + 7)
+    html = himalaya.stringify(parsedHTML)
 
     html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
@@ -166,7 +220,7 @@ module.exports = {
         filePath = path.join(__dirname, 'static', filePath || 'index.html')
         if (fs.existsSync(filePath)) {
             var data = fs.readFileSync(filePath).toString()
-            
+
             res.contentType(path.basename(filePath))
 
             // if (req.path.includes(".css")) {
@@ -177,7 +231,7 @@ module.exports = {
 
             if (filePath.includes(".html")) {
                 data = converter(data, req.query)
-                
+
             }
 
             if (!filePath.includes(".js")) {
@@ -206,7 +260,7 @@ async function updateCommits() {
 
     commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
     // ^ this works for Forgejo (basically everything i use that isnt Github E.G. Codeberg)
-    
+
     // commits = commits.substring(commits.lastIndexOf(">") + 1)
     // ^ This works for Github (fuck you Github)
 
@@ -253,7 +307,7 @@ function get_img_url(activity, size = "large_image") {
 function socketeer() {
     var lanyard = new WebSocket('https://api.violets-purgatory.dev')
 
-    lanyard.on("error", (error) =>{
+    lanyard.on("error", (error) => {
         console.log(error)
     })
 
