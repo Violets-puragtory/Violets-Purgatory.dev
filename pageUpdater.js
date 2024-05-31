@@ -48,10 +48,9 @@ function timeFormatter(seconds) {
 function converter(html) {
     var startTime = Date.now()
 
-    html = htmlMinifier.minify(html)
+    html = html
 
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
-    reloads += 1
 
     var statusText = ""
 
@@ -110,8 +109,10 @@ function converter(html) {
     }
 
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
+    
+    var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
 
-    var parsedHTML = himalaya.parse(html)
+    var parsedHTML = himalaya.parse(bodyHTML)
 
     function scanParsedHTML(json) {
         for (var i = 0; i < json.length; i++) {
@@ -193,7 +194,9 @@ function converter(html) {
 
     parsedHTML = highlighter(parsedHTML)
 
-    html = himalaya.stringify(parsedHTML)
+    parsedHTML = himalaya.stringify(parsedHTML)
+
+    html = html.substring(0, html.indexOf("<body>")) + parsedHTML + html.substring(html.indexOf("</body>") + 7)
 
     html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
