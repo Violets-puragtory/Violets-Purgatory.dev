@@ -2,7 +2,7 @@ function rain() {
     var html = ""
 
     html += `<div class="rainStuff"><div class="rainContainer">`
-    html += `<link rel="stylesheet" type="text/css" href="./themes/rain.css">`
+    html += `<link rel="stylesheet" type="text/css" href="/themes/rain.css">`
 
     var amount = 7
 

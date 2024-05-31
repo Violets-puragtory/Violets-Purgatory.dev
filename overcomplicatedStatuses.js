@@ -37,7 +37,6 @@ function timeFormatter(seconds) {
     } else {
         return `${minutes}:${seconds % 60}`
     }
-
 }
 
 function gameTimeFormatter(seconds) {
@@ -52,6 +51,14 @@ function gameTimeFormatter(seconds) {
 
     return `${hours} hours and ${minutes % 60} minutes`
 
+}
+
+function onlyIfExists(string, check) {
+    if (check) {
+        return string
+    } else {
+        return ""
+    }
 }
 
 module.exports = {
@@ -140,7 +147,8 @@ module.exports = {
                     }
                     </style>
                     `
-                } else if (activity.type == 0) {
+                } else if (activity.type == 0 && activity.assets) {
+                    console.log(activity.assets)
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
@@ -163,13 +171,14 @@ module.exports = {
                             ${smch()}
                             <p>
                                 Playing <span style="color: rgb(255, 100, 150);">${activity.name}</span> 
-                                <br> ${(activity.details || activity.assets.large_text || " ")}
-                                <br> ${(activity.state || activity.assets.small_text || " ")}
+                                ${onlyIfExists("<br>" + (activity.details || activity.assets.large_text), activity.details || activity.assets.large_text)}
+                                ${onlyIfExists("<br>" + (activity.state || activity.assets.small_text), activity.state || activity.assets.small_text)}
                                 <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
                             </p>
                         </div>
                     `
-                } else if (activity.type != 4) {
+                } else if (activity.type != 4 && activity.assets) {
+                    console.log(activity.assets)
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
