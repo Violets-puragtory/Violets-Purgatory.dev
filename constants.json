@@ -67,6 +67,7 @@
         "Fedi": "rgb(175, 125, 200)",
         "Matrix": "limegreen",
         "Element": "rgb(100, 255, 200)",
+        "Code": "rgb(150, 175, 255)",
         "Codeberg": "rgb(0, 255, 255)",
         "Docker": "blue",
         "Github": "gray",
@@ -83,7 +84,6 @@
         "CSS": "rgb(50, 200, 255)",
         "Thumbor": "rgb(225, 225, 255)",
         "Spotify": "limegreen",
-        "Ultrakill": "red",
-        "Code": "rgb(150, 175, 255)"
+        "Ultrakill": "red"
     }
 }

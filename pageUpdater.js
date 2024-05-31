@@ -21,7 +21,6 @@ var commitCount = "500+"
 var lanyardData = undefined
 
 var uptime = Date.now()
-var reloads = 0
 
 function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -100,7 +99,6 @@ function converter(html) {
         },
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
-        "RELOAD_COUNT": reloads,
         "WEATHER_MODIFIER": randomThemer.returnTheme(),
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
@@ -109,6 +107,25 @@ function converter(html) {
     }
 
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
+
+    while (html.includes("{PATH_")) {
+        var pagePath = html.substring(html.indexOf("{PATH_"))
+        pagePath = pagePath.substring(6, pagePath.indexOf('}'))
+
+        var stringIndex = `{PATH_${pagePath}}`
+        pagePath = pagePath.toLowerCase()
+
+        var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
+        pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
+        html = html.replaceAll(stringIndex, pageHTML)
+    }
+
+    var rpTable = Object.keys(replacers)
+
+    for (let index = 0; index < rpTable.length; index++) {
+        const text = rpTable[index];
+        html = html.replaceAll(`{${text}}`, replacers[text])
+    }
     
     if (html.includes("<body>")) {
         var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
@@ -117,42 +134,24 @@ function converter(html) {
         var parsedHTML = himalaya.parse(html)
     }
 
-    function scanParsedHTML(json) {
-        for (var i = 0; i < json.length; i++) {
-            var element = json[i]
-            if (element.type == "element") {
-                if (element.children.length > 0) {
-                    element.children = scanParsedHTML(element.children)
-                }
-            } else if (element.type == "text") {
 
-                while (element.content.includes("{PATH_")) {
-                    var pagePath = element.content.substring(element.content.indexOf("{PATH_"))
-                    pagePath = pagePath.substring(6, pagePath.indexOf('}'))
+    // function scanParsedHTML(json) {
+    //     for (var i = 0; i < json.length; i++) {
+    //         var element = json[i]
+    //         if (element.type == "element") {
+    //             if (element.children.length > 0) {
+    //                 element.children = scanParsedHTML(element.children)
+    //             }
+    //         } else if (element.type == "text") {
 
-                    var stringIndex = `{PATH_${pagePath}}`
-                    pagePath = pagePath.toLowerCase()
+                
 
-                    var pageHTML = fs.readFileSync(path.join(__dirname, 'static', pagePath, 'index.html')).toString()
-                    pageHTML = pageHTML.substring(pageHTML.indexOf('<main>') + 6, pageHTML.indexOf('</main>'))
-                    element.content = element.content.replaceAll(stringIndex, pageHTML)
-                }
+    //             json[i] = element
+    //         }
+    //     }
 
-                var rpTable = Object.keys(replacers)
-
-                for (let index = 0; index < rpTable.length; index++) {
-                    const text = rpTable[index];
-                    element.content = element.content.replaceAll(`{${text}}`, replacers[text])
-                }
-
-                // console.log(element.content, himalaya.parse(element.content))
-
-                json[i] = element
-            }
-        }
-
-        return json
-    }
+    //     return json
+    // }
 
     // var highTable = Object.keys(highlightedWords)
 
@@ -166,9 +165,9 @@ function converter(html) {
     //     element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
     // }
 
-    parsedHTML = scanParsedHTML(parsedHTML)
+    // parsedHTML = scanParsedHTML(parsedHTML)
 
-    parsedHTML = himalaya.parse(himalaya.stringify(parsedHTML))
+    // parsedHTML = himalaya.parse(himalaya.stringify(parsedHTML))
 
     function highlighter(json) {
         for (var i = 0; i < json.length; i++) {
