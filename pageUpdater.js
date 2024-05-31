@@ -110,9 +110,12 @@ function converter(html) {
 
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
     
-    var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
-
-    var parsedHTML = himalaya.parse(bodyHTML)
+    if (html.includes("<body>")) {
+        var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
+        var parsedHTML = himalaya.parse(bodyHTML)
+    } else {
+        var parsedHTML = himalaya.parse(html)
+    }
 
     function scanParsedHTML(json) {
         for (var i = 0; i < json.length; i++) {
@@ -196,7 +199,11 @@ function converter(html) {
 
     parsedHTML = himalaya.stringify(parsedHTML)
 
-    html = html.substring(0, html.indexOf("<body>")) + parsedHTML + html.substring(html.indexOf("</body>") + 7)
+    if (html.includes("<body>")) {
+        html = html.substring(0, html.indexOf("<body>")) + parsedHTML + html.substring(html.indexOf("</body>") + 7)
+    } else {
+        html = parsedHTML
+    }
 
     html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
@@ -205,7 +212,7 @@ function converter(html) {
 
 module.exports = {
     getActivities: function () {
-        return htmlMinifier.minify(activityToHTML.activitiesToHTML(lanyardData, cachedImages))
+        return htmlMinifier.minify(converter(activityToHTML.activitiesToHTML(lanyardData, cachedImages)))
     },
 
     middleWare: async function (req, res, next) {
