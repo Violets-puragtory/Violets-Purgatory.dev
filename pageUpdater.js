@@ -289,28 +289,28 @@ var lastPong = 0
 var activityImages = constants.activityImages
 var cachedImages = {}
 
-function get_img_url(activity, size = "large_image") {
-    if ("assets" in activity) {
-        var image = activity.assets[size]
+// function get_img_url(activity, size = "large_image") {
+//     if ("assets" in activity) {
+//         var image = activity.assets[size]
 
-        if (image) {
-            if (image.includes("https/")) {
-                return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
-            } else if (image.includes("spotify")) {
-                return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
-            } else {
-                return decodeURIComponent('https://cdn.discordapp.com/app-assets/' + activity.application_id + "/" + image + ".png")
-            }
-        }
-    }
+//         if (image) {
+//             if (image.includes("https/")) {
+//                 return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
+//             } else if (image.includes("spotify")) {
+//                 return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
+//             } else {
+//                 return decodeURIComponent('https://cdn.discordapp.com/app-assets/' + activity.application_id + "/" + image + ".png")
+//             }
+//         }
+//     }
 
-    if (!image && size == "large_image") {
-        if (activity.name in activityImages) {
-            return decodeURIComponent(activityImages[activity.name])
-        }
-    }
-    return null
-}
+//     if (!image && size == "large_image") {
+//         if (activity.name in activityImages) {
+//             return decodeURIComponent(activityImages[activity.name])
+//         }
+//     }
+//     return null
+// }
 
 
 function socketeer() {
@@ -353,36 +353,36 @@ function socketeer() {
             lanyardData = data.d
             lastLanyardUpdate = Date.now()
 
-            for (let index = 0; index < lanyardData.activities.length; index++) {
-                const activity = lanyardData.activities[index];
+            // for (let index = 0; index < lanyardData.activities.length; index++) {
+            //     const activity = lanyardData.activities[index];
 
-                if (get_img_url(activity)) {
-                    var url = get_img_url(activity)
-                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
-                    var fp = path.join(__dirname, 'cached', fn)
+            //     if (get_img_url(activity)) {
+            //         var url = get_img_url(activity)
+            //         var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
+            //         var fp = path.join(__dirname, 'cached', fn)
 
-                    if (!cachedImages[url]) {
-                        const response = await (await fetch(thumborURL + "200x200/" + thumborArgs + url)).arrayBuffer()
-                        fs.writeFileSync(fp, Buffer.from(response))
+            //         if (!cachedImages[url]) {
+            //             const response = await (await fetch(thumborURL + "200x200/" + thumborArgs + url)).arrayBuffer()
+            //             fs.writeFileSync(fp, Buffer.from(response))
 
-                        cachedImages[url] = fn
-                    }
-                }
+            //             cachedImages[url] = fn
+            //         }
+            //     }
 
-                if (get_img_url(activity, "small_image")) {
-                    var url = get_img_url(activity, "small_image")
-                    var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
-                    var fp = path.join(__dirname, 'cached', fn)
+            //     if (get_img_url(activity, "small_image")) {
+            //         var url = get_img_url(activity, "small_image")
+            //         var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
+            //         var fp = path.join(__dirname, 'cached', fn)
 
-                    if (!cachedImages[url]) {
-                        const response = await (await fetch(thumborURL + "64x64/" + thumborArgs + url)).arrayBuffer()
+            //         if (!cachedImages[url]) {
+            //             const response = await (await fetch(thumborURL + "64x64/" + thumborArgs + url)).arrayBuffer()
 
-                        fs.writeFileSync(fp, Buffer.from(response))
+            //             fs.writeFileSync(fp, Buffer.from(response))
 
-                        cachedImages[url] = fn
-                    }
-                }
-            }
+            //             cachedImages[url] = fn
+            //         }
+            //     }
+            // }
 
         } else if (data.op == 4) {
             globalSpins = data.spins

@@ -90,14 +90,7 @@ module.exports = {
 
 
                 function get_img(activity, size = "large_image") {
-                    if (cachedImages[get_img_url(activity, size)]) {
-                        var fn = cachedImages[get_img_url(activity, size)]
-                        var fp = path.join(__dirname, 'cached', fn)
-                    } else {
-                        return '/imgs/notFound.png'
-                    }
-
-                    return '/cached/' + fn
+                    return "https://cache.violets-purgatory.dev/cached/" + get_img_url(activity, size)
                 }
 
                 function songStats() {

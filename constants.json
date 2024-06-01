@@ -1,8 +1,4 @@
 {
-    "activityImages": {
-        "ULTRAKILL": "https://fs.violets-purgatory.dev/SiteActivityImages/ULTRAKILL.jpg",
-        "Phasmophobia": "https://fs.violets-purgatory.dev/SiteActivityImages/Phasmophobia.png"
-    },
     "discStatuses": {
         "online": {
             "text": "Online",
