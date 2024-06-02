@@ -99,7 +99,7 @@ function converter(html) {
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
         "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString(),
-        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData, cachedImages)
+        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData)
     }
 
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
@@ -172,7 +172,7 @@ function converter(html) {
 
 module.exports = {
     getActivities: function () {
-        return htmlMinifier.minify(converter(activityToHTML.activitiesToHTML(lanyardData, cachedImages)))
+        return htmlMinifier.minify(converter(activityToHTML.activitiesToHTML(lanyardData)))
     },
 
     middleWare: async function (req, res, next) {
