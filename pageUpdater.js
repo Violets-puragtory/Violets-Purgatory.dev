@@ -26,10 +26,6 @@ function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-var thumborURL = "https://thumbor.violets-purgatory.dev/unsafe/"
-var imgExtension = "png"
-var thumborArgs = `filters:format(${imgExtension})/`
-
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.ceil(seconds / 60)
@@ -134,41 +130,6 @@ function converter(html) {
         var parsedHTML = himalaya.parse(html)
     }
 
-
-    // function scanParsedHTML(json) {
-    //     for (var i = 0; i < json.length; i++) {
-    //         var element = json[i]
-    //         if (element.type == "element") {
-    //             if (element.children.length > 0) {
-    //                 element.children = scanParsedHTML(element.children)
-    //             }
-    //         } else if (element.type == "text") {
-
-                
-
-    //             json[i] = element
-    //         }
-    //     }
-
-    //     return json
-    // }
-
-    // var highTable = Object.keys(highlightedWords)
-
-    // for (let index = 0; index < highTable.length; index++) {
-    //     var term = highTable[index];
-    //     var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
-
-
-    //     element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
-    //     element.content = element.content.replaceAll(term, replacement)
-    //     element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
-    // }
-
-    // parsedHTML = scanParsedHTML(parsedHTML)
-
-    // parsedHTML = himalaya.parse(himalaya.stringify(parsedHTML))
-
     function highlighter(json) {
         for (var i = 0; i < json.length; i++) {
             var element = json[i]
@@ -232,12 +193,6 @@ module.exports = {
 
             res.contentType(path.basename(filePath))
 
-            // if (req.path.includes(".css")) {
-            //    res.setHeader("Content-Type", "text/css")
-            // } else if (!req.path.includes(".woff2")) {
-            //     data = converter(data, req.query)
-            // }
-
             if (filePath.includes(".html")) {
                 data = converter(data, req.query)
 
@@ -286,33 +241,6 @@ updateCommits()
 var lastLanyardUpdate = Date.now()
 var lastPong = 0
 
-var activityImages = constants.activityImages
-var cachedImages = {}
-
-// function get_img_url(activity, size = "large_image") {
-//     if ("assets" in activity) {
-//         var image = activity.assets[size]
-
-//         if (image) {
-//             if (image.includes("https/")) {
-//                 return decodeURIComponent('https://' + image.substr(image.indexOf('https/') + 6, image.length))
-//             } else if (image.includes("spotify")) {
-//                 return decodeURIComponent('https://i.scdn.co/image/' + image.substr(image.indexOf('spotify:') + 8, image.length))
-//             } else {
-//                 return decodeURIComponent('https://cdn.discordapp.com/app-assets/' + activity.application_id + "/" + image + ".png")
-//             }
-//         }
-//     }
-
-//     if (!image && size == "large_image") {
-//         if (activity.name in activityImages) {
-//             return decodeURIComponent(activityImages[activity.name])
-//         }
-//     }
-//     return null
-// }
-
-
 function socketeer() {
     var lanyard = new WebSocket('https://api.violets-purgatory.dev')
 
@@ -352,38 +280,6 @@ function socketeer() {
         } else if (data.op == 0) {
             lanyardData = data.d
             lastLanyardUpdate = Date.now()
-
-            // for (let index = 0; index < lanyardData.activities.length; index++) {
-            //     const activity = lanyardData.activities[index];
-
-            //     if (get_img_url(activity)) {
-            //         var url = get_img_url(activity)
-            //         var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
-            //         var fp = path.join(__dirname, 'cached', fn)
-
-            //         if (!cachedImages[url]) {
-            //             const response = await (await fetch(thumborURL + "200x200/" + thumborArgs + url)).arrayBuffer()
-            //             fs.writeFileSync(fp, Buffer.from(response))
-
-            //             cachedImages[url] = fn
-            //         }
-            //     }
-
-            //     if (get_img_url(activity, "small_image")) {
-            //         var url = get_img_url(activity, "small_image")
-            //         var fn = Math.ceil(Math.random() * 100_000_000_000).toString() + "." + imgExtension
-            //         var fp = path.join(__dirname, 'cached', fn)
-
-            //         if (!cachedImages[url]) {
-            //             const response = await (await fetch(thumborURL + "64x64/" + thumborArgs + url)).arrayBuffer()
-
-            //             fs.writeFileSync(fp, Buffer.from(response))
-
-            //             cachedImages[url] = fn
-            //         }
-            //     }
-            // }
-
         } else if (data.op == 4) {
             globalSpins = data.spins
         }
