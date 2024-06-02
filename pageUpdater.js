@@ -142,12 +142,14 @@ function converter(html) {
 
                 for (let index = 0; index < highTable.length; index++) {
                     var term = highTable[index];
-                    var replacement = `<span style="color: ${highlightedWords[term]}">${term}</span>`
-            
             
                     element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
-                    element.content = element.content.replaceAll(term, replacement)
+                    element.content = element.content.replaceAll(term, "{TERM" + index + "}")
                     element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
+                }
+
+                for (let index = 0; index < highTable.length; index++) {
+                    element.content = element.content.replaceAll("{TERM" + index + "}", `<span style="color: ${highlightedWords[highTable[index]]}">${highTable[index]}</span>`)
                 }
             }
         }
