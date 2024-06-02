@@ -28,6 +28,10 @@ function get_img_url(activity, size = "large_image") {
     return null
 }
 
+function makeCompat(string) {
+    return string.replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+}
+
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.floor(seconds / 60)
@@ -98,15 +102,15 @@ module.exports = {
 
                     if (activity.assets && activity.assets.large_text != activity.details && activity.state.length + activity.assets.large_text.length < 100) {
                         html += `
-                        <br> Album: ${activity.assets.large_text || " "}
-                        <br> Artist: ${activity.state || " "}
+                        <br> Album: ${makeCompat(activity.assets.large_text || " ")}
+                        <br> Artist: ${makeCompat(activity.state || " ")}
                         `
                     } else {
                         html += "<br>"
                         if (activity.state.includes(";")) 
                             { html += "Artists: " }
                         else { html += "Artist: " }
-                        html += `${activity.state || " "}`
+                        html += `${makeCompat(activity.state || " ")}`
                     }
 
                     return html
@@ -119,7 +123,7 @@ module.exports = {
                         <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text || activity.state || ""}">
                             <p>
                                 Listening to ${activity.name}
-                                <br> Song: ${activity.details || " "}
+                                <br> Song: ${makeCompat(activity.details || " ")}
                                 ${songStats()}
                                 <br>
                                 <span class="lengthBar lengthBar${index}"><span></span></span>
