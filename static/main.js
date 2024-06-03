@@ -19,10 +19,10 @@ const discStatuses = {
 
 var pfp
 
-var catsOnMars = new Audio("/snds/cats on mars.mp3")
+var music = new Audio("/snds/Lotus Waters.ogg")
 var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
-catsOnMars.loop = true
-catsOnMars.volume = 0.25
+music.loop = true
+music.volume = 0.45
 whipLash.volume = 0.25
 
 var sock
@@ -42,20 +42,20 @@ function spinLoop() {
     spinWaiting = true
     setTimeout(() => {
         spinWaiting = false
-        if (!catsOnMars.paused) {
+        if (!music.paused) {
             if (spins > 1) {
                 document.querySelector(".spinnyCount").style.display = "block"
                 document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
             }
             spins += 0.5
             if (Math.round(spins) == spins && sock && sock.OPEN) {
-                resetPFP()
+                // resetPFP()
                 sock.send(`{"op": 4}`)
                 console.log("Spin Sent!")
             }
             spinLoop()
         }
-    }, 1000);
+    }, 1500);
 }
 
 window.onbeforeunload = function () {
@@ -71,7 +71,7 @@ window.onload = function () {
         if (!spinWaiting) {
             spinLoop();
         }
-        catsOnMars.play()
+        music.play()
 
         pfp.style.animationName = "spinny"
 
@@ -79,9 +79,9 @@ window.onload = function () {
     })
 
     document.body.onmouseup = () => {
-        if (catsOnMars.currentTime != 0) {
-            catsOnMars.currentTime = 0
-            catsOnMars.pause()
+        if (music.currentTime != 0) {
+            music.currentTime = 0
+            music.pause()
 
             whipLash.currentTime = 0
             whipLash.play()
