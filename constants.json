@@ -18,18 +18,13 @@
         }
     },
     "quotes": [
-        "Remember the 14th commandment: Thou shalt always clean thy plate and not waste anything, whether thy stomach is full, or not.",
-        "I hate javascript!!!",
-        "Happy <s>400</s> 500 commits!",
-        "Play Cave Story!",
-        "Cave Story+ Sucks!",
         "World's Worst Developer",
-        "Bored",
-        "IMAGE CACHING!!! THE IMAGE CACHING IS REAL!!!!",
-        "Is sharing your IP <em>reallyy</em> that bad?",
         "The worst git user to exist",
         "These birds are Pissing me off... I'm the original &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starwalker",
-        "Fun fact: Did you know the <a href='./socials'>Socials section</a> is considered its own page?"
+
+        "Make sure to check out <a href='https://univerter.dev'>Univerter!</a>",
+        "Check out <a href='https://asahixp.pages.gay'>Asahi's website! &lt;3</a>",
+        "Check out <a href='https://sylvie.loveh.art/'>Sylvie's website! &lt;3</a>"
     ],
     "titles": [
         "Boykisser",
@@ -74,6 +69,9 @@
             "caseInsensitive": true
         },
         "Lunya": {
+            "color": "rgb(255, 175, 175)"
+        },
+        "Sylvie": {
             "color": "rgb(255, 175, 175)"
         },
         "bisexual": {
