@@ -54,9 +54,6 @@
         "word highlighting": {
             "color": "yellow"
         },
-        "replaceAll": {
-            "color": "limegreen"
-        },
         "Godot Engine": {
             "color": "#64B5F6"
         },
@@ -73,7 +70,8 @@
             "color": "rgb(200, 150, 255)"
         },
         "Asahi": {
-            "color": "rgb(255, 175, 175)"
+            "color": "rgb(255, 175, 175)",
+            "caseInsensitive": true
         },
         "Lunya": {
             "color": "rgb(255, 175, 175)"
