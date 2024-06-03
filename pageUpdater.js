@@ -149,7 +149,27 @@ function converter(html) {
                 }
 
                 for (let index = 0; index < highTable.length; index++) {
-                    element.content = element.content.replaceAll("{TERM" + index + "}", `<span style="color: ${highlightedWords[highTable[index]]}">${highTable[index]}</span>`)
+                    var termKey = "{TERM" + index + "}"
+                    while (element.content.includes(termKey)) {
+                        var termIndex = element.content.indexOf(termKey)
+                    
+                        var spanEnd = element.content.indexOf(" ", termIndex)
+                                                
+                        if (spanEnd == -1) {
+                            spanEnd = element.content.length
+                        }
+
+                        var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
+    
+                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ")
+                        var startContent = element.content.substring(spanStart, termIndex)
+    
+                        var replacement = `<span style="color: ${highlightedWords[highTable[index]]}">${startContent + highTable[index] + endContent}</span>`
+                        
+                        element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
+                    }
+
+                    // element.content = element.content.replaceAll(termKey, replacement)
                 }
             }
         }
