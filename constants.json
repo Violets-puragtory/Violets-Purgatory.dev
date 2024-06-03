@@ -42,41 +42,114 @@
         "https://axiomatic-hair-production.up.railway.app/"
     ],
     "highlightedWords": {
-        "birds": "yellow",
-        "Pissing": "yellow",
-        "Starwalker": "yellow",
-        "word highlighting": "yellow",
-        "replaceAll": "limegreen",
-        "Godot Engine": "#64B5F6",
-        "Javascript": "yellow",
-        "NodeJS": "limegreen",
-        "Violet": "rgb(200, 150, 255)",
-        "Purgatory": "rgb(200, 150, 255)",
-        "Asahi": "rgb(255, 175, 175)",
-        "Lunya": "rgb(255, 175, 175)",
-        "bisexual": "rgb(214, 2, 112)",
-        "enby": "rgb(252, 244, 52)",
-        "Youtube": "rgb(255, 0, 0)",
-        "Fedi": "rgb(175, 125, 200)",
-        "Matrix": "limegreen",
-        "Element": "rgb(100, 255, 200)",
-        "Codeberg": "rgb(0, 255, 255)",
-        "Code": "rgb(150, 175, 255)",
-        "Docker": "blue",
-        "Github": "gray",
-        "Steam": "lightgray",
-        "Univerter": "rgb(200, 175, 255)",
-        "Ko-fi": "rgb(255, 150, 150)",
-        "Revolt": "rgb(255, 50, 50)",
-        "Discord": "rgb(150, 150, 255)",
-        "SearXNG": "rgb(100, 100, 255)",
-        "Highlighting": "yellow",
-        "highlighted": "yellow",
-        "Forgejo": "orange",
-        "HTML": "orange",
-        "CSS": "rgb(50, 200, 255)",
-        "Thumbor": "rgb(225, 225, 255)",
-        "Spotify": "limegreen",
-        "Ultrakill": "red"
+        "birds": {
+            "color": "yellow"
+        },
+        "Pissing": {
+            "color": "yellow"
+        },
+        "Starwalker": {
+            "color": "yellow"
+        },
+        "word highlighting": {
+            "color": "yellow"
+        },
+        "replaceAll": {
+            "color": "limegreen"
+        },
+        "Godot Engine": {
+            "color": "#64B5F6"
+        },
+        "Javascript": {
+            "color": "yellow"
+        },
+        "NodeJS": {
+            "color": "limegreen"
+        },
+        "Violet": {
+            "color": "rgb(200, 150, 255)"
+        },
+        "Purgatory": {
+            "color": "rgb(200, 150, 255)"
+        },
+        "Asahi": {
+            "color": "rgb(255, 175, 175)"
+        },
+        "Lunya": {
+            "color": "rgb(255, 175, 175)"
+        },
+        "bisexual": {
+            "color": "rgb(214, 2, 112)"
+        },
+        "enby": {
+            "color": "rgb(252, 244, 52)"
+        },
+        "Youtube": {
+            "color": "rgb(255, 0, 0)"
+        },
+        "Fedi": {
+            "color": "rgb(175, 125, 200)"
+        },
+        "Matrix": {
+            "color": "limegreen"
+        },
+        "Element": {
+            "color": "rgb(100, 255, 200)"
+        },
+        "Codeberg": {
+            "color": "rgb(0, 255, 255)"
+        },
+        "Code": {
+            "color": "rgb(150, 175, 255)"
+        },
+        "Docker": {
+            "color": "blue"
+        },
+        "Github": {
+            "color": "gray"
+        },
+        "Steam": {
+            "color": "lightgray"
+        },
+        "Univerter": {
+            "color": "rgb(200, 175, 255)"
+        },
+        "Ko-fi": {
+            "color": "rgb(255, 150, 150)"
+        },
+        "Revolt": {
+            "color": "rgb(255, 50, 50)"
+        },
+        "Discord": {
+            "color": "rgb(150, 150, 255)"
+        },
+        "SearXNG": {
+            "color": "rgb(100, 100, 255)"
+        },
+        "Highlighting": {
+            "color": "yellow"
+        },
+        "highlighted": {
+            "color": "yellow"
+        },
+        "Forgejo": {
+            "color": "orange"
+        },
+        "HTML": {
+            "color": "orange"
+        },
+        "CSS": {
+            "color": "rgb(50, 200, 255)"
+        },
+        "Thumbor": {
+            "color": "rgb(225, 225, 255)"
+        },
+        "Spotify": {
+            "color": "limegreen"
+        },
+        "Ultrakill": {
+            "color": "red",
+            "caseInsensitive": true
+        }
     }
 }

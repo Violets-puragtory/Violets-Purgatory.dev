@@ -142,14 +142,21 @@ function converter(html) {
 
                 for (let index = 0; index < highTable.length; index++) {
                     var term = highTable[index];
+                    var termProps = highlightedWords[term]
+                    
+                    var reg = term
+                    if (termProps.caseInsensitive) {
+                        reg = new RegExp(`(${term})`, "gi")
+                    }
             
                     element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
-                    element.content = element.content.replaceAll(term, "{TERM" + index + "}")
+                    element.content = element.content.replaceAll(reg, "{TERM" + index + "}")
                     element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
                 }
 
                 for (let index = 0; index < highTable.length; index++) {
                     var termKey = "{TERM" + index + "}"
+                    var termProps = highlightedWords[highTable[index]]
                     while (element.content.includes(termKey)) {
                         var termIndex = element.content.indexOf(termKey)
                     
@@ -164,7 +171,7 @@ function converter(html) {
                         var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ")
                         var startContent = element.content.substring(spanStart, termIndex)
     
-                        var replacement = `<span style="color: ${highlightedWords[highTable[index]]}">${startContent + highTable[index] + endContent}</span>`
+                        var replacement = `<span style="color: ${termProps.color}">${startContent + highTable[index] + endContent}</span>`
                         
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
