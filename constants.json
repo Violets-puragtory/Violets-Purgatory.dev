@@ -72,7 +72,7 @@
             "color": "rgb(255, 175, 175)"
         },
         "Sylvie": {
-            "color": "rgb(255, 175, 175)"
+            "color": "#f768a4"
         },
         "bisexual": {
             "color": "rgb(214, 2, 112)"
@@ -145,6 +145,10 @@
         },
         "Ultrakill": {
             "color": "red",
+            "caseInsensitive": true
+        },
+        "Risk of Rain 2": {
+            "color": "rgb(150, 220, 255)",
             "caseInsensitive": true
         }
     }
