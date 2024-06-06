@@ -87,11 +87,6 @@ module.exports = {
                     continue
                 }
 
-                if (!debounce && activity.type != 4) {
-                    addedHTML += `<h2><hr>What I'm up to:</h2><div class="activity-container">`
-                    debounce = true
-                }
-
 
                 function get_img(activity, size = "large_image") {
                     return "https://cache.violets-purgatory.dev/cached/" + get_img_url(activity, size)
@@ -200,6 +195,10 @@ module.exports = {
                 }
             }
         }
-        return addedHTML + "</div>"
+        if (addedHTML.length > 10) {
+            addedHTML = `<h2><hr>What I'm up to:</h2><div class="activity-container">` + addedHTML
+            addedHTML += "</div>"
+        }
+        return addedHTML
     }
 }
