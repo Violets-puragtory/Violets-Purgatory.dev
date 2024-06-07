@@ -95,7 +95,7 @@ module.exports = {
                 function songStats() {
                     var html = ``
 
-                    if (activity.assets && activity.assets.large_text != activity.details && activity.state.length + activity.assets.large_text.length < 100) {
+                    if (activity.assets && activity.assets.large_text != activity.details && activity.details.length + activity.state.length + activity.assets.large_text.length < 100) {
                         html += `
                         <br> Album: ${makeCompat(activity.assets.large_text || " ")}
                         <br> Artist: ${makeCompat(activity.state || " ")}
