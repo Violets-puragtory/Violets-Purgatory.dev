@@ -17,18 +17,24 @@ const discStatuses = {
     }
 }
 
+const spinSpeed = 30
+
 var pfp
 
 var music = new Audio("/snds/Lotus Waters.ogg")
-var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
+music.preservesPitch = false
 music.loop = true
-music.volume = 0.45
-whipLash.volume = 0.25
+music.playbackRate = 0
+// var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
+// whipLash.volume = 0.25
 
 var sock
 
-var spins = 1
+var spins = 0
+var lastSent = 0
 var globalSpins = 0
+
+var spinning = false
 
 var firsttimeDebounce = true
 
@@ -38,24 +44,36 @@ function resetPFP() {
     pfp.src = "https://api.violets-purgatory.dev/v1/pfp?" + new Date().getTime()
 }
 
+function lerp(a, b, t) {
+    return a * (1 - t) + b * t
+}
+
 function spinLoop() {
     spinWaiting = true
     setTimeout(() => {
         spinWaiting = false
-        if (!music.paused) {
+        if (spinning) {
+            music.volume = 0.5
+            music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
             if (spins > 1) {
                 document.querySelector(".spinnyCount").style.display = "block"
                 document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
             }
-            spins += 0.5
-            if (Math.round(spins) == spins && sock && sock.OPEN) {
+            spins += 1/spinSpeed / 3
+            document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
+            if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
+                document.querySelector(".globalSpins").innerHTML = globalSpins + 1
+                lastSent = Math.floor(spins)
                 // resetPFP()
                 sock.send(`{"op": 4}`)
                 console.log("Spin Sent!")
             }
-            spinLoop()
+        } else {
+            music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
+            music.volume = lerp(music.volume, 0, 1/spinSpeed * 4)
         }
-    }, 1500);
+        spinLoop()
+    }, 1/spinSpeed * 1000);
 }
 
 window.onbeforeunload = function () {
@@ -67,26 +85,33 @@ window.onload = function () {
 
     pfp = document.querySelector(".pfp")
 
+    spinLoop()
+
     pfp.addEventListener("mousedown", () => {
-        if (!spinWaiting) {
-            spinLoop();
-        }
+        // if (!spinWaiting) {
+        //     spinLoop();
+        // }
         music.play()
 
-        pfp.style.animationName = "spinny"
+        spinning = true
+
+        pfp.style.transition = ""
 
         pfp.style.scale = "1.1"
     })
 
     document.body.onmouseup = () => {
         if (music.currentTime != 0) {
-            music.currentTime = 0
-            music.pause()
+            // music.currentTime = 0
+            // music.pause()
 
-            whipLash.currentTime = 0
-            whipLash.play()
+            // whipLash.currentTime = 0
+            // whipLash.play()
 
-            pfp.style.animationName = "unset"
+            spinning = false
+
+            pfp.style.transition = "all 3s cubic-bezier(0.39, 0.575, 0.565, 1)"
+
             pfp.style.scale = "1"
         }
     }
