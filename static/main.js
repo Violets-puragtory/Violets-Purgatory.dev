@@ -176,11 +176,11 @@ function socketeer() {
                 resetPFP()
             }
 
-            if (lanyard.activities[0] && lanyard.activities[0].type == 4) {
-                document.querySelector(".customStatus").innerHTML = `<hr><p>${lanyard.activities[0].state}</p>`
-            } else {
-                document.querySelector(".customStatus").innerHTML = ""
-            }
+            // if (lanyard.activities[0] && lanyard.activities[0].type == 4) {
+            //     document.querySelector(".customStatus").innerHTML = `<hr><img src=""><p>${lanyard.activities[0].state}</p>`
+            // } else {
+            //     document.querySelector(".customStatus").innerHTML = ""
+            // }
 
             var discFetch = await (await fetch("/discHTML")).text()
             document.querySelector("#activityHtml").innerHTML = discFetch
