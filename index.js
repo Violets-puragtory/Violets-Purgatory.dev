@@ -39,14 +39,10 @@ app.use("/cached", express.static(cachePath))
 app.use("/imgs", express.static(path.join(assetPath, "Images")))
 app.use("/snds", express.static(path.join(assetPath, "Sounds")))
 
+app.use("/emojis", express.static(path.join(cachePath, "emojis")))
+
 if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
-} else {
-    var files = fs.readdirSync(cachePath)
-    for (let index = 0; index < files.length; index++) {
-        const file = files[index];
-        fs.rmSync(path.join(cachePath, file))
-    }
 }
 
 app.get("/discHTML", (req, res) => {

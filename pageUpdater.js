@@ -49,18 +49,6 @@ function converter(html) {
 
     var statusText = ""
 
-    if (lanyardData) {
-        var statusData = constants.discStatuses[lanyardData.discord_status]
-        var username = lanyardData.discord_user.username
-
-        if (lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
-            var statusText = `<hr/><p>${lanyardData.activities[0].state}</p>`
-        }
-    } else {
-        var statusData = constants.discStatuses.offline
-        var username = "bingus_violet"
-    }
-
     var bnchName = "Beta"
     var bnchSub = "beta."
 
@@ -79,12 +67,27 @@ function converter(html) {
         "QUOTE_COUNT": quotes.length,
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "DISCORD_STATUS":
-            `<span style="color: ${statusData.color};" class="statusColor">${statusData.text}</span>` +
-            `<style>.pfp { border-color: ${statusData.color} }</style>`,
+            `<span style="color: ${constants.discStatuses[lanyardData.discord_status].color};" class="statusColor">${constants.discStatuses[lanyardData.discord_status].text}</span>` +
+            `<style>.pfp { border-color: ${constants.discStatuses[lanyardData.discord_status].color} }</style>`,
         "UPTIME": uptime,
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
-        "DISCORD_USER": username,
-        "CUSTOM_STATUS": statusText,
+        "CUSTOM_STATUS": () => {
+            if (lanyardData && lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
+                var status = lanyardData.activities[0]
+                var addedHTML = "<hr/><p>"
+                if (status.emoji) {
+                    if (status.emoji.id) {
+                        addedHTML += `<img src="/emojis/${status.emoji.id}" style="width: 48px; vertical-align: middle;"/>`
+                    } else  {
+                        addedHTML += status.emoji.name
+                    }
+                }
+                addedHTML += status.state
+                addedHTML += "</p>"
+                return addedHTML
+            }
+            return ""
+        },
         "SELECTED_VIDEO": () => {
             if (config.dailyVideoURL) {
                 return `<h2><hr/>Random video!</h2><p>I would call it random <em>daily</em> video but its not at all daily...</p>
@@ -309,6 +312,21 @@ function socketeer() {
         } else if (data.op == 0) {
             lanyardData = data.d
             lastLanyardUpdate = Date.now()
+
+            for (var i = 0; i < lanyardData.activities.length; i++) {
+                var activity = lanyardData.activities[i]
+                if (activity.type == 4 && activity.emoji) {
+                    
+                    if (activity.emoji.id) {
+                        if (activity.emoji.animated) {
+                            var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.gif?quality=lossless`)).arrayBuffer())
+                        } else {
+                            var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.png?quality=lossless`)).arrayBuffer())
+                        }
+                        fs.writeFileSync(path.join(__dirname, "cached/emojis", activity.emoji.id), emoji)
+                    }
+                }
+            }
         } else if (data.op == 4) {
             globalSpins = data.spins
         }
