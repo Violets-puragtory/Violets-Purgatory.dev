@@ -45,6 +45,10 @@ if (!fs.existsSync(cachePath)) {
     fs.mkdirSync(cachePath)
 }
 
+if (!fs.existsSync(path.join(cachePath, "emojis"))) {
+    fs.mkdirSync(path.join(cachePath, "emojis"))
+}
+
 app.get("/discHTML", (req, res) => {
     res.send(pageUpdater.getActivities())
 })
