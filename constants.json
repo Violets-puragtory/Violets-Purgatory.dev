@@ -150,6 +150,9 @@
         "Risk of Rain 2": {
             "color": "rgb(150, 220, 255)",
             "caseInsensitive": true
+        },
+        "Liberapay": {
+            "color": "yellow"
         }
     }
 }
