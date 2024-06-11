@@ -153,6 +153,9 @@
         },
         "Liberapay": {
             "color": "yellow"
+        },
+        "Roblox": {
+            "color": "rgb(225, 225, 225)"
         }
     }
 }
