@@ -66,9 +66,14 @@
 }
 
 .emoji {
-    max-width: 32px !important;
+    max-width: 2rem !important;
     vertical-align: top;
     padding: 0;
+    margin-right: 10px;
+}
+
+.emoji:hover {
+    transform: scale(1.5);
 }
 
 img:not(.project-inner > div > img):not(.activity>img) {
