@@ -65,6 +65,12 @@
     display: inline-block;
 }
 
+.emoji {
+    max-width: 32px !important;
+    vertical-align: top;
+    padding: 0;
+}
+
 img:not(.project-inner > div > img):not(.activity>img) {
     width: 100%;
     max-width: 168px;
