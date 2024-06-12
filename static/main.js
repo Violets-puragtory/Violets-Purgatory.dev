@@ -60,7 +60,6 @@ function spinLoop() {
                 document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
             }
             spins += 1/spinSpeed / 3
-            document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
             if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
                 document.querySelector(".globalSpins").innerHTML = globalSpins + 1
                 lastSent = Math.floor(spins)
@@ -71,7 +70,9 @@ function spinLoop() {
         } else {
             music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
             music.volume = lerp(music.volume, 0, 1/spinSpeed * 4)
+            spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
+        document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
         spinLoop()
     }, 1/spinSpeed * 1000);
 }
@@ -110,7 +111,7 @@ window.onload = function () {
 
             spinning = false
 
-            pfp.style.transition = "all 3s cubic-bezier(0.39, 0.575, 0.565, 1)"
+            // pfp.style.transition  = "all 3s cubic-bezier(0.39, 0.575, 0.565, 1)"
 
             pfp.style.scale = "1"
         }
