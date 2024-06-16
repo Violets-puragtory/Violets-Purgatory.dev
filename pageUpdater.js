@@ -79,7 +79,7 @@ function converter(html) {
                     if (status.emoji.id) {
                         addedHTML += `<img src="/emojis/${status.emoji.id}" title="${status.emoji.name}" class="emoji"/>`
                     } else  {
-                        addedHTML += status.emoji.name
+                        addedHTML += status.emoji.name + " "
                     }
                 }
                 addedHTML += status.state
