@@ -173,8 +173,14 @@ function converter(html) {
     
                         var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ")
                         var startContent = element.content.substring(spanStart, termIndex)
-    
-                        var replacement = `<span style="color: ${termProps.color}">${startContent + highTable[index] + endContent}</span>`
+                        
+                        var style = ""
+
+                        if (termProps.color) {
+                            style += `color: ${termProps.color};`
+                        }
+
+                        var replacement = `<span style="${style}">${startContent + highTable[index] + endContent}</span>`
                         
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
