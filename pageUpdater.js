@@ -171,16 +171,20 @@ function converter(html) {
 
                         var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
     
-                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ")
-                        var startContent = element.content.substring(spanStart, termIndex)
+                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
+                        var startContent = element.content.substring(spanStart - 1, termIndex)
                         
-                        var style = ""
+                        var style = termProps.style || ""
 
                         if (termProps.color) {
                             style += `color: ${termProps.color};`
                         }
 
-                        var replacement = `<span style="${style}">${startContent + highTable[index] + endContent}</span>`
+                        if (style.length > 2) {
+                            style = `style="${style}"`
+                        }
+
+                        var replacement = `<span ${style}>${startContent + highTable[index] + endContent}</span>`
                         
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
