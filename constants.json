@@ -161,6 +161,10 @@
             "color": "rgb(255, 100, 100)",
             "caseInsensitive": true
         },
+        "Teto Territory": {
+            "color": "rgb(255, 100, 100)",
+            "caseInsensitive": true
+        },
         "Teto": {
             "color": "rgb(255, 100, 100)",
             "caseInsensitive": true
