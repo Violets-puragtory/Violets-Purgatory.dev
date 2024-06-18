@@ -175,16 +175,29 @@ function converter(html) {
                         var startContent = element.content.substring(spanStart - 1, termIndex)
                         
                         var style = termProps.style || ""
+                        var classes = termProps.classes || ""
 
                         if (termProps.color) {
                             style += `color: ${termProps.color};`
+                        }
+
+                        if (termProps.italicized) {
+                            style += "font-style: italic;"
+                        }
+
+                        if (termProps.bold) {
+                            classes += "bold"
                         }
 
                         if (style.length > 2) {
                             style = `style="${style}"`
                         }
 
-                        var replacement = `<span ${style}>${startContent + highTable[index] + endContent}</span>`
+                        if (classes.length > 2) {
+                            classes = `class="${classes}"`
+                        }
+
+                        var replacement = `<span ${style} ${classes}>${startContent + highTable[index] + endContent}</span>`
                         
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }

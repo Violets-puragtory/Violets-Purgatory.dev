@@ -328,7 +328,7 @@ em, b, s {
     color: inherit;
 }
 
-b, b > *, .activityTitle, .activityTitle > * {
+b, b > *, .activityTitle, .activityTitle > *, .bold {
     font-family: "RubikBold", Verdana, Geneva, Tahoma, sans-serif;
 }
 

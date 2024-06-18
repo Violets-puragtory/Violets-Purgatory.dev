@@ -168,6 +168,11 @@
         "Teto": {
             "color": "rgb(255, 100, 100)",
             "caseInsensitive": true
+        },
+        "Ryouiki Tenkai": {
+            "bold": true,
+            "italicized": true,
+            "caseInsensitive": true
         }
     }
 }
