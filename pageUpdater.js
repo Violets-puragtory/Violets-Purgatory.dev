@@ -255,7 +255,7 @@ async function updateCommits() {
     var commits = siteResponse.substring(0, siteResponse.indexOf("Commits"))
 
     commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
-    // ^ this works for Forgejo (basically everything i use that isnt Github E.G. Codeberg)
+    // ^ this works for Forgejo (basically everything i use that isnt Github, E.G. Codeberg)
 
     // commits = commits.substring(commits.lastIndexOf(">") + 1)
     // ^ This works for Github (fuck you Github)
