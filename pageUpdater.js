@@ -98,10 +98,10 @@ function converter(html) {
         },
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
+        "LAST_LANYARD": timeFormatter((Date.now() - lastLanyardUpdate) / 1000),
         "WEATHER_MODIFIER": randomThemer.returnTheme(),
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
-        "CACHED_IMAGES": fs.readdirSync(path.join(__dirname, "cached")).length.toString(),
         "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData)
     }
 
