@@ -49,10 +49,6 @@ if (!fs.existsSync(path.join(cachePath, "emojis"))) {
     fs.mkdirSync(path.join(cachePath, "emojis"))
 }
 
-app.get("/discHTML", (req, res) => {
-    res.send(pageUpdater.getActivities())
-})
-
 app.use(pageUpdater.middleWare)
 
 process.on('uncaughtException', (err, origin) => {

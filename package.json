@@ -20,6 +20,7 @@
     "@node-minify/core": "^8.0.6",
     "@node-minify/uglify-js": "^8.0.6",
     "express": "^4.18.2",
+    "glob": "^10.4.2",
     "himalaya": "^1.1.0",
     "minify-html": "^0.0.2",
     "ws": "^8.16.0",
