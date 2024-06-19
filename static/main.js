@@ -18,15 +18,27 @@ const discStatuses = {
 }
 
 const spinSpeed = 30
+var spinFactor = 3
+
+var date = new Date()
+
+var teto = false
+
+if (date.getDay() == 2) {
+    teto = true
+} 
 
 var pfp
 
-var music = new Audio("/snds/Lotus Waters.ogg")
-music.preservesPitch = false
+var music
+
+if (teto) {
+    music = new Audio("/snds/Triple Baka.ogg")
+} else {
+    music = new Audio("/snds/Lotus Waters.ogg")
+}
+
 music.loop = true
-// music.playbackRate = 0
-// var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
-// whipLash.volume = 0.25
 
 var sock
 
@@ -54,12 +66,17 @@ function spinLoop() {
         spinWaiting = false
         if (spinning) {
             music.volume = 0.5
+            if (music.currentTime > 6.5 && teto) {
+                spinFactor = 0.25
+            } else {
+                spinFactor = 3
+            }
             // music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
             if (spins > 1) {
                 document.querySelector(".spinnyCount").style.display = "block"
                 document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
             }
-            spins += 1/spinSpeed / 3
+            spins += 1/spinSpeed / spinFactor
             if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
                 document.querySelector(".globalSpins").innerHTML = globalSpins + 1
                 lastSent = Math.floor(spins)
@@ -69,7 +86,8 @@ function spinLoop() {
             }
         } else {
             // music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
-            music.volume = lerp(music.volume, 0, 1/spinSpeed * 4)
+            music.pause()
+            music.currentTime = 1.5
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
         document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
