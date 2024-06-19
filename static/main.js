@@ -24,7 +24,7 @@ var pfp
 var music = new Audio("/snds/Lotus Waters.ogg")
 music.preservesPitch = false
 music.loop = true
-music.playbackRate = 0
+// music.playbackRate = 0
 // var whipLash = new Audio("/snds/johnny-test-whip-crack.mp3")
 // whipLash.volume = 0.25
 
@@ -54,7 +54,7 @@ function spinLoop() {
         spinWaiting = false
         if (spinning) {
             music.volume = 0.5
-            music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
+            // music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
             if (spins > 1) {
                 document.querySelector(".spinnyCount").style.display = "block"
                 document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
@@ -68,7 +68,7 @@ function spinLoop() {
                 console.log("Spin Sent!")
             }
         } else {
-            music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
+            // music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
             music.volume = lerp(music.volume, 0, 1/spinSpeed * 4)
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }

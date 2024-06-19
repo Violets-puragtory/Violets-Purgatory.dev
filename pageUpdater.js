@@ -47,8 +47,6 @@ function converter(html) {
 
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
 
-    var statusText = ""
-
     var bnchName = "Beta"
     var bnchSub = "beta."
 
