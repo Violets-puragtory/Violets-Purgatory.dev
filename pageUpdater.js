@@ -389,8 +389,9 @@ function socketeer() {
             lastLanyardUpdate = Date.now()
 
             for (var i = 0; i < pregenFiles.length; i++) {
-                // console.log(pregenFiles[i].absolutePath)
+                var startTime = Date.now()
                 pregenFiles[i].html = converter(fs.readFileSync(pregenFiles[i].absolutePath).toString(), false)
+                pregenFiles[i].html = pregenFiles[i].html.replaceAll("{PREGEN_TIME}", Date.now() - startTime)
             }
 
             for (var i = 0; i < lanyardData.activities.length; i++) {
