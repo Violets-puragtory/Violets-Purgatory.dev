@@ -100,8 +100,39 @@ function converter(html) {
         "WEATHER_MODIFIER": randomThemer.returnTheme(),
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
-        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData)
+        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData),
+        "SOCIALS": () => {
+            var socials = lanyardData.socials
+            var html = ""
+            if (socials) {
+                var socialsTable = Object.keys(socials)
+                for (var i = 0; i < socialsTable.length; i++) {
+                    var category = socialsTable[i]
+                    var sites = socials[category]
+                    var sitesTable = Object.keys(sites)
+                    html += `<div class="grid-child"><div><h3>${category}</h3>`
+                    for (var x = 0; x < sitesTable.length; x++) {
+                        var siteName = sitesTable[x]
+                        var siteData = sites[siteName]
+                        if (siteData.url) {
+                            html += `<a class="chip" href="${siteData.url}">${siteName}: ${siteData.name}</a>`
+                        }
+                    }
+                    html += "</div></div>"
+                }
+            }
+            return html
+        }
     }
+
+    // <div class="grid-child">
+    //     <div>
+    //         <h3>Chat</h3>
+    //         <a class="chip" href="https://matrix.to/#/@bingus_violet:matrix.violets-purgatory.dev">Matrix: @bingus_violet:&ZeroWidthSpace;matrix.violets-purgatory.dev</a>
+    //         <a class="chip">Discord: bingus_violet</a>
+    //         <a class="chip">Revolt: Bingus{Violet}#5573</a>
+    //     </div>
+    // </div>
 
     replacers.ALL_KEYWORDS = "{" + Object.keys(replacers).join("}{") + "} "
 
