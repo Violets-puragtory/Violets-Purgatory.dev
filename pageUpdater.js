@@ -68,7 +68,7 @@ function pathReplacer(html) {
     return html
 }
 
-function highlighter(json, full=true) {
+function highlighter(json, full = true) {
     for (var i = 0; i < json.length; i++) {
         var element = json[i]
         if (element.type == "element") {
@@ -81,12 +81,12 @@ function highlighter(json, full=true) {
             for (let index = 0; index < highTable.length; index++) {
                 var term = highTable[index];
                 var termProps = highlightedWords[term]
-                
+
                 var reg = term
                 if (termProps.caseInsensitive) {
                     reg = new RegExp(`(${term})`, "gi")
                 }
-        
+
                 element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
                 element.content = element.content.replaceAll(reg, "{TERM" + index + "}")
                 element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
@@ -98,46 +98,46 @@ function highlighter(json, full=true) {
                     var termProps = highlightedWords[highTable[index]]
                     while (element.content.includes(termKey)) {
                         var termIndex = element.content.indexOf(termKey)
-                    
+
                         var spanEnd = element.content.indexOf(" ", termIndex)
-                                                
+
                         if (spanEnd == -1) {
                             spanEnd = element.content.length
                         }
-    
+
                         var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
-    
+
                         var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
                         var startContent = element.content.substring(spanStart - 1, termIndex)
-                        
+
                         var style = termProps.style || ""
                         var classes = termProps.classes || ""
-    
+
                         if (termProps.color) {
                             style += `color: ${termProps.color};`
                         }
-    
+
                         if (termProps.italicized) {
                             style += "font-style: italic;"
                         }
-    
+
                         if (termProps.bold) {
                             classes += "bold"
                         }
-    
+
                         if (style.length > 2) {
                             style = `style="${style}"`
                         }
-    
+
                         if (classes.length > 2) {
                             classes = `class="${classes}"`
                         }
-    
+
                         var replacement = `<span ${style} ${classes}>${startContent + highTable[index] + endContent}</span>`
-                        
+
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
-            }
+                }
 
                 // element.content = element.content.replaceAll(termKey, replacement)
             }
@@ -147,7 +147,7 @@ function highlighter(json, full=true) {
     return json
 }
 
-function converter(html, dynamic=true) {
+function converter(html, dynamic = true) {
     var startTime = Date.now()
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
 
@@ -178,7 +178,7 @@ function converter(html, dynamic=true) {
                 if (status.emoji) {
                     if (status.emoji.id) {
                         addedHTML += `<img src="/emojis/${status.emoji.id}" title="${status.emoji.name}" class="emoji"/>`
-                    } else  {
+                    } else {
                         addedHTML += status.emoji.name + " "
                     }
                 }
@@ -244,29 +244,34 @@ function converter(html, dynamic=true) {
 
     for (let index = 0; index < rpTable.length; index++) {
         const text = rpTable[index];
+        if (dynamic) {
+            replacers[text] = himalaya.stringify(highlighter(himalaya.parse(replacers[text])))
+        }
         html = html.replaceAll(`{${text}}`, replacers[text])
     }
-    
-    if (html.includes("<body>")) {
-        var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
-        var parsedHTML = himalaya.parse(bodyHTML)
-    } else {
-        var parsedHTML = himalaya.parse(html)
+
+    if (!dynamic) {
+        if (html.includes("<body>")) {
+            var bodyHTML = htmlMinifier.minify(html.substring(html.indexOf("<body>") + 6, html.lastIndexOf("</body>")))
+            var parsedHTML = himalaya.parse(bodyHTML)
+        } else {
+            var parsedHTML = himalaya.parse(html)
+        }
+
+        parsedHTML = highlighter(parsedHTML)
+
+        parsedHTML = himalaya.stringify(parsedHTML)
+        if (html.includes("<body>")) {
+            parsedHTML = "<body>" + parsedHTML + "</body>"
+            html = html.substring(0, html.indexOf("<body>")) + parsedHTML + html.substring(html.indexOf("</body>") + 7)
+        } else {
+            html = parsedHTML
+        }
     }
 
-    // console.log(parsedHTML)
-
-    parsedHTML = highlighter(parsedHTML, dynamic)
-
-    parsedHTML = himalaya.stringify(parsedHTML)
-    if (html.includes("<body>")) {
-        parsedHTML = "<body>" + parsedHTML + "</body>"
-        html = html.substring(0, html.indexOf("<body>")) + parsedHTML + html.substring(html.indexOf("</body>") + 7)
-    } else {
-        html = parsedHTML
+    if (dynamic) {
+        html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
     }
-
-    html = html.replaceAll("{LOAD_TIME}", (Date.now() - startTime).toString() + "ms")
 
     return html
 }
@@ -397,7 +402,7 @@ function socketeer() {
             for (var i = 0; i < lanyardData.activities.length; i++) {
                 var activity = lanyardData.activities[i]
                 if (activity.type == 4 && activity.emoji) {
-                    
+
                     if (activity.emoji.id) {
                         if (activity.emoji.animated) {
                             var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.gif?quality=lossless`)).arrayBuffer())
