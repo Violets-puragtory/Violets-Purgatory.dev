@@ -167,9 +167,14 @@ function converter(html, dynamic = true) {
         },
         "COMMIT_COUNT": commitCount,
         "QUOTE_COUNT": quotes.length,
-        "DISCORD_STATUS":
-            `<span style="color: ${constants.discStatuses[lanyardData.discord_status].color};" class="statusColor">${constants.discStatuses[lanyardData.discord_status].text}</span>` +
-            `<style>.pfp { border-color: ${constants.discStatuses[lanyardData.discord_status].color} }</style>`,
+        "DISCORD_STATUS": () => { 
+            if (lanyardData) {
+                return `<span style="color: ${constants.discStatuses[lanyardData.discord_status].color};" class="statusColor">${constants.discStatuses[lanyardData.discord_status].text}</span>` +
+                `<style>.pfp { border-color: ${constants.discStatuses[lanyardData.discord_status].color} }</style>`;
+            }
+            
+            return "";
+    },
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "CUSTOM_STATUS": () => {
             if (lanyardData && lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
@@ -200,9 +205,9 @@ function converter(html, dynamic = true) {
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
         "SOCIALS": () => {
-            var socials = lanyardData.socials
-            var html = ""
-            if (socials) {
+            if (lanyardData && lanyardData.socials) {
+                var socials = lanyardData.socials
+                var html = ""
                 var socialsTable = Object.keys(socials)
                 for (var i = 0; i < socialsTable.length; i++) {
                     var category = socialsTable[i]
@@ -353,6 +358,16 @@ updateCommits()
 var lastLanyardUpdate = Date.now()
 var lastPong = 0
 
+function pregenerate() {
+    for (var i = 0; i < pregenFiles.length; i++) {
+        var startTime = Date.now()
+        pregenFiles[i].html = converter(fs.readFileSync(pregenFiles[i].absolutePath).toString(), false)
+        pregenFiles[i].html = pregenFiles[i].html.replaceAll("{PREGEN_TIME}", Date.now() - startTime)
+    }
+}
+
+pregenerate()
+
 function socketeer() {
     var lanyard = new WebSocket('https://api.violets-purgatory.dev')
 
@@ -393,12 +408,7 @@ function socketeer() {
             lanyardData = data.d
             lastLanyardUpdate = Date.now()
 
-            for (var i = 0; i < pregenFiles.length; i++) {
-                var startTime = Date.now()
-                pregenFiles[i].html = converter(fs.readFileSync(pregenFiles[i].absolutePath).toString(), false)
-                pregenFiles[i].html = pregenFiles[i].html.replaceAll("{PREGEN_TIME}", Date.now() - startTime)
-            }
-
+            pregenerate()
             for (var i = 0; i < lanyardData.activities.length; i++) {
                 var activity = lanyardData.activities[i]
                 if (activity.type == 4 && activity.emoji) {
