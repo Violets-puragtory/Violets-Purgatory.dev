@@ -39,6 +39,7 @@ if (teto) {
 }
 
 music.loop = true
+music.preservesPitch = false
 
 var sock
 
@@ -65,16 +66,15 @@ function spinLoop() {
     setTimeout(() => {
         spinWaiting = false
         if (spinning) {
-            music.volume = 0.5
+            // music.volume = 0.5
             if (music.currentTime > 6.5 && teto) {
                 spinFactor = 0.25
             } else {
                 spinFactor = 3
             }
-            // music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
-            if (spins > 1) {
-                document.querySelector(".spinnyCount").style.display = "block"
-                document.querySelector(".localSpins").innerHTML = Math.ceil(spins - 1);
+            if (!teto) {
+                music.playbackRate = lerp(music.playbackRate, 1, 1/spinSpeed)
+                music.volume = lerp(music.volume, 0.5, 1/spinSpeed)
             }
             spins += 1/spinSpeed / spinFactor
             if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
@@ -82,12 +82,20 @@ function spinLoop() {
                 lastSent = Math.floor(spins)
                 // resetPFP()
                 sock.send(`{"op": 4}`)
-                console.log("Spin Sent!")
+                if (spins > 1) {
+                    document.querySelector(".spinnyCount").style.display = "block"
+                    document.querySelector(".localSpins").innerHTML = lastSent;
+                }
             }
         } else {
-            // music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
-            music.pause()
-            music.currentTime = 1.5
+            if (!teto) {
+                music.playbackRate = lerp(music.playbackRate, 0.5, 1/spinSpeed)
+                music.volume = lerp(music.volume, -0, 3/spinSpeed)
+            } else {
+                music.pause()
+                music.currentTime = 1.5
+            }
+
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
         document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
