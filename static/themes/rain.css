@@ -12,9 +12,9 @@
 
 .rainContainer {
     height: 100vh;
-    width: 80vw;
+    width: 95vw;
     top: 0px;
-    left: 10vw;
+    left: 2.5vw;
     position: absolute;
     overflow: hidden;
 }

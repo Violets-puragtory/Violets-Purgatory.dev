@@ -1,8 +1,8 @@
 function rain() {
     var html = ""
 
-    html += `<div class="rainStuff"><div class="rainContainer">`
     html += `<link rel="stylesheet" type="text/css" href="/themes/rain.css">`
+    html += `<div class="rainStuff"><div class="rainContainer">`
 
     var amount = 7
 
@@ -13,39 +13,40 @@ function rain() {
     for (let index = 0; index < amount; index++) {
         html += `
         .rainDrop:nth-of-type(${index + 1}) {
-            animation: rainAnim${index} ${(Math.random() * 0.3) + (2)}s linear;
+            animation: rainAnim${index} ${((Math.round(Math.random() * 10) / 10) * 0.3) + 0.6}s linear;
+            animation-delay: ${Math.round(Math.random() * 200) / 100}s;
             animation-iteration-count: infinite;
-            animation-delay: ${Math.round(Math.random() * 100) / 100}s;
+            animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
         }
         `
-        var randos = []
-        for (let index = 0; index < 11; index++) {
-            randos.push(Math.round(Math.random() * 100))
+        
+        var pos = 0
+
+        if (index % 2 == 0) {
+            pos = Math.random() * 30
+        } else {
+            pos = (Math.random() * 30) + 70
         }
+
+        pos = Math.round(pos)
 
         html += `@keyframes rainAnim${index} {    `
-
-        for (let index = 0; index < 5; index++) {
             html += `
-        ${index * 3}0% {
-            top: 110vh;
-            right: ${randos[index]}%;
-            visibility: hidden;
-        }
-
-        ${index * 3}0.1% {
-            top: -10vh;
-            right: ${randos[index + 1]}%;
-            visibility: hidden;
-        }
-        ${index * 3}0.2% {
+        0% {
+            top: -20vh;
+            right: ${pos}%;
             visibility: visible;
         }
-        `
+
+        90% {
+            top: 110vh;
+            right: ${pos}%;
+            visibility: visible;
         }
-        // console.log(html)
-        
-        html += `90.3% { visibility: hidden; }`
+        90.1% {
+            visibility: hidden;
+        }
+        `
 
         html += `}`
 

@@ -1,7 +1,6 @@
 const express = require('express'),
     path = require('path'),
     fs = require('fs'),
-    pageUpdater = require('./pageUpdater.js'),
     WebSocket = require("ws")
 
 var app = express()
@@ -27,6 +26,8 @@ if (!fs.existsSync(configFile)) {
 if (!fs.existsSync(announcementFile)) {
     fs.writeFileSync(announcementFile, ``)
 }
+
+const pageUpdater = require('./pageUpdater.js')
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
