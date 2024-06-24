@@ -22,7 +22,6 @@
 .rainDrop {
     position: absolute;
     width: 5px;
-    backdrop-filter: blur(5px);
     background-color: rgba(0, 0, 255, 0.2);
     height: 10vh;
     visibility: hidden;

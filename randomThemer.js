@@ -57,12 +57,61 @@ function rain() {
     return html
 }
 
-function night() {
+function purpleMagic() {
+    var html = ""
 
+    html += `<link rel="stylesheet" type="text/css" href="/themes/purpleMagic.css">`
+    html += `<div class="magicStuff"><div class="magicContainer">`
+
+    var amount = 30
+
+    for (let index = 0; index < amount; index++) {
+        html += `<div class="particle"></div>`
+    }
+    html += "<style>"
+    for (let index = 0; index < amount; index++) {
+        html += `
+        .particle:nth-of-type(${index + 1}) {
+            animation: magic${index} ${((Math.round(Math.random() * 10) / 10) * 0.3) + 20}s linear, sway 4s cubic-bezier(0.445, 0.05, 0.55, 0.95) alternate;
+            animation-delay: ${Math.round(Math.random() * 100) / 100 * 20}s;
+            animation-iteration-count: infinite;
+
+        }
+        `
+        
+        var pos = Math.round(Math.random() * 100)
+
+        html += `@keyframes magic${index} {    `
+
+            html += `
+        0% {
+            top: 110vh;
+            right: ${pos}%;
+            visibility: visible;
+        }
+
+        90% {
+            top: -10vh;
+            right: ${pos}%;
+            visibility: visible;
+        }
+        90.1% {
+            visibility: hidden;
+        }
+        `
+
+        html += `}`
+
+    }
+    html += "</style>"
+    html += "</div></div>"
+
+    return html
 }
 
 var events = [
     rain(),
+    purpleMagic(),
     "",
 ]
 
