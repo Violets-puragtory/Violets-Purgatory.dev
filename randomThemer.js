@@ -119,7 +119,7 @@ module.exports = {
 
     returnTheme: function() {
         var time = new Date()
-        return events[time.getUTCDay() % events.length]
+        return events[time.getDate() % events.length]
     },
 
 }
