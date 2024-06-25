@@ -78,13 +78,13 @@ function spinLoop() {
             }
             spins += 1/spinSpeed / spinFactor
             if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
-                document.querySelector(".globalSpins").innerHTML = globalSpins + 1
+                $(".globalSpins").innerHTML = globalSpins + 1
                 lastSent = Math.floor(spins)
                 // resetPFP()
                 sock.send(`{"op": 4}`)
                 if (spins > 1) {
-                    document.querySelector(".spinnyCount").style.display = "block"
-                    document.querySelector(".localSpins").innerHTML = lastSent;
+                    $(".spinnyCount").css("display", "block")
+                    $(".localSpins").html(lastSent);
                 }
             }
         } else {
@@ -98,7 +98,7 @@ function spinLoop() {
 
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
-        document.querySelector(".pfp").style.rotate = (spins * 360) + "deg"
+        $(".pfp").css("rotate", (spins * 360) + "deg")
         spinLoop()
     }, 1/spinSpeed * 1000);
 }
@@ -110,11 +110,11 @@ window.onbeforeunload = function () {
 window.onload = function () {
     window.scrollTo(0, 0);
 
-    pfp = document.querySelector(".pfp")
+    pfp = $(".pfp")
 
     spinLoop()
 
-    pfp.addEventListener("mousedown", () => {
+    pfp.on("mousedown", () => {
         // if (!spinWaiting) {
         //     spinLoop();
         // }
@@ -122,9 +122,9 @@ window.onload = function () {
 
         spinning = true
 
-        pfp.style.transition = ""
+        pfp.css("transition", "")
 
-        pfp.style.scale = "1.1"
+        pfp.css("scale", "1.1")
     })
 
     document.body.onmouseup = () => {
@@ -139,7 +139,7 @@ window.onload = function () {
 
             // pfp.style.transition  = "all 3s cubic-bezier(0.39, 0.575, 0.565, 1)"
 
-            pfp.style.scale = "1"
+            pfp.css("scale", "1")
         }
     }
     socketeer()
@@ -185,20 +185,20 @@ function socketeer() {
             globalSpins = data.spins
             if (firsttimeDebounce == true) {
                 firsttimeDebounce = false
-                document.querySelector(".globalSpins").innerHTML = globalSpins + 1;
+                $(".globalSpins").innerHTML = globalSpins + 1;
             } else {
-                document.querySelector(".globalSpins").innerHTML = globalSpins;
+                $(".globalSpins").innerHTML = globalSpins;
             }
         } else if (data.op == 0) {
             var lanyard = data.d
             var statusInfo = discStatuses[lanyard.discord_status]
-            var lastStatus = document.querySelector(".statusColor")
+            var lastStatus = $(".statusColor")
 
             if (lastStatus.innerHTML != statusInfo.text) {
                 lastStatus.innerHTML = statusInfo.text
-                lastStatus.style.color = statusInfo.color
+                lastStatus.css("color", statusInfo.color)
 
-                pfp.style.borderColor = lastStatus.style.color
+                pfp.css("borderColor", statusInfo.color)
 
                 resetPFP()
             }
@@ -210,7 +210,7 @@ function socketeer() {
             // }
 
             var discFetch = await (await fetch("/discHTML")).text()
-            document.querySelector("#activityHtml").innerHTML = discFetch
+            $("#activityHtml").html(discFetch)
         } else if (data.op == 3) {
             lastPong = Date.now()
         } else {
