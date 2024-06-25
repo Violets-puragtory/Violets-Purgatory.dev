@@ -20,6 +20,7 @@ var globalSpins = 0
 var commitCount = "500+"
 
 var uptime = Date.now()
+var lastPregen = 0
 
 var pregenFiles = []
 
@@ -231,6 +232,7 @@ function converter(html, dynamic = true) {
         "LAST_LANYARD": timeFormatter((Date.now() - api.lastLanyardUpdate) / 1000),
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
+        "LAST_PREGEN": timeFormatter((Date.now() - lastPregen) / 1000)
     }
 
     if (dynamic) {
@@ -353,6 +355,7 @@ updateCommits()
 
 
 function pregenerate() {
+    lastPregen = Date.now()
     for (var i = 0; i < pregenFiles.length; i++) {
         var startTime = Date.now()
         pregenFiles[i].html = converter(fs.readFileSync(pregenFiles[i].absolutePath).toString(), false)
@@ -362,9 +365,13 @@ function pregenerate() {
 
 pregenerate()
 
-api.events.on("lanyardUpdate", async () => {
-    pregenerate()
+api.events.on("lanyardConnect", pregenerate)
 
+api.events.on("lanyardUpdate", async () => {
+    if (!api.lanyard.activityChanged) {
+        pregenerate()
+    }
+    
     for (var i = 0; i < api.lanyard.activities.length; i++) {
         var activity = api.lanyard.activities[i]
         if (activity.type == 4 && activity.emoji) {

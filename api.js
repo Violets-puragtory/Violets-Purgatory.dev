@@ -56,6 +56,7 @@ function socketeer() {
             module.exports.connected = true
             ping(30000)
             lastPong = Date.now()
+            events.emit("lanyardConnect")
         } else if (data.op == 3) {
             lastPong = Date.now()
         } else if (data.op == 0) {
