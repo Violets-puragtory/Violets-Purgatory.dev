@@ -215,7 +215,7 @@ function converter(html, dynamic = true) {
                         var siteName = sitesTable[x]
                         var siteData = sites[siteName]
                         if (siteData.url) {
-                            html += `<a class="chip" href="${siteData.url}">${siteName}: ${siteData.name}</a>`
+                            html += `<a class="chip" href="${siteData.url}">${siteName}: ${siteData.name.replaceAll("Violet", "{Violet}")}</a>`
                         }
                     }
                     html += "</div></div>"
