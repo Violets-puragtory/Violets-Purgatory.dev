@@ -24,6 +24,8 @@ var lastPregen = 0
 
 var pregenFiles = []
 
+var javascriptCache = {}
+
 var globResult = glob.globSync("**/static/**/*.html", { absolute: true })
 for (var i = 0; i < globResult.length; i++) {
     var result = globResult[i]
@@ -328,10 +330,13 @@ module.exports = {
             if (!filePath.includes(".js")) {
                 data = htmlMinifier.minify(data)
             } else {
-                data = await minify({
-                    compressor: uglifyJs,
-                    content: data
-                })
+                if (!javascriptCache[filePath]) {
+                    javascriptCache[filePath] = await minify({
+                        compressor: uglifyJs,
+                        content: data
+                    })
+                }
+                data = javascriptCache[filePath]
             }
 
             res.send(data)
