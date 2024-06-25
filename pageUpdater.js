@@ -38,6 +38,10 @@ function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+function makeHtmlSafe(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 function timeFormatter(seconds) {
     seconds = Math.ceil(seconds)
     var minutes = Math.ceil(seconds / 60)
@@ -122,8 +126,8 @@ function highlighter(json, full = true) {
 
                         if (termProps.outline) {
                             var width = 2
-                            style += `text-shadow: -1px -1px 0 ${termProps.outline}, 1px -1px 0 ${termProps.outline}, -1px 1px 0 ${termProps.outline}, 1px 1px 0 ${termProps.outline};`
-                            // style += `-webkit-text-stroke: 1px ${termProps.outline};`
+                            // style += `text-shadow: -1px -1px 0 ${termProps.outline}, 1px -1px 0 ${termProps.outline}, -1px 1px 0 ${termProps.outline}, 1px 1px 0 ${termProps.outline};`
+                            style += `-webkit-text-stroke: 1px ${termProps.outline};`
                             // ^ Not in use because it looks bad :30
                         }
 
@@ -191,7 +195,8 @@ function converter(html, dynamic = true) {
                         addedHTML += status.emoji.name + " "
                     }
                 }
-                addedHTML += status.state
+                
+                addedHTML += makeHtmlSafe(status.state)
                 addedHTML += "</p>"
                 return addedHTML
             }
