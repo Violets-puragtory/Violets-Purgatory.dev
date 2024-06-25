@@ -1,13 +1,13 @@
 const path = require('path'),
     fs = require('fs'),
-    WebSocket = require('ws'),
     minify = require('@node-minify/core'),
     uglifyJs = require("@node-minify/uglify-js"),
     htmlMinifier = require("minify-html"),
     activityToHTML = require("./overcomplicatedStatuses.js"),
     randomThemer = require("./randomThemer.js"),
     himalaya = require("himalaya"),
-    glob = require("glob")
+    glob = require("glob"),
+    api = require("./api.js")
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
@@ -18,8 +18,6 @@ var titles = constants.titles
 var globalSpins = 0
 
 var commitCount = "500+"
-
-var lanyardData = undefined
 
 var uptime = Date.now()
 
@@ -168,17 +166,15 @@ function converter(html, dynamic = true) {
         "COMMIT_COUNT": commitCount,
         "QUOTE_COUNT": quotes.length,
         "DISCORD_STATUS": () => { 
-            if (lanyardData) {
-                return `<span style="color: ${constants.discStatuses[lanyardData.discord_status].color};" class="statusColor">${constants.discStatuses[lanyardData.discord_status].text}</span>` +
-                `<style>.pfp { border-color: ${constants.discStatuses[lanyardData.discord_status].color} }</style>`;
-            }
+            return `<span style="color: ${constants.discStatuses[api.lanyard.discord_status].color};" class="statusColor">${constants.discStatuses[api.lanyard.discord_status].text}</span>` +
+            `<style>.pfp { border-color: ${constants.discStatuses[api.lanyard.discord_status].color} }</style>`;
             
             return "";
     },
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "CUSTOM_STATUS": () => {
-            if (lanyardData && lanyardData.activities[0] && lanyardData.activities[0].type == 4) {
-                var status = lanyardData.activities[0]
+            if (api.lanyard.activities[0] && api.lanyard.activities[0].type == 4) {
+                var status = api.lanyard.activities[0]
                 var addedHTML = "<hr/><p>"
                 if (status.emoji) {
                     if (status.emoji.id) {
@@ -205,8 +201,8 @@ function converter(html, dynamic = true) {
         "WEATHER_TEXT": "",
         "ANNOUNCEMENT": fs.readFileSync(path.join(__dirname, "config/announcement.html")),
         "SOCIALS": () => {
-            if (lanyardData && lanyardData.socials) {
-                var socials = lanyardData.socials
+            if (api.lanyard.socials) {
+                var socials = api.lanyard.socials
                 var html = ""
                 var socialsTable = Object.keys(socials)
                 for (var i = 0; i < socialsTable.length; i++) {
@@ -229,10 +225,10 @@ function converter(html, dynamic = true) {
     }
 
     var realtimeReplacers = {
-        "ACTIVITIES": activityToHTML.activitiesToHTML(lanyardData),
+        "ACTIVITIES": activityToHTML.activitiesToHTML(api.lanyard),
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
-        "LAST_LANYARD": timeFormatter((Date.now() - lastLanyardUpdate) / 1000),
+        "LAST_LANYARD": timeFormatter((Date.now() - api.lastLanyardUpdate) / 1000),
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
         "RANDOM_QUOTE": quotes[Math.floor(Math.random() * quotes.length)],
     }
@@ -283,7 +279,7 @@ function converter(html, dynamic = true) {
 
 module.exports = {
     getActivities: function () {
-        return htmlMinifier.minify(converter(activityToHTML.activitiesToHTML(lanyardData)))
+        return htmlMinifier.minify(converter(activityToHTML.activitiesToHTML(api.lanyard)))
     },
 
     middleWare: async function (req, res, next) {
@@ -355,8 +351,6 @@ updateCommits()
 
 // Lanyard Stuffs
 
-var lastLanyardUpdate = Date.now()
-var lastPong = 0
 
 function pregenerate() {
     for (var i = 0; i < pregenFiles.length; i++) {
@@ -368,65 +362,21 @@ function pregenerate() {
 
 pregenerate()
 
-function socketeer() {
-    var lanyard = new WebSocket('https://api.violets-purgatory.dev')
+api.events.on("lanyardUpdate", async () => {
+    pregenerate()
 
-    lanyard.on("error", (error) => {
-        console.log(error)
-    })
+    for (var i = 0; i < api.lanyard.activities.length; i++) {
+        var activity = api.lanyard.activities[i]
+        if (activity.type == 4 && activity.emoji) {
 
-    lanyard.on("close", () => {
-        console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
-        setTimeout(() => {
-            socketeer()
-        }, 30000);
-    })
-
-    function ping(dur) {
-        lanyard.send(JSON.stringify({
-            op: 3
-        }))
-        setTimeout(() => {
-            ping(dur)
-            if (Date.now() - lastPong > 120000) {
-                lanyard.close()
-                console.log("Max duration since last pong exceeded- Closing socket.")
-            }
-        }, dur);
-    }
-
-    lanyard.addEventListener("message", async (res) => {
-        var data = JSON.parse(res.data)
-        // console.log(data.op)
-        if (data.op == 1) {
-            console.log("Connected to Discord Websocket!")
-            ping(30000)
-            lastPong = Date.now()
-        } else if (data.op == 3) {
-            lastPong = Date.now()
-        } else if (data.op == 0) {
-            lanyardData = data.d
-            lastLanyardUpdate = Date.now()
-
-            pregenerate()
-            for (var i = 0; i < lanyardData.activities.length; i++) {
-                var activity = lanyardData.activities[i]
-                if (activity.type == 4 && activity.emoji) {
-
-                    if (activity.emoji.id) {
-                        if (activity.emoji.animated) {
-                            var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.gif?quality=lossless`)).arrayBuffer())
-                        } else {
-                            var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.png?quality=lossless`)).arrayBuffer())
-                        }
-                        fs.writeFileSync(path.join(__dirname, "cached/emojis", activity.emoji.id), emoji)
-                    }
+            if (activity.emoji.id) {
+                if (activity.emoji.animated) {
+                    var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.gif?quality=lossless`)).arrayBuffer())
+                } else {
+                    var emoji = Buffer.from(await (await fetch(`https://cdn.discordapp.com/emojis/${activity.emoji.id}.png?quality=lossless`)).arrayBuffer())
                 }
+                fs.writeFileSync(path.join(__dirname, "cached/emojis", activity.emoji.id), emoji)
             }
-        } else if (data.op == 4) {
-            globalSpins = data.spins
         }
-    })
-}
-
-socketeer()
+    }
+})

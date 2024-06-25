@@ -21,7 +21,6 @@
         "World's Worst Developer",
         "The worst git user to exist",
         "These birds are Pissing me off... I'm the original &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starwalker",
-
         "Make sure to check out <a href='https://univerter.dev'>Univerter!</a>",
         "Check out <a href='https://asahixp.pages.gay'>Asahi's website! &lt;3</a>",
         "Check out <a href='https://sylvie.loveh.art/'>Sylvie's website! &lt;3</a>"
@@ -36,6 +35,84 @@
         "https://unusual-back-production.up.railway.app/",
         "https://axiomatic-hair-production.up.railway.app/"
     ],
+    "fallbackLanyard": {
+        "kv": {},
+        "spotify": null,
+        "discord_user": {
+            "id": "534132311781015564",
+            "username": "bingus_violet",
+            "avatar": "f3fe0d6a1dd2fe301f437e02333e602d",
+            "discriminator": "0",
+            "bot": false,
+            "clan": null,
+            "global_name": "Violet",
+            "avatar_decoration_data": null,
+            "display_name": "Violet",
+            "public_flags": 0
+        },
+        "activities": [],
+        "discord_status": "offline",
+        "active_on_discord_web": false,
+        "active_on_discord_desktop": false,
+        "active_on_discord_mobile": false,
+        "listening_to_spotify": false,
+        "socials": {
+            "Social Media": {
+                "Fedi": {
+                    "name": "bingus_violet@floofy.city",
+                    "url": "https://floofy.city/@bingus_violet"
+                },
+                "Youtube": {
+                    "name": "Violet's Fiasco",
+                    "url": "https://www.youtube.com/channel/UChcrBJNJLZucy3TPyGyAY2g"
+                },
+                "Liberapay": {
+                    "name": "bingus_violet",
+                    "url": "https://en.liberapay.com/bingus_violet/"
+                }
+            },
+            "Messaging": {
+                "Matrix": {
+                    "name": "@bingus_violet:matrix.violets-purgatory.dev",
+                    "url": "https://matrix.to/#/@bingus_violet:matrix.violets-purgatory.dev"
+                },
+                "Discord": {
+                    "name": "bingus_violet"
+                },
+                "Revolt": {
+                    "name": "BingusViolet#5573"
+                }
+            },
+            "Coding": {
+                "Forgejo": {
+                    "name": "bingus_violet@git.violets-purgatory.dev",
+                    "url": "https://git.violets-purgatory.dev/bingus_violet/"
+                },
+                "Codeberg": {
+                    "name": "bingus_violet",
+                    "url": "https://codeberg.org/Bingus_violet"
+                },
+                "Docker": {
+                    "name": "bingusviolet",
+                    "url": "https://hub.docker.com/u/bingusviolet"
+                },
+                "Github": {
+                    "name": "violets-puragtory",
+                    "url": "https://github.com/violets-puragtory"
+                }
+            },
+            "Games": {
+                "Steam": {
+                    "name": "Violet",
+                    "url": "https://steamcommunity.com/id/violet-The-Thigh-high-obtainer/"
+                },
+                "Roblox": {
+                    "name": "@bingus_violet",
+                    "url": "https://www.roblox.com/users/28347789/profile"
+                }
+            }
+        }
+    },
     "highlightedWords": {
         "birds": {
             "color": "yellow"
