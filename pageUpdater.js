@@ -120,6 +120,13 @@ function highlighter(json, full = true) {
                             style += "font-style: italic;"
                         }
 
+                        if (termProps.outline) {
+                            var width = 2
+                            style += `text-shadow: -1px -1px 0 ${termProps.outline}, 1px -1px 0 ${termProps.outline}, -1px 1px 0 ${termProps.outline}, 1px 1px 0 ${termProps.outline};`
+                            // style += `-webkit-text-stroke: 1px ${termProps.outline};`
+                            // ^ Not in use because it looks bad :30
+                        }
+
                         if (termProps.bold) {
                             classes += "bold"
                         }

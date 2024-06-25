@@ -254,6 +254,12 @@
             "bold": true,
             "italicized": true,
             "caseInsensitive": true
+        },
+        "Pokerogue": {
+            "caseInsensitive": true,
+            "color": "#366383",
+            "outline": "#d43131",
+            "bold": true
         }
     }
 }
