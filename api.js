@@ -29,6 +29,7 @@ function socketeer() {
     lanyard.on("close", () => {
         console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
         module.exports.lanyard = constants.fallbackLanyard
+        module.exports.connected = false
         setTimeout(() => {
             socketeer()
         }, 30000);
@@ -52,6 +53,7 @@ function socketeer() {
         // console.log(data.op)
         if (data.op == 1) {
             console.log("Connected to Discord Websocket!")
+            module.exports.connected = true
             ping(30000)
             lastPong = Date.now()
         } else if (data.op == 3) {
