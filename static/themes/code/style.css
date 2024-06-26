@@ -1,0 +1,16 @@
+* {
+    font-family: "Consolas", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New";
+}
+
+body {
+    background: black;
+}
+
+.mainTitle {
+    color: limegreen !important;
+}
+
+.mainTitle {
+    animation: typer 2s linear;
+    margin: auto;
+}

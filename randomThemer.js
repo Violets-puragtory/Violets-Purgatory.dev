@@ -109,14 +109,18 @@ function purpleMagic() {
     return html
 }
 
+function code() {
+    return '<link rel="stylesheet" type="text/css" href="/themes/code/style.css"> <script src="/themes/code/script.js"></script>'
+}
+
 var events = [
     rain(),
     purpleMagic(),
+    code(),
     "",
 ]
 
 module.exports = {
-
     returnTheme: function() {
         var time = new Date()
         return events[time.getDate() % events.length]
