@@ -12,7 +12,11 @@ function typeWriter(elem, delay) {
             }, 20)
         }
     }
-    setTimeout(nextLetter, delay);
+    setTimeout(() => {
+        if (elem.text() == '_'.repeat(elemText.length)) {
+            nextLetter()
+        }
+    }, delay);
 }
 
 $(document).ready(() => {
