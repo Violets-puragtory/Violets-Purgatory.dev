@@ -36,6 +36,16 @@ for (var i = 0; i < globResult.length; i++) {
     })
 }
 
+(async function() {
+    globResult = glob.globSync("**/static/**/*.js", { absolute: true })
+    for (var i = 0; i < globResult.length; i++) {
+        javascriptCache[globResult[i]] = await minify({
+            compressor: uglifyJs,
+            content: fs.readFileSync(globResult[i]).toString()
+        })
+    }
+})()
+
 function firstToUpper(str) {
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
@@ -179,12 +189,12 @@ function converter(html, dynamic = true) {
         },
         "COMMIT_COUNT": commitCount,
         "QUOTE_COUNT": quotes.length,
-        "DISCORD_STATUS": () => { 
+        "DISCORD_STATUS": () => {
             return `<span style="color: ${constants.discStatuses[api.lanyard.discord_status].color};" class="statusColor">${constants.discStatuses[api.lanyard.discord_status].text}</span>` +
-            `<style>.pfp { border-color: ${constants.discStatuses[api.lanyard.discord_status].color} }</style>`;
-            
+                `<style>.pfp { border-color: ${constants.discStatuses[api.lanyard.discord_status].color} }</style>`;
+
             return "";
-    },
+        },
         "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
         "CUSTOM_STATUS": () => {
             if (api.lanyard.activities[0] && api.lanyard.activities[0].type == 4) {
@@ -197,7 +207,7 @@ function converter(html, dynamic = true) {
                         addedHTML += status.emoji.name + " "
                     }
                 }
-                
+
                 addedHTML += makeHtmlSafe(status.state)
                 addedHTML += "</p>"
                 return addedHTML
@@ -331,12 +341,6 @@ module.exports = {
             if (!filePath.includes(".js")) {
                 data = htmlMinifier.minify(data)
             } else {
-                if (!javascriptCache[filePath]) {
-                    javascriptCache[filePath] = await minify({
-                        compressor: uglifyJs,
-                        content: data
-                    })
-                }
                 data = javascriptCache[filePath]
             }
 
@@ -389,7 +393,7 @@ api.events.on("lanyardUpdate", async () => {
     if (!api.lanyard.activityChanged) {
         pregenerate()
     }
-    
+
     for (var i = 0; i < api.lanyard.activities.length; i++) {
         var activity = api.lanyard.activities[i]
         if (activity.type == 4 && activity.emoji) {
