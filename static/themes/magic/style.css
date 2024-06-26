@@ -8,6 +8,7 @@
     top: 0;
     height: 0;
     z-index: 0;
+    pointer-events: none;
 }
 
 .magicContainer {
