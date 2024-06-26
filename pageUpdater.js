@@ -240,6 +240,7 @@ function converter(html, dynamic = true) {
     }
 
     var realtimeReplacers = {
+        "API_CONNECTED": api.connected.toString(),
         "ACTIVITIES": activityToHTML.activitiesToHTML(api.lanyard),
         "SPINCOUNT": globalSpins,
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),

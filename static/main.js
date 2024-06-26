@@ -110,6 +110,8 @@ window.onbeforeunload = function () {
 window.onload = function () {
     window.scrollTo(0, 0);
 
+    $("#jsEnabled").text("true")
+
     pfp = $(".pfp")
 
     spinLoop()
@@ -173,6 +175,7 @@ function socketeer() {
 
     sock.addEventListener("close", () => {
         console.log("Connection Closed. Attempting Reconnect in 30 seconds.")
+        $("#apiConnected").text("false")
         setTimeout(() => {
             socketeer()
         }, 30000);
@@ -182,6 +185,7 @@ function socketeer() {
         data = data.data
         data = JSON.parse(data)
         if (data.op == 4) {
+            $("#apiConnected").text("true")
             globalSpins = data.spins
             if (firsttimeDebounce == true) {
                 firsttimeDebounce = false

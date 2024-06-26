@@ -20,7 +20,7 @@
     <meta content="https://api.violets-purgatory.dev/v1/pfp" property="og:image" />
     <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
 </head>
-    
+
 <body>
     {WEATHER_MODIFIER}
     <a href="../" class="chip">Home</a>
@@ -42,6 +42,9 @@
             <li>Uptime: {UPTIME}</li>
             <li>Last Lanyard update: {LAST_LANYARD}</li>
             <li>Last Pregeneration: {LAST_PREGEN}</li>
+            <li>Server connected to API: {API_CONNECTED}</li>
+            <li>Javascript Loaded/Enabled: <span id="jsEnabled">false</span></li>
+            <li>Client connected to API: <span id="apiConnected">false</span></li>
         </ul>
     </main>
 </div>
