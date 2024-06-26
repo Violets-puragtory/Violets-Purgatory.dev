@@ -1,7 +1,7 @@
 function rain() {
     var html = ""
 
-    html += `<link rel="stylesheet" type="text/css" href="/themes/rain.css">`
+    html += `<link rel="stylesheet" type="text/css" href="/themes/rain/style.css"> <script src="/themes/rain/script.js"></script>`
     html += `<div class="rainStuff"><div class="rainContainer">`
 
     var amount = 7
@@ -60,10 +60,10 @@ function rain() {
 function purpleMagic() {
     var html = ""
 
-    html += `<link rel="stylesheet" type="text/css" href="/themes/purpleMagic.css">`
+    html += `<link rel="stylesheet" type="text/css" href="/themes/magic/style.css"> <script src="/themes/magic/script.js"></script>`
     html += `<div class="magicStuff"><div class="magicContainer">`
 
-    var amount = 30
+    var amount = 15
 
     for (let index = 0; index < amount; index++) {
         html += `<div class="particle"></div>`
@@ -78,6 +78,10 @@ function purpleMagic() {
 
         }
         `
+
+        if (index % 2 == 0) {
+            html.replace("alternate", "alternate-reverse")
+        }
         
         var pos = Math.round(Math.random() * 100)
 
@@ -114,9 +118,9 @@ function code() {
 }
 
 var events = [
-    rain(),
-    purpleMagic(),
     code(),
+    purpleMagic(),
+    rain(),
     "",
 ]
 
