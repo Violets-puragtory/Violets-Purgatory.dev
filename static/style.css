@@ -299,6 +299,7 @@ video {
     border: 2px rgb(125, 100, 155) solid;
     border-radius: 15px;
     transition: all 5s cubic-bezier(0.39, 0.575, 0.565, 1);
+    z-index: 5;
 }
 
 video:active {
