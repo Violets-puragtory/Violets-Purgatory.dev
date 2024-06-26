@@ -6,7 +6,7 @@ body {
     background: black;
 }
 
-.mainTitle {
+.mainTitle, .mainTitle > span {
     color: limegreen !important;
 }
 
