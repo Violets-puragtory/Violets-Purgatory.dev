@@ -195,7 +195,12 @@ function converter(html, dynamic = true) {
 
             return "";
         },
-        "TOPBAR": `<div id="topbar"><h3><a href="/socials">Socials</a></h3></div>`,
+        "TOPBAR": `<div id="topbar">
+        <h3><a class="chip" href="/">Home</a>
+        <a class="chip" href="/socials">Socials</a>
+        <a class="chip" href="/stats">Stats</a>
+        <a class="chip" href="/faq">Nerd FAQ</a></h3>
+        </div>`,
         "CUSTOM_STATUS": () => {
             if (api.lanyard.activities[0] && api.lanyard.activities[0].type == 4) {
                 var status = api.lanyard.activities[0]

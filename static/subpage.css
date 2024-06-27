@@ -9,23 +9,10 @@ h1:nth-of-type(1) {
     
 }
 
-body {
+/* body {
     padding: 5vh 0;
-}
+} */
 
 .mainDiv {
-    animation: fadeUp 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: auto;
-}
-
-@keyframes fadeUp {
-    0% {
-        transform: translateY(50vw);
-        opacity: 0;
-    }
-
-    100% {
-        transform: none;
-        opacity: 1;
-    }
 }

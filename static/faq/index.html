@@ -24,9 +24,7 @@
 <body>
     {WEATHER_MODIFIER}
 
-    <a href="../" class="chip">Home</a>
-    <a href="../socials" class="chip">Socials</a>
-    <a href="../stats" class="chip">Stats</a>
+    {TOPBAR}
     <h1>FAQ (and more!)</h1>
     <div class="mainDiv">
         <h2><br>1. Questions & Answers<hr></h2>
@@ -34,6 +32,7 @@
             <h3>Why are so many words colored?</h3>
             <p>I like the way it looks to have certain words be highlighted, makes it look fancier and easier to read (imo). So, when I remade this site, I went ahead and added an <em>Automatic Word Highlighting System!</em> This allows me have words automatically highlighted, on the server side, without having to do it in the code manually. Here's the current list of highlighted words:</p>
             <p class="textBlock">{ALL_HIGHLIGHTS}</p>
+            <p>As time continues, more words are added to the highlighting list, and I'm slowly adding more features, like disabling case sensitivity, boldness, italics, outlines, and more.</p>
             <br>
             <h3>I thought the site doesn't use Javascript? So why is it there?</h3>
             <p>Originally, all my sites were completely Javascript free. As of late, though, I decided to add Javascript to this one. Javascript will <b><em>NEVER</em></b> be a requirement on this site. Javascript will ONLY be used where necessary, and I will do everything possible to make the experience indistinguishable.</p>
@@ -48,6 +47,10 @@
         </ol>
         <p>Slowly, though, they're slowly all merging into one CSS file, so I can't be sure it'll stay this way for long.</p>
         <p>As for the "unused" style.css, though, that exists for compatibility reasons- many of my older sites just grabbed CSS from the site for their css. This has been <b>mostly</b> fixed, but the FileShare still does, so it'll stay until I finally give the FileShare its own CSS.</p>
+        <h3 id="embeds">Why/How are certain segments of pages "embedded" on others?</h3>
+        <p>On the main page, you may notice certain other pages contained inside it, such as this page, the stats page, and socials page. And, most notably with this page, it's not the full page, either. <br>
+        This is because of a feature I created called "page embeds", which allow me to embed a portion of content from another page, without the use of any sort of iframes. This was made so I could keep information on multiple pages up to date.<br>
+        It's much more performant and scalable than an I-frame as well.</p>
     </div>
 </body>
 

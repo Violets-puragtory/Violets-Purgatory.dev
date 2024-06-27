@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" type="text/css" href="../subpage.css">
-    
+
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
 
@@ -16,38 +16,55 @@
     <meta name="darkreader-lock">
 
     <meta content="Stats - Violet's Purgatory" property="og:title" />
-    <meta content="This page just does a semi-intensive speed test on the site, and displays related statistics." property="og:description" />
+    <meta content="This page just does a semi-intensive speed test on the site, and displays related statistics."
+        property="og:description" />
     <meta content="https://api.violets-purgatory.dev/v1/pfp" property="og:image" />
     <meta content="#a200ff" data-react-helmet="true" name="theme-color" />
 </head>
 
 <body>
     {WEATHER_MODIFIER}
-    <a href="../" class="chip">Home</a>
-    <a href="../socials" class="chip">Socials</a>
-    <a href="../faq" class="chip">FAQ</a>
-    <h1>Stats</h1>
-    <p>This is the <em>full</em> stats page! This page exists for testing the speed of site generation, and contains every keyword on Violet's Purgatory in a hidden div.</p>
-    
-    <div style="display: none">
-        {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS} {ALL_KEYWORDS}
-    </div>
 
-    <main>
-        <h1><hr>Stats</h1>
-        <br>
+    {TOPBAR}
+    <h1>Stats</h1>
+    <div class="mainDiv">
+        <p>Welcome to the stats page! This page is now "deprecated"... sorta.<br>
+        Feel free to read more about it at the bottom of the page.</p>
+        <main>
+            <h1>
+                <hr>Stats
+            </h1>
+            <br>
+            <ul>
+                <li>Page generation time: {LOAD_TIME}</li>
+                <li>Pregeneration time: {PREGEN_TIME}ms</li>
+                <li>Uptime: {UPTIME}</li>
+                <li>Last Lanyard update: {LAST_LANYARD}</li>
+                <li>Last Pregeneration: {LAST_PREGEN}</li>
+                <li>Server connected to API: {API_CONNECTED}</li>
+                <li>Javascript Loaded/Enabled: <span id="jsEnabled">false</span></li>
+                <li>Client connected to API: <span id="apiConnected">false</span></li>
+            </ul>
+        </main>
+        <h2><hr>Why does this page exist?</h2>
+        <p>Originally, the stats page served the purpose of putting heavy load on the server for testing page generation times. This had a number of problems, though:</p>
+        <ol>
+            <li>Anyone could freely use this page and put the server under heavy load, with no limits, including malicious actors.</li>
+            <li>The page itself failed to serve its original function, as it was not an accurate display of what kind of loads or processing would be caused by a <em>real</em> page on the site, as it did not contain things such as <a href="/faq#embeds" target="_blank">page embeds</a>, and otherwise had a lack of content.</li>
+            <li>It didn't provide any information the main page did not.</li>
+        </ol>
+        <p>The list could probably go on and on, but by now I suspect you begin to get the idea. So, overall, this page is pretty useless :3</p>
+        <h2><hr>Why does it still exist then?</h2>
+        <p>Mainly for the aforementioned <a>page embeds</a>. The main page, and others, can embed the stats page on themselves to easily collect statistics! Currently, this is only used on the main page but, the code is still more organized and much more modular than if I had smacked the code into the main page and called it a day.</p>
+        <h2><hr>The future of the stats page</h2>
+        <p>I have a few different ideas at the moment, one of them being an actual stats monitor. E.G, I could record stats such as:</p>
         <ul>
-            <li>Page generation time: {LOAD_TIME}</li>
-            <li>Pregeneration time: {PREGEN_TIME}ms</li>
-            <li>Uptime: {UPTIME}</li>
-            <li>Last Lanyard update: {LAST_LANYARD}</li>
-            <li>Last Pregeneration: {LAST_PREGEN}</li>
-            <li>Server connected to API: {API_CONNECTED}</li>
-            <li>Javascript Loaded/Enabled: <span id="jsEnabled">false</span></li>
-            <li>Client connected to API: <span id="apiConnected">false</span></li>
+            <li>Programs connected to the api (This would includes sites AND users)</li>
+            <li>Average CPU, RAM, etc loads</li>
+            <li>Uptime monitor (Would probably pull from something like Uptime Kuma)</li>
         </ul>
-    </main>
-</div>
+        <p>But, only time can tell :)</p>
+    </div>
 </body>
 
 </html>

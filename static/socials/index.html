@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" type="text/css" href="../subpage.css">
-    
+
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
 
@@ -24,17 +24,18 @@
 <body>
     {WEATHER_MODIFIER}
 
-    <a href="../" class="chip">Home</a>
+    {TOPBAR}
+    <!-- <a href="../" class="chip">Home</a>
     <a href="../faq" class="chip">FAQ</a>
-    <a href="../stats" class="chip">Stats</a>
+    <a href="../stats" class="chip">Stats</a> -->
     <h1>Socials</h1>
     <div class="mainDiv">
         <hr>
-    <main>
-        <p>Here's most of the sites you can find me on-<br>if you needed that for some reason?</p>
-        <div class="grid-container">
-            {SOCIALS}
-            <!-- <div class="grid-child">
+        <main>
+            <p>Here's most of the sites you can find me on-<br>if you needed that for some reason?</p>
+            <div class="grid-container">
+                {SOCIALS}
+                <!-- <div class="grid-child">
                 <div>
                     <h3>Social Media</h3>
                     <a class="chip" href="https://floofy.city/@bingus_violet" rel="me">Fedi: bingus_violet&ZeroWidthSpace;@floofy.city</a>
@@ -67,15 +68,15 @@
                     <a class="chip" href="https://www.roblox.com/users/28347789/profile">Roblox: @bingus_violet</a>
                 </div>
             </div> -->
+            </div>
+            <br>
+        </main>
+        <div id="activityHtml">
+            {ACTIVITIES}
         </div>
-        <br>
-    </main>
-    <div id="activityHtml">
-        {ACTIVITIES}
-    </div>
 
-    {SELECTED_VIDEO}
-</div>
+        {SELECTED_VIDEO}
+    </div>
 </body>
 
 </html>
