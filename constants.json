@@ -261,6 +261,9 @@
             "color": "#366383",
             "outline": "#d43131",
             "bold": true
+        },
+        "page embed": {
+            "link": "/faq#embeds"
         }
     }
 }

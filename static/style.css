@@ -286,6 +286,10 @@ li {
     text-align: center;
 }
 
+span {
+    color: inherit
+}
+
 .lengthBar>span {
     margin: 0;
     padding: 0;
