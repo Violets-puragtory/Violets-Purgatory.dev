@@ -21,7 +21,7 @@
         "World's Worst Developer",
         "The worst git user to exist",
         "These birds are Pissing me off... I'm the original &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starwalker",
-        "Make sure to check out <a href='https://univerter.dev'>Univerter!</a>",
+        "Make sure to check out Univerter!",
         "Check out <a href='https://asahixp.pages.gay'>Asahi's website! &lt;3</a>",
         "Check out <a href='https://sylvie.loveh.art/'>Sylvie's website! &lt;3</a>"
     ],
@@ -185,6 +185,7 @@
             "color": "lightgray"
         },
         "Univerter": {
+            "link": "https://univerter.dev/",
             "color": "rgb(200, 175, 255)"
         },
         "Ko-fi": {

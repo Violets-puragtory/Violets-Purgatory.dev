@@ -127,6 +127,7 @@ function highlighter(json, full = true) {
 
                         var style = termProps.style || ""
                         var classes = termProps.classes || ""
+                        var link = termProps.link || ""
 
                         if (termProps.color) {
                             style += `color: ${termProps.color};`
@@ -155,7 +156,11 @@ function highlighter(json, full = true) {
                             classes = `class="${classes}"`
                         }
 
-                        var replacement = `<span ${style} ${classes}>${startContent + highTable[index] + endContent}</span>`
+                        var replacement = `<span ${style} ${classes} ${link}>${startContent + highTable[index] + endContent}</span>`
+
+                        if (link) {
+                            replacement = `<a href="${link}">${replacement}</a>`
+                        }
 
                         element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
