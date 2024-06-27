@@ -36,7 +36,7 @@ for (var i = 0; i < globResult.length; i++) {
     })
 }
 
-(async function() {
+(async function () {
     globResult = glob.globSync("**/static/**/*.js", { absolute: true })
     for (var i = 0; i < globResult.length; i++) {
         javascriptCache[globResult[i]] = await minify({
@@ -156,13 +156,18 @@ function highlighter(json, full = true) {
                             classes = `class="${classes}"`
                         }
 
-                        var replacement = `<span ${style} ${classes} ${link}>${startContent + highTable[index] + endContent}</span>`
+                        var stuff = (startContent + highTable[index] + endContent).trim()
 
-                        if (link) {
-                            replacement = `<a href="${link}">${replacement}</a>`
+                        if (!stuff.includes("span")) {
+                            var replacement = `<span ${style} ${classes} ${link}>${stuff}</span>`
+
+                            if (link) {
+                                replacement = `<a href="${link}">${replacement}</a>`
+                            }
+                            element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
+                        } else {
+                            element.content = element.content.replace(termKey, highTable[index])   
                         }
-
-                        element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
                     }
                 }
 
