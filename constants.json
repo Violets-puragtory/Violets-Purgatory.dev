@@ -198,7 +198,10 @@
         "Docker": {
             "color": "blue"
         },
-        "Github": {
+        "Git": {
+            "color": "gray"
+        },
+        "git": {
             "color": "gray"
         },
         "Steam": {
