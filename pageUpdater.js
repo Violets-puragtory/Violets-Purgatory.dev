@@ -17,7 +17,7 @@ var titles = constants.titles
 
 var globalSpins = 0
 
-var commitCount = "500+"
+var commitCount = "600+"
 
 var uptime = Date.now()
 var lastPregen = 0
