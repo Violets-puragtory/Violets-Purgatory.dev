@@ -18,15 +18,26 @@
         }
     },
     "quotes": [
-        "World's Worst Developer",
-        "The worst git user to exist",
         "These birds are Pissing me off... I'm the original &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starwalker",
-        "Make sure to check out Univerter!",
-        "Check out <a href='https://asahixp.pages.gay'>Asahi's website! &lt;3</a>",
-        "Check out <a href='https://sylvie.loveh.art/'>Sylvie's website! &lt;3</a>"
+        "The developer the city did not want nor need",
+        "Congratulations Nick, Enjoy your Dota.",
+        "Can we go back to Skype already",
+        "I keep forgetting I have a Matrix",
+        "Pregeneration! Page Pregeneration! It's here! Yippee!!!",
+        "Can you even call this highlighting anymore it does like 300 other things now",
+        "If you dont convert your HTML to JSON and then back to HTML did you even really make a Server-Side renderer???",
+        "I finally know what SSR means. Yeah that. I made one of those (I think).",
+        "The optimization update coming out in January 2068!",
+        "Now with... <em>bleh...</em> JQuery...",
+        "Louis do NOT make a server side renderer. Worst mistake of my life.",
+        "Univerter Supremacy",
+        "Violet's Limbo update soon... I swear...",
+        "Univerter update: Coming. someday. some year. :)",
+        "I love this font, but emoticons have never looked worse... :( </3",
+        "<a href='https://youtu.be/O3AlP6FtPw4?t=3'>IT'S 2015!!!</a> /ref",
+        "<a href='https://youtu.be/O3AlP6FtPw4?t=620'>I'm throwin SNOWBALLS atcha...</a> /ref"
     ],
     "titles": [
-        "Boykisser",
         "World's Worst Developer"
     ],
     "thumborInstances": [
@@ -132,6 +143,12 @@
         "Javascript": {
             "color": "yellow"
         },
+        "JSON": {
+            "color": "yellow"
+        },
+        "JQuery": {
+            "color": "yellow"
+        },
         "NodeJS": {
             "color": "limegreen"
         },
@@ -139,6 +156,9 @@
             "color": "rgb(200, 150, 255)"
         },
         "Purgatory": {
+            "color": "rgb(200, 150, 255)"
+        },
+        "Limbo": {
             "color": "rgb(200, 150, 255)"
         },
         "Asahi": {
@@ -200,11 +220,9 @@
         "SearXNG": {
             "color": "rgb(100, 100, 255)"
         },
-        "Highlighting": {
-            "color": "yellow"
-        },
-        "highlighted": {
-            "color": "yellow"
+        "highlight": {
+            "color": "yellow",
+            "caseInsensitive": true
         },
         "Forgejo": {
             "color": "orange"
