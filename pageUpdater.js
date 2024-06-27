@@ -207,8 +207,8 @@ function converter(html, dynamic = true) {
         <a class="chip" href="/faq">Nerd FAQ</a></h3>
         </div>`,
         "CUSTOM_STATUS": () => {
-            if (api.lanyard.activities[0] && api.lanyard.activities[0].type == 4) {
-                var status = api.lanyard.activities[0]
+            if (api.lanyard.custom_status) {
+                var status = api.lanyard.custom_status
                 var addedHTML = "<hr/><p>"
                 if (status.emoji) {
                     if (status.emoji.id) {
@@ -218,7 +218,7 @@ function converter(html, dynamic = true) {
                     }
                 }
 
-                addedHTML += makeHtmlSafe(status.state)
+                addedHTML += makeHtmlSafe(status.text)
                 addedHTML += "</p>"
                 return addedHTML
             }
