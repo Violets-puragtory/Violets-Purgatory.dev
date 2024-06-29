@@ -78,7 +78,8 @@ function spinLoop() {
             }
             spins += 1/spinSpeed / spinFactor
             if (Math.floor(spins) != lastSent && sock && sock.OPEN) {
-                $(".globalSpins").innerHTML = globalSpins + 1
+                console.log("RAH")
+                $(".globalSpins").text(globalSpins + 1)
                 lastSent = Math.floor(spins)
                 // resetPFP()
                 sock.send(`{"op": 4}`)

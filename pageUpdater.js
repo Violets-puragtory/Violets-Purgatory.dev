@@ -15,8 +15,6 @@ var highlightedWords = constants.highlightedWords
 var quotes = constants.quotes
 var titles = constants.titles
 
-var globalSpins = 0
-
 var commitCount = "600+"
 
 var uptime = Date.now()
@@ -267,7 +265,7 @@ function converter(html, dynamic = true) {
     var realtimeReplacers = {
         "API_CONNECTED": api.connected.toString(),
         "ACTIVITIES": activityToHTML.activitiesToHTML(api.lanyard),
-        "SPINCOUNT": globalSpins,
+        "SPINCOUNT": api.spins.toString(),
         "UPTIME": timeFormatter((Date.now() - uptime) / 1000),
         "LAST_LANYARD": timeFormatter((Date.now() - api.lastLanyardUpdate) / 1000),
         "RANDOM_TITLE": titles[Math.floor(Math.random() * titles.length)],
