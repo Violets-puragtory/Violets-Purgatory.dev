@@ -23,7 +23,7 @@ $(document).ready(() => {
     var arr = $("span").each((_, item) => {
         if ($(item).text().length > 0) {
             i++
-            typeWriter($(item), i * 450)
+            typeWriter($(item), i * 150)
         }
     })
 })
