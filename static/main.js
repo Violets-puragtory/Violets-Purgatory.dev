@@ -86,7 +86,7 @@ function timeFormatter(seconds) {
     }
 }
 
-function loop() {
+function spinLoop() {
     spinWaiting = true
     setTimeout(() => {
         spinWaiting = false
@@ -125,24 +125,29 @@ function loop() {
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
         $(".pfp").css("rotate", (spins * 360) + "deg")
-
-        $(".durationBarFormatter").each((_, item) => {
-            item = $(item)
-            item.text(`${timeFormatter((Date.now() - item.attr("data-start")))}/${timeFormatter((item.attr("data-end") - item.attr("data-start")))}`)
-        })
-
-        $(".timeEstimate").each((_, item) => {
-            item = $(item)
-            item.text(gameTimeFormatter(Date.now() - item.attr("data-start")))
-        })
-
-        $(".endEstimate").each((_, item) => {
-            item = $(item)
-            item.text(timeFormatter((item.attr("data-end") - Date.now())))
-        })
-
-        loop()
+        spinLoop()
     }, 1/spinSpeed * 1000);
+}
+
+function secondLoop() {
+    $(".durationBarFormatter").each((_, item) => {
+        item = $(item)
+        item.text(`${timeFormatter((Date.now() - item.attr("data-start")))}/${timeFormatter((item.attr("data-end") - item.attr("data-start")))}`)
+    })
+
+    $(".timeEstimate").each((_, item) => {
+        item = $(item)
+        item.text(gameTimeFormatter(Date.now() - item.attr("data-start")))
+    })
+
+    $(".endEstimate").each((_, item) => {
+        item = $(item)
+        item.text(timeFormatter((item.attr("data-end") - Date.now())))
+    })
+
+    setTimeout(() => {
+        secondLoop()
+    }, 1000);
 }
 
 window.onbeforeunload = function () {
@@ -154,7 +159,8 @@ window.onload = function () {
 
     pfp = $(".pfp")
 
-    loop()
+    spinLoop()
+    secondLoop()
 
     pfp.on("mousedown", () => {
         // if (!spinWaiting) {
