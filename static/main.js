@@ -136,6 +136,11 @@ function loop() {
             item.text(gameTimeFormatter(Date.now() - item.attr("data-start")))
         })
 
+        $(".endEstimate").each((_, item) => {
+            item = $(item)
+            item.text(timeFormatter((item.attr("data-end") - Date.now())))
+        })
+
         loop()
     }, 1/spinSpeed * 1000);
 }

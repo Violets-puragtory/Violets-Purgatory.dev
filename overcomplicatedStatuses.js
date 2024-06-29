@@ -122,6 +122,10 @@ module.exports = {
                                 <span class="timeEstimate" data-start="${activity.timestamps.start}">${gameTimeFormatter((Date.now() - activity.timestamps.start))}</span>
                                 `
                             }
+                        } else if (activity.timestamps.end) {
+                            return `
+                            <span class="endEstimate" data-end="${activity.timestamps.end}">${timeFormatter((activity.timestamps.end - Date.now()))}</span> left
+                            `
                         }
                     }
                 }
