@@ -7,7 +7,8 @@ const path = require('path'),
     randomThemer = require("./randomThemer.js"),
     himalaya = require("himalaya"),
     glob = require("glob"),
-    api = require("./api.js")
+    api = require("./api.js"),
+    gitCommitCount = require("git-commit-count")
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
@@ -369,10 +370,12 @@ module.exports = {
 }
 
 async function updateCommits() {
-    var siteResponse = await (await fetch(`https://git.violets-purgatory.dev/bingus_violet/violets-purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
-    var commits = siteResponse.substring(0, siteResponse.indexOf("Commits"))
+    var commits = gitCommitCount()
 
-    commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
+    // var siteResponse = await (await fetch(`https://git.violets-purgatory.dev/bingus_violet/violets-purgatory/src/branch/${process.env.BRANCH || "origin"}`)).text()
+    // var commits = siteResponse.substring(0, siteResponse.indexOf("Commits"))
+
+    // commits = commits.substring(commits.lastIndexOf("<b>") + 3, commits.lastIndexOf("</b>"))
     // ^ this works for Forgejo (basically everything i use that isnt Github, E.G. Codeberg)
 
     // commits = commits.substring(commits.lastIndexOf(">") + 1)
