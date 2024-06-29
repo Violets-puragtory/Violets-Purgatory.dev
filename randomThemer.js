@@ -114,7 +114,7 @@ function purpleMagic() {
 }
 
 function code() {
-    return '<link rel="stylesheet" type="text/css" href="/themes/code/style.css"> <script src="/themes/code/script.js"></script>'
+    return '<link rel="stylesheet" type="text/css" href="/themes/code/style.css">' // <script src="/themes/code/script.js"></script>'
 }
 
 var events = [
