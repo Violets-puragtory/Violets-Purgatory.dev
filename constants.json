@@ -73,9 +73,10 @@
                     "name": "bingus_violet@floofy.city",
                     "url": "https://floofy.city/@bingus_violet"
                 },
-                "Youtube": {
+                "YouTube": {
                     "name": "Violet's Fiasco",
-                    "url": "https://www.youtube.com/channel/UChcrBJNJLZucy3TPyGyAY2g"
+                    "url": "https://www.youtube.com/channel/UChcrBJNJLZucy3TPyGyAY2g",
+                    "caseInsensitive": true
                 },
                 "Liberapay": {
                     "name": "bingus_violet",
