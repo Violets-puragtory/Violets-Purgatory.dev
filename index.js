@@ -52,10 +52,10 @@ if (!fs.existsSync(path.join(cachePath, "emojis"))) {
 
 app.use(pageUpdater.middleWare)
 
-process.on('uncaughtException', (err, origin) => {
-    fs.writeSync(
-      process.stderr.fd,
-      `Caught exception: ${err}\n` +
-      `Exception origin: ${origin}`,
-    );
-  });  
+// process.on('uncaughtException', (err, origin) => {
+//     fs.writeSync(
+//       process.stderr.fd,
+//       `Caught exception: ${err}\n` +
+//       `Exception origin: ${origin}`,
+//     );
+//   });  

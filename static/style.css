@@ -182,7 +182,7 @@ br {
     margin: 3px 0;
 }
 
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 1000px) {
     .activity-container {
         display: flex;
         flex-wrap: wrap;
@@ -268,7 +268,8 @@ li {
 .lengthBar {
     background-color: rgb(50, 40, 60);
     display: inline-block;
-    width: 80%;
+    margin: auto;
+    width: 65%;
     height: 10px;
     padding: 0;
     overflow: hidden;

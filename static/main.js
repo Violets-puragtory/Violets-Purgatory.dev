@@ -61,7 +61,32 @@ function lerp(a, b, t) {
     return a * (1 - t) + b * t
 }
 
-function spinLoop() {
+function gameTimeFormatter(seconds) {
+    seconds = Math.ceil(seconds / 1000)
+    var minutes = Math.ceil(seconds / 60)
+    var hours = Math.floor(minutes / 60)
+    if (seconds <= 60) {
+        return 'about ' + seconds + ' seconds'
+    } else if (minutes < 60) {
+        return `${minutes} Minutes`
+    }
+
+    return `${hours} hours and ${minutes % 60} minutes`
+
+}
+
+function timeFormatter(seconds) {
+    seconds = Math.ceil(seconds / 1000)
+    var minutes = Math.floor(seconds / 60)
+
+    if (seconds % 60 < 10) {
+        return `${minutes}:0${seconds % 60}`
+    } else {
+        return `${minutes}:${seconds % 60}`
+    }
+}
+
+function loop() {
     spinWaiting = true
     setTimeout(() => {
         spinWaiting = false
@@ -100,7 +125,18 @@ function spinLoop() {
             spins = lerp(spins, Math.round(spins), 1 / spinSpeed * 3)
         }
         $(".pfp").css("rotate", (spins * 360) + "deg")
-        spinLoop()
+
+        $(".durationBarFormatter").each((_, item) => {
+            item = $(item)
+            item.text(`${timeFormatter((Date.now() - item.attr("data-start")))}/${timeFormatter((item.attr("data-end") - item.attr("data-start")))}`)
+        })
+
+        $(".timeEstimate").each((_, item) => {
+            item = $(item)
+            item.text(gameTimeFormatter(Date.now() - item.attr("data-start")))
+        })
+
+        loop()
     }, 1/spinSpeed * 1000);
 }
 
@@ -113,7 +149,7 @@ window.onload = function () {
 
     pfp = $(".pfp")
 
-    spinLoop()
+    loop()
 
     pfp.on("mousedown", () => {
         // if (!spinWaiting) {

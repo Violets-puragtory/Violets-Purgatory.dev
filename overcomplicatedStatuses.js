@@ -1,5 +1,5 @@
 const path = require("path"),
-fs = require("fs")
+    fs = require("fs")
 
 var constants = JSON.parse(fs.readFileSync(path.join(__dirname, 'constants.json')))
 
@@ -33,7 +33,7 @@ function makeCompat(string) {
 }
 
 function timeFormatter(seconds) {
-    seconds = Math.ceil(seconds)
+    seconds = Math.ceil(seconds / 1000)
     var minutes = Math.floor(seconds / 60)
 
     if (seconds % 60 < 10) {
@@ -44,7 +44,7 @@ function timeFormatter(seconds) {
 }
 
 function gameTimeFormatter(seconds) {
-    seconds = Math.ceil(seconds)
+    seconds = Math.ceil(seconds / 1000)
     var minutes = Math.ceil(seconds / 60)
     var hours = Math.floor(minutes / 60)
     if (seconds <= 60) {
@@ -87,63 +87,47 @@ module.exports = {
                     continue
                 }
 
-
                 function get_img(activity, size = "large_image") {
                     return "https://cache.violets-purgatory.dev/cached/" + get_img_url(activity, size)
                 }
 
-                function songStats() {
-                    var html = ``
-
-                    if (activity.assets && activity.assets.large_text != activity.details && activity.details.length + activity.state.length + activity.assets.large_text.length < 100) {
-                        html += `
-                        <br> Album: ${makeCompat(activity.assets.large_text || " ")}
-                        <br> Artist: ${makeCompat(activity.state || " ")}
-                        `
-                    } else {
-                        html += "<br>"
-                        if (activity.state.includes(";")) 
-                            { html += "Artists: " }
-                        else { html += "Artist: " }
-                        html += `${makeCompat(activity.state || " ")}`
-                    }
-
-                    return html
-                }
-                if (activity.type == 2) {
-                    var timeLeft = Math.round((activity.timestamps.end - Date.now()) / 1000)
-                    var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
-                    addedHTML += `
-                    <div class="chip activity grid-child">
-                        <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text || activity.state || ""}">
-                            <p>
-                                Listening to ${activity.name}
-                                <br> Song: ${makeCompat(activity.details || " ")}
-                                ${songStats()}
+                function activityTime() {
+                    if (activity.timestamps) {
+                        if (activity.timestamps.start) {
+                            if (activity.timestamps.end) {
+                                var timeLeft = Math.round((activity.timestamps.end - Date.now()) / 1000)
+                                var currentPercent = (Date.now() - activity.timestamps.start) / (activity.timestamps.end - activity.timestamps.start) * 100
+                                return `
                                 <br>
-                                <span class="lengthBar lengthBar${index}"><span></span></span>
-                                ${timeFormatter((activity.timestamps.end - activity.timestamps.start) / 1000)}
-                            </p>
-                        </div>
-                    <style>
-    
-                    .lengthBar${index} > span {
-                        animation-name: songSlider${index};
-                        animation-duration: ${timeLeft}s;
-                        animation-timing-function: linear;
-                    }
-    
-                    @keyframes songSlider${index} {
-                        0% {
-                            width: ${currentPercent}%;
+                                <span style="text-align: center;"><span class="lengthBar lengthBar${index}"><span></span></span><span class="durationBarFormatter" data-start="${activity.timestamps.start}" data-end="${activity.timestamps.end}">${timeFormatter((Date.now() - activity.timestamps.start))}/${timeFormatter((activity.timestamps.end - activity.timestamps.start))}</span></span>
+                                    <style>
+                                        .lengthBar${index} > span {
+                                            animation-name: songSlider${index};
+                                            animation-duration: ${timeLeft}s;
+                                            animation-timing-function: linear;
+                                        }
+
+                                        @keyframes songSlider${index} {
+                                            0% {
+                                                width: ${currentPercent}%;
+                                            }
+                                            100% {
+                                                width: 100%;
+                                            }
+                                        }
+                                    </style>
+                                `
+                            } else {
+                                return `
+                                <span class="timeEstimate" data-start="${activity.timestamps.start}">${gameTimeFormatter((Date.now() - activity.timestamps.start))}</span>
+                                `
+                            }
                         }
-                        100% {
-                            width: 100%;
-                        }
                     }
-                    </style>
-                    `
-                } else if (activity.type == 0 && activity.assets) {
+                }
+
+                if (activity.type != 4 && activity.assets) {
+
                     var time = activity.created_at
                     if (activity.timestamps) {
                         time = activity.timestamps.start
@@ -152,43 +136,19 @@ module.exports = {
                         activity.assets = { "large_text": " ", "small_text": " " }
                     }
 
-                    function smch() {
-                        if (get_img_url(activity, "small_image")) {
-                            return `<img class="smallimg" src="${get_img(activity, "small_image")}" title="${activity.assets.small_text}">`
-                        }
-                        return ""
-                    }
-
-
-                    addedHTML += `
-                        <div class="chip activity grid-child">
-                            <img src="${get_img(activity)}" title="${activity.assets.large_text}">
-                            ${smch()}
-                            <p>
-                                Playing ${activity.name} 
-                                ${onlyIfExists("<br>" + (activity.details || activity.assets.large_text), activity.details || activity.assets.large_text)}
-                                ${onlyIfExists("<br>" + (activity.state || activity.assets.small_text), activity.state || activity.assets.small_text)}
-                                <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
-                            </p>
-                        </div>
-                    `
-                } else if (activity.type != 4 && activity.assets) {
-                    var time = activity.created_at
-                    if (activity.timestamps) {
-                        time = activity.timestamps.start
-                    }
-                    if (!activity.assets) {
-                        activity.assets = { "large_text": " ", "small_text": " " }
-                    }
+                    var text1 = onlyIfExists("<br><span style='font-size: 1.3rem;'>" + activity.song + "</span>", activity.song) || activity.details || activity.assets.large_text
+                    var text2 = onlyIfExists("By: " + activity.artist, activity.artist) || activity.state || activity.assets.small_text
+                    var text3 = onlyIfExists("On: " + activity.album, activity.album)
 
                     addedHTML += `
                         <div class="chip activity grid-child">
                             <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
-                            <p>
-                                <span style="color: rgb(225, 200, 255);">${activity.name}</span> 
-                                <br> ${(activity.details || activity.assets.large_text || " ")}
-                                <br> ${(activity.state || activity.assets.small_text || " ")}
-                                <br> ${gameTimeFormatter((Date.now() - time) / 1000)}
+                            <p style="text-align: left; font-size: 1.15rem;">
+                                <span style="font-size: 1.6rem;">${activity.name}</span>
+                                ${onlyIfExists("<br>" + text1, text1)}
+                                ${onlyIfExists("<br>" + text2, text2)}
+                                ${onlyIfExists("<br>" + text3, text3)}
+                                ${onlyIfExists("<br>" + activityTime(), activityTime())}
                             </p>
                         </div>
                     `
