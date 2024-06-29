@@ -18,12 +18,12 @@ function typeWriter(elem, delay) {
     }, delay);
 }
 
-$(document).ready(() => {
-    var i = 0
-    var arr = $("span").each((_, item) => {
-        if ($(item).text().length > 0) {
-            i++
-            typeWriter($(item), i * 150)
-        }
-    })
-})
+// $(document).ready(() => {
+//     var i = 0
+//     var arr = $("span").each((_, item) => {
+//         if ($(item).text().length > 0) {
+//             i++
+//             typeWriter($(item), i * 150)
+//         }
+//     })
+// })
