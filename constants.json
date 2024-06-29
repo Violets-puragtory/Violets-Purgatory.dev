@@ -75,8 +75,7 @@
                 },
                 "YouTube": {
                     "name": "Violet's Fiasco",
-                    "url": "https://www.youtube.com/channel/UChcrBJNJLZucy3TPyGyAY2g",
-                    "caseInsensitive": true
+                    "url": "https://www.youtube.com/channel/UChcrBJNJLZucy3TPyGyAY2g"
                 },
                 "Liberapay": {
                     "name": "bingus_violet",
@@ -178,8 +177,9 @@
         "enby": {
             "color": "rgb(252, 244, 52)"
         },
-        "Youtube": {
-            "color": "rgb(255, 0, 0)"
+        "YouTube": {
+            "color": "rgb(255, 0, 0)",
+            "caseInsensitive": true
         },
         "Fedi": {
             "color": "rgb(175, 125, 200)"
