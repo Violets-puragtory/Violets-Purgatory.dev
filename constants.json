@@ -289,6 +289,21 @@
         },
         "Lethal Company": {
             "color": "red"
+        },
+        "Wambu": {
+            "color": "limegreen"
+        },
+        "Spooky's Jump Scare Mansion": {
+            "color": "rgb(150, 175, 255)"
+        },
+        "Spooky": {
+            "color": "orange"
+        },
+        ".js": {
+            "color": "yellow"
+        },
+        "Shortcat": {
+            "color": "orange"
         }
     }
 }
