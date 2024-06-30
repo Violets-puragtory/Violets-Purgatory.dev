@@ -138,7 +138,9 @@
                 "Javascript",
                 "JSON",
                 "JQuery",
-                ".js"
+                ".js",
+
+                "enby"
             ],
             "color": "yellow"
         },
@@ -181,7 +183,8 @@
             "words": [
                 "NodeJS",
                 "Spotify",
-                "Wambu"
+                "Wambu",
+                "Matrix"
             ],
             "color": "limegreen"
         },
@@ -210,12 +213,6 @@
                 "Fedi"
             ],
             "color": "rgb(175, 125, 200)"
-        },
-        {
-            "words": [
-                "Matrix"
-            ],
-            "color": "limegreen"
         },
         {
             "words": [
