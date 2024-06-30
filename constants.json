@@ -140,7 +140,9 @@
                 "JQuery",
                 ".js",
 
-                "enby"
+                "enby",
+
+                "Slay the Spire"
             ],
             "color": "yellow"
         },
@@ -175,7 +177,8 @@
                 "HTML",
                 "Shortcat",
                 "Valve",
-                "Spooky"
+                "Spooky",
+                "The Ironclad"
             ],
             "color": "orange"
         },
@@ -184,7 +187,8 @@
                 "NodeJS",
                 "Spotify",
                 "Wambu",
-                "Matrix"
+                "Matrix",
+                "The Silent"
             ],
             "color": "limegreen"
         },
@@ -198,7 +202,8 @@
             "words": [
                 "Violet",
                 "Purgatory",
-                "Limbo"
+                "Limbo",
+                "The Watcher"
             ],
             "color": "rgb(200, 150, 255)"
         },
@@ -289,7 +294,9 @@
         },
         {
             "words": [
-                "CSS"
+                "CSS",
+                "Neow",
+                "The Defect"
             ],
             "color": "rgb(50, 200, 255)"
         },
