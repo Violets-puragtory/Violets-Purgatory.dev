@@ -90,95 +90,103 @@ function highlighter(json, full = true) {
                 element.children = highlighter(element.children, full)
             }
         } else if (element.type == "text") {
-            var highTable = Object.keys(highlightedWords)
+            var index = 0
+            for (let i = 0; i < highlightedWords.length; i++) {
+                var dict = highlightedWords[i]
+                for (let x = 0; x < dict.words.length; x++) {
+                    index += 1
+                    var term = dict.words[x];
+                    var termProps = dict
 
-            for (let index = 0; index < highTable.length; index++) {
-                var term = highTable[index];
-                var termProps = highlightedWords[term]
+                    var reg = term
+                    if (termProps.caseInsensitive) {
+                        reg = new RegExp(`(${term})`, "gi")
+                    }
 
-                var reg = term
-                if (termProps.caseInsensitive) {
-                    reg = new RegExp(`(${term})`, "gi")
+                    element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
+                    element.content = element.content.replaceAll(reg, "{TERM" + index + "}")
+                    element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
                 }
-
-                element.content = element.content.replaceAll(`{${term}}`, "TEMPORARY_REPLACE")
-                element.content = element.content.replaceAll(reg, "{TERM" + index + "}")
-                element.content = element.content.replaceAll("TEMPORARY_REPLACE", `${term}`)
             }
 
             if (full) {
-                for (let index = 0; index < highTable.length; index++) {
-                    var termKey = "{TERM" + index + "}"
-                    var termProps = highlightedWords[highTable[index]]
-                    while (element.content.includes(termKey)) {
-                        var termIndex = element.content.indexOf(termKey)
+                var index = 0
+                for (let i = 0; i < highlightedWords.length; i++) {
+                    var dict = highlightedWords[i]
+                    for (let x = 0; x < dict.words.length; x++) {
+                        index += 1
+                        var termKey = "{TERM" + index + "}"
+                        var termProps = dict
+                        while (element.content.includes(termKey)) {
+                            var termIndex = element.content.indexOf(termKey)
 
-                        var spanEnd = element.content.indexOf(" ", termIndex)
+                            var spanEnd = element.content.indexOf(" ", termIndex)
 
-                        if (spanEnd == -1) {
-                            spanEnd = element.content.length
-                        }
-
-                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
-
-                        // if (highTable[index] == "ULTRAKILL") {
-                        //     console.log(startContent, " ---- ", endContent)
-                        // }
-
-                        var startContent = element.content.substring(spanStart - 1, termIndex)
-                        var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
-
-                        if (startContent.includes("(") && !endContent.includes(")")) {
-                            spanEnd = element.content.indexOf(")", spanStart) + 1
-                            endContent = element.content.substring(termIndex + termKey.length, spanEnd)
-                        }
-                        else if (endContent.includes(")") && !startContent.includes("(")) {
-                            spanStart = element.content.substring(0, spanStart).lastIndexOf("(")
-                            startContent = element.content.substring(spanStart - 1, termIndex)
-                        }
-
-                        var style = termProps.style || ""
-                        var classes = termProps.classes || ""
-                        var link = termProps.link || ""
-
-                        if (termProps.color) {
-                            style += `color: ${termProps.color};`
-                        }
-
-                        if (termProps.italicized) {
-                            style += "font-style: italic;"
-                        }
-
-                        if (termProps.outline) {
-                            var width = 2
-                            // style += `text-shadow: -1px -1px 0 ${termProps.outline}, 1px -1px 0 ${termProps.outline}, -1px 1px 0 ${termProps.outline}, 1px 1px 0 ${termProps.outline};`
-                            style += `-webkit-text-stroke: 1px ${termProps.outline};`
-                            // ^ Not in use because it looks bad :30
-                        }
-
-                        if (termProps.bold) {
-                            classes += "bold"
-                        }
-
-                        if (style.length > 2) {
-                            style = `style="${style}"`
-                        }
-
-                        if (classes.length > 2) {
-                            classes = `class="${classes}"`
-                        }
-
-                        var stuff = (startContent + highTable[index] + endContent).trim()
-
-                        if (!stuff.includes("span")) {
-                            var replacement = `<span ${style} ${classes} ${link}>${stuff}</span>`
-
-                            if (link) {
-                                replacement = `<a href="${link}">${replacement}</a>`
+                            if (spanEnd == -1) {
+                                spanEnd = element.content.length
                             }
-                            element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
-                        } else {
-                            element.content = element.content.replace(termKey, highTable[index])   
+
+                            var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
+
+                            // if (highTable[index] == "ULTRAKILL") {
+                            //     console.log(startContent, " ---- ", endContent)
+                            // }
+
+                            var startContent = element.content.substring(spanStart - 1, termIndex)
+                            var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
+
+                            if (startContent.includes("(") && !endContent.includes(")")) {
+                                spanEnd = element.content.indexOf(")", spanStart) + 1
+                                endContent = element.content.substring(termIndex + termKey.length, spanEnd)
+                            }
+                            else if (endContent.includes(")") && !startContent.includes("(")) {
+                                spanStart = element.content.substring(0, spanStart).lastIndexOf("(")
+                                startContent = element.content.substring(spanStart - 1, termIndex)
+                            }
+
+                            var style = termProps.style || ""
+                            var classes = termProps.classes || ""
+                            var link = termProps.link || ""
+
+                            if (termProps.color) {
+                                style += `color: ${termProps.color};`
+                            }
+
+                            if (termProps.italicized) {
+                                style += "font-style: italic;"
+                            }
+
+                            if (termProps.outline) {
+                                var width = 2
+                                // style += `text-shadow: -1px -1px 0 ${termProps.outline}, 1px -1px 0 ${termProps.outline}, -1px 1px 0 ${termProps.outline}, 1px 1px 0 ${termProps.outline};`
+                                style += `-webkit-text-stroke: 1px ${termProps.outline};`
+                                // ^ Not in use because it looks bad :30
+                            }
+
+                            if (termProps.bold) {
+                                classes += "bold"
+                            }
+
+                            if (style.length > 2) {
+                                style = `style="${style}"`
+                            }
+
+                            if (classes.length > 2) {
+                                classes = `class="${classes}"`
+                            }
+
+                            var stuff = (startContent + dict.words[x] + endContent).trim()
+
+                            if (!stuff.includes("span")) {
+                                var replacement = `<span ${style} ${classes} ${link}>${stuff}</span>`
+
+                                if (link) {
+                                    replacement = `<a href="${link}">${replacement}</a>`
+                                }
+                                element.content = element.content.substring(0, spanStart) + replacement + element.content.substring(spanEnd)
+                            } else {
+                                element.content = element.content.replace(termKey, dict.words[x])
+                            }
                         }
                     }
                 }
@@ -194,9 +202,16 @@ function highlighter(json, full = true) {
 function converter(html, dynamic = true) {
     var startTime = Date.now()
     var config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config/config.json')))
-
+    
     var staticReplacers = {
-        "ALL_HIGHLIGHTS": Object.keys(highlightedWords).join(", "),
+        "ALL_HIGHLIGHTS": () => {
+            var addedHTML = ""
+            for (var i = 0; i < highlightedWords.length; i++) {
+                addedHTML += highlightedWords[i].words.join(", ")
+                addedHTML += ", "
+            }
+            return addedHTML.substring(0, addedHTML.length - 2)
+        },
         "BRANCH_NAME": () => {
             if (process.env.BRANCH == "dev") {
                 return "Stable"

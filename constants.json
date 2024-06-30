@@ -124,193 +124,231 @@
             }
         }
     },
-    "highlightedWords": {
-        "birds": {
+    "highlightedWords": [
+        {
+            "words": [
+                "birds",
+                "Pissing",
+                "Starwalker",
+
+                "word highlighting",
+                "highlight",
+                "Highlight",
+
+                "Javascript",
+                "JSON",
+                "JQuery",
+                ".js"
+            ],
             "color": "yellow"
         },
-        "Pissing": {
-            "color": "yellow"
-        },
-        "Starwalker": {
-            "color": "yellow"
-        },
-        "word highlighting": {
-            "color": "yellow"
-        },
-        "Godot Engine": {
-            "color": "#64B5F6"
-        },
-        "Javascript": {
-            "color": "yellow"
-        },
-        "JSON": {
-            "color": "yellow"
-        },
-        "JQuery": {
-            "color": "yellow"
-        },
-        "NodeJS": {
-            "color": "limegreen"
-        },
-        "Violet": {
-            "color": "rgb(200, 150, 255)"
-        },
-        "Purgatory": {
-            "color": "rgb(200, 150, 255)"
-        },
-        "Limbo": {
-            "color": "rgb(200, 150, 255)"
-        },
-        "Asahi": {
-            "color": "rgb(255, 175, 175)",
+        {
+            "words": [
+                "Teto Tuesday",
+                "Teto Territory",
+                "Teto",
+                "Kasane"
+            ],
+            "color": "#d5738d",
             "caseInsensitive": true
         },
-        "Lunya": {
-            "color": "rgb(255, 175, 175)"
-        },
-        "Sylvie": {
-            "color": "#f768a4"
-        },
-        "bisexual": {
-            "color": "rgb(214, 2, 112)"
-        },
-        "enby": {
-            "color": "rgb(252, 244, 52)"
-        },
-        "YouTube": {
-            "color": "rgb(255, 0, 0)",
-            "caseInsensitive": true
-        },
-        "Fedi": {
-            "color": "rgb(175, 125, 200)"
-        },
-        "Matrix": {
-            "color": "limegreen"
-        },
-        "Element": {
-            "color": "rgb(100, 255, 200)"
-        },
-        "Codeberg": {
-            "color": "rgb(0, 255, 255)"
-        },
-        "Code": {
-            "color": "rgb(150, 175, 255)"
-        },
-        "Codium": {
-            "color": "rgb(150, 175, 255)"
-        },
-        "Docker": {
-            "color": "blue"
-        },
-        "Github": {
-            "color": "gray"
-        },
-        "Steam": {
-            "color": "lightgray"
-        },
-        "Univerter": {
-            "link": "https://univerter.dev/",
-            "color": "rgb(200, 175, 255)"
-        },
-        "Ko-fi": {
-            "color": "rgb(255, 150, 150)"
-        },
-        "Revolt": {
-            "color": "rgb(255, 50, 50)"
-        },
-        "Discord": {
-            "color": "rgb(150, 150, 255)"
-        },
-        "SearXNG": {
-            "color": "rgb(100, 100, 255)"
-        },
-        "highlight": {
-            "color": "yellow",
-            "caseInsensitive": true
-        },
-        "Forgejo": {
-            "color": "orange"
-        },
-        "HTML": {
-            "color": "orange"
-        },
-        "CSS": {
-            "color": "rgb(50, 200, 255)"
-        },
-        "Thumbor": {
-            "color": "rgb(225, 225, 255)"
-        },
-        "Spotify": {
-            "color": "limegreen"
-        },
-        "ULTRAKILL": {
+        {
+            "words": [
+                "YouTube",
+                "ULTRAKILL",
+                "Lethal Company"
+            ],
             "color": "red",
             "caseInsensitive": true
         },
-        "Risk of Rain 2": {
+        {
+            "words": [
+                "Spooky's Jump Scare Mansion"
+            ],
+            "color": "rgb(150, 175, 255)"
+        },
+        {
+            "words": [
+                "Forgejo",
+                "HTML",
+                "Shortcat",
+                "Valve",
+                "Spooky"
+            ],
+            "color": "orange"
+        },
+        {
+            "words": [
+                "NodeJS",
+                "Spotify",
+                "Wambu"
+            ],
+            "color": "limegreen"
+        },
+        {
+            "words": [
+                "Godot Engine"
+            ],
+            "color": "#64B5F6"
+        },
+        {
+            "words": [
+                "Violet",
+                "Purgatory",
+                "Limbo"
+            ],
+            "color": "rgb(200, 150, 255)"
+        },
+        {
+            "words": [
+                "bisexual"
+            ],
+            "color": "rgb(214, 2, 112)"
+        },
+        {
+            "words": [
+                "Fedi"
+            ],
+            "color": "rgb(175, 125, 200)"
+        },
+        {
+            "words": [
+                "Matrix"
+            ],
+            "color": "limegreen"
+        },
+        {
+            "words": [
+                "Element"
+            ],
+            "color": "rgb(100, 255, 200)"
+        },
+        {
+            "words": [
+                "Codeberg"
+            ],
+            "color": "rgb(0, 255, 255)"
+        },
+        {
+            "words": [
+                "Code"
+            ],
+            "color": "rgb(150, 175, 255)"
+        },
+        {
+            "words": [
+                "Codium"
+            ],
+            "color": "rgb(150, 175, 255)"
+        },
+        {
+            "words": [
+                "Docker"
+            ],
+            "color": "blue"
+        },
+        {
+            "words": [
+                "Github"
+            ],
+            "color": "gray"
+        },
+        {
+            "words": [
+                "Steam"
+            ],
+            "color": "lightgray"
+        },
+        {
+            "words": [
+                "Univerter"
+            ],
+            "link": "https://univerter.dev/",
+            "color": "rgb(200, 175, 255)"
+        },
+        {
+            "words": [
+                "Ko-fi"
+            ],
+            "color": "rgb(255, 150, 150)"
+        },
+        {
+            "words": [
+                "Revolt"
+            ],
+            "color": "rgb(255, 50, 50)"
+        },
+        {
+            "words": [
+                "Discord"
+            ],
+            "color": "rgb(150, 150, 255)"
+        },
+        {
+            "words": [
+                "SearXNG"
+            ],
+            "color": "rgb(100, 100, 255)"
+        },
+        {
+            "words": [
+                "CSS"
+            ],
+            "color": "rgb(50, 200, 255)"
+        },
+        {
+            "words": [
+                "Thumbor"
+            ],
+            "color": "rgb(225, 225, 255)"
+        },
+        {
+            "words": [
+                "Risk of Rain 2"
+            ],
             "color": "rgb(150, 220, 255)",
             "caseInsensitive": true
         },
-        "Liberapay": {
+        {
+            "words": [
+                "Liberapay"
+            ],
             "color": "yellow"
         },
-        "Roblox": {
+        {
+            "words": [
+                "Roblox"
+            ],
             "color": "rgb(225, 225, 225)"
         },
-        "Teto Tuesday": {
-            "color": "#d5738d",
-            "caseInsensitive": true
-        },
-        "Teto Territory": {
-            "color": "#d5738d",
-            "caseInsensitive": true
-        },
-        "Teto": {
-            "color": "#d5738d",
-            "caseInsensitive": true
-        },
-        "Kasane": {
-            "color": "#d5738d",
-            "caseInsensitive": true
-        },
-        "Ryouiki Tenkai": {
+        {
+            "words": [
+                "Ryouiki Tenkai"
+            ],
             "bold": true,
             "italicized": true,
             "caseInsensitive": true
         },
-        "Pokerogue": {
+        {
+            "words": [
+                "Pokerogue"
+            ],
             "caseInsensitive": true,
             "color": "#366383",
             "outline": "#d43131",
             "bold": true
         },
-        "page embed": {
+        {
+            "words": [
+                "page embed"
+            ],
             "link": "/faq#embeds"
         },
-        "YIP": {
+        {
+            "words": [
+                "YIP"
+            ],
             "italicized": true
-        },
-        "Lethal Company": {
-            "color": "red"
-        },
-        "Wambu": {
-            "color": "limegreen"
-        },
-        "Spooky's Jump Scare Mansion": {
-            "color": "rgb(150, 175, 255)"
-        },
-        "Spooky": {
-            "color": "orange"
-        },
-        ".js": {
-            "color": "yellow"
-        },
-        "Shortcat": {
-            "color": "orange"
-        },
-        "Valve": {
-            "color": "orange",
-            "caseInsensitive": true
         }
-    }
+    ]
 }
