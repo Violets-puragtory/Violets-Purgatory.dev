@@ -388,11 +388,12 @@ module.exports = {
 
             res.send(data)
         } else {
-            res.status(404).send(`
-            <link rel="stylesheet" href="/style.css">
-            <h1>404</h1>
-            <p>Uh oh... I think your lost? There's nothing here :P</p>
-        `)
+        //     res.status(404).send(`
+        //     <link rel="stylesheet" href="/style.css">
+        //     <h1>404</h1>
+        //     <p>Uh oh... I think your lost? There's nothing here :P</p>
+        // `)
+        next()
         }
     }
 }
@@ -430,6 +431,8 @@ function pregenerate() {
     for (var i = 0; i < pregenFiles.length; i++) {
         pregenFiles[i].html = pregenFiles[i].html.replaceAll("{PREGEN_TOTAL}", Date.now() - lastPregen)
     }
+
+    module.exports.pregen = pregenFiles
 }
 
 pregenerate()

@@ -24,6 +24,7 @@
     "glob": "^10.4.2",
     "himalaya": "^1.1.0",
     "minify-html": "^0.0.2",
+    "node-html-to-image": "^4.0.0",
     "ws": "^8.16.0",
     "youtubei.js": "^9.0.2"
   }
