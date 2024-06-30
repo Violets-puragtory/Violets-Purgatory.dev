@@ -137,11 +137,11 @@ module.exports = {
                         time = activity.timestamps.start
                     }
                     if (!activity.assets) {
-                        activity.assets = { "large_text": " ", "small_text": " " }
+                        activity.assets = { "large_text": "", "small_text": "" }
                     }
 
-                    var text1 = onlyIfExists("<br><span style='font-size: 1.3rem;'>" + activity.song + "</span>", activity.song) || activity.details || activity.assets.large_text
-                    var text2 = onlyIfExists("By: " + activity.artist, activity.artist) || activity.state || activity.assets.small_text
+                    var text1 = onlyIfExists("<br><span style='font-size: 1.3rem;'>" + activity.song + "</span>", activity.song) || activity.details
+                    var text2 = onlyIfExists("By: " + activity.artist, activity.artist) || activity.state
                     var text3 = onlyIfExists("On: " + activity.album, activity.album)
 
                     addedHTML += `
