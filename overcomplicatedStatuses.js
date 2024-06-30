@@ -142,7 +142,7 @@ module.exports = {
 
                     var text1 = onlyIfExists("<br><span style='font-size: 1.3rem;'>" + activity.song + "</span>", activity.song) || activity.details
                     var text2 = onlyIfExists("By: " + activity.artist, activity.artist) || activity.state
-                    var text3 = onlyIfExists("On: " + activity.album, activity.album)
+                    var text3 = onlyIfExists("On: " + activity.album, activity.album != activity.song && activity.album)
 
                     addedHTML += `
                         <div class="chip activity grid-child">
