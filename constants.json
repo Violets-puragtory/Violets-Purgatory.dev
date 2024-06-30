@@ -196,6 +196,9 @@
         "Code": {
             "color": "rgb(150, 175, 255)"
         },
+        "Codium": {
+            "color": "rgb(150, 175, 255)"
+        },
         "Docker": {
             "color": "blue"
         },
