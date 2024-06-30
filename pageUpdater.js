@@ -119,10 +119,23 @@ function highlighter(json, full = true) {
                             spanEnd = element.content.length
                         }
 
+                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
+
+                        // if (highTable[index] == "ULTRAKILL") {
+                        //     console.log(startContent, " ---- ", endContent)
+                        // }
+
+                        var startContent = element.content.substring(spanStart - 1, termIndex)
                         var endContent = element.content.substring(termIndex + termKey.length, spanEnd)
 
-                        var spanStart = element.content.substring(0, termIndex).lastIndexOf(" ") + 1
-                        var startContent = element.content.substring(spanStart - 1, termIndex)
+                        if (startContent.includes("(") && !endContent.includes(")")) {
+                            spanEnd = element.content.indexOf(")", spanStart) + 1
+                            endContent = element.content.substring(termIndex + termKey.length, spanEnd)
+                        }
+                        else if (endContent.includes(")") && !startContent.includes("(")) {
+                            spanStart = element.content.substring(0, spanStart).lastIndexOf("(")
+                            startContent = element.content.substring(spanStart - 1, termIndex)
+                        }
 
                         var style = termProps.style || ""
                         var classes = termProps.classes || ""
