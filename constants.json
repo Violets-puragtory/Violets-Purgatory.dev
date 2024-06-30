@@ -304,6 +304,10 @@
         },
         "Shortcat": {
             "color": "orange"
+        },
+        "Valve": {
+            "color": "orange",
+            "caseInsensitive": true
         }
     }
 }
