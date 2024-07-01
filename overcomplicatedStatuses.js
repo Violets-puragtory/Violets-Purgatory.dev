@@ -147,6 +147,7 @@ module.exports = {
                     addedHTML += `
                         <div class="chip activity grid-child">
                             <img src="${get_img(activity)}" title="${activity.assets.large_text || activity.assets.small_text}">
+                            ${onlyIfExists(`<img class="smallimg" src="${get_img(activity, "small_image")}" title="${activity.assets.small_text}">`, activity.assets.small_image)}
                             <p style="text-align: left; font-size: 1.15rem;">
                                 <span style="font-size: 1.6rem;">${activity.name}</span>
                                 ${onlyIfExists("<br>" + text1, text1)}
